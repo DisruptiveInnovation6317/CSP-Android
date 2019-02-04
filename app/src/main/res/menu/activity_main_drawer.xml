@@ -5,6 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_welcome_screen"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Welcome" />
+
+        <item
             android:id="@+id/nav_pit_scout"
             android:icon="@drawable/ic_menu_camera"
             android:enabled="false"

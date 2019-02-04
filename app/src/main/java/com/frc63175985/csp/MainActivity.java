@@ -1,6 +1,7 @@
 package com.frc63175985.csp;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -78,14 +79,19 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 
-        if (id == R.id.nav_pit_scout) {
+        if (id == R.id.nav_welcome_screen) {
+            fm.replace(R.id.content_frame, welcomeFragment);
+        } else if (id == R.id.nav_pit_scout) {
 
         } else if (id == R.id.nav_match_scout) {
 
         }
+
+        fm.commit();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -101,8 +107,8 @@ public class MainActivity extends AppCompatActivity
         TextView scoutTextView = findViewById(R.id.nav_scout_name);
         TextView tournamentTextView = findViewById(R.id.nav_tournament_name);
 
-        navigationView.getMenu().getItem(0).setEnabled(loggedIn);
         navigationView.getMenu().getItem(1).setEnabled(loggedIn);
+        navigationView.getMenu().getItem(2).setEnabled(loggedIn);
 
         if (loggedIn) {
             // Set title and subtitle to scout and matchlist to user
