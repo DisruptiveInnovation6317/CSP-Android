@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
@@ -25,9 +26,9 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
 
     // Fragments
-    private Fragment welcomeFragment;
-    private Fragment pitScoutingFragment;
-    private Fragment matchScoutingFragment;
+    private Fragment welcomeFragment = new WelcomeFragment();
+    private Fragment pitScoutingFragment = new PitScoutingFragment();
+    private Fragment matchScoutingFragment = new MatchScoutingFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +39,28 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        welcomeFragment = new WelcomeFragment();
-        pitScoutingFragment = new PitScoutingFragment();
-        matchScoutingFragment = new MatchScoutingFragment();
         FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
         fm.replace(R.id.content_frame, welcomeFragment).commit();
 
         ScoutAuthState.shared.addStateListener(this);
+
+        View headerView = navigationView.getHeaderView(0)
+                .findViewById(R.id.nav_header_main_linearLayout);
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigationView.setCheckedItem(navigationView.getMenu().getItem(0));
+                onNavigationItemSelected(navigationView.getMenu().getItem(0));
+            }
+        });
     }
 
     @Override
@@ -74,7 +83,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -82,17 +90,19 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_welcome_screen) {
+            setTitle(getResources().getString(R.string.app_name));
             fm.replace(R.id.content_frame, welcomeFragment);
         } else if (id == R.id.nav_pit_scout) {
+            setTitle(getResources().getString(R.string.pit_scout));
             fm.replace(R.id.content_frame, pitScoutingFragment);
         } else if (id == R.id.nav_match_scout) {
+            setTitle(getResources().getString(R.string.match_scout));
             fm.replace(R.id.content_frame, matchScoutingFragment);
         }
 
