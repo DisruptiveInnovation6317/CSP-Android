@@ -78,3 +78,4 @@ gen-external-apklibs
 
 # .idea still showing up
 *.idea*
+.DS_Store
