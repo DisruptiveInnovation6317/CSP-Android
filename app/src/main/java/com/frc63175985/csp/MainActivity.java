@@ -3,6 +3,7 @@ package com.frc63175985.csp;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,17 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.frc63175985.csp.auth.CSPAuthState;
-import com.frc63175985.csp.auth.CSPAuthStateListener;
+import com.frc63175985.csp.auth.ScoutAuthState;
+import com.frc63175985.csp.auth.ScoutAuthStateListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CSPAuthStateListener {
-    private static final String LOG_TAG = "CSP-Android";
+        implements NavigationView.OnNavigationItemSelectedListener, ScoutAuthStateListener {
+    private static final String LOG_TAG = "CSP_Android";
 
     private NavigationView navigationView;
 
     // Fragments
-    private WelcomeFragment welcomeFragment;
+    private Fragment welcomeFragment;
+    private Fragment pitScoutingFragment;
+    private Fragment matchScoutingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +46,12 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         welcomeFragment = new WelcomeFragment();
+        pitScoutingFragment = new PitScoutingFragment();
+        matchScoutingFragment = new MatchScoutingFragment();
         FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
         fm.replace(R.id.content_frame, welcomeFragment).commit();
 
-        CSPAuthState.shared.setStateListener(this);
+        ScoutAuthState.shared.addStateListener(this);
     }
 
     @Override
@@ -86,9 +91,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_welcome_screen) {
             fm.replace(R.id.content_frame, welcomeFragment);
         } else if (id == R.id.nav_pit_scout) {
-
+            fm.replace(R.id.content_frame, pitScoutingFragment);
         } else if (id == R.id.nav_match_scout) {
-
+            fm.replace(R.id.content_frame, matchScoutingFragment);
         }
 
         fm.commit();
@@ -96,10 +101,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public static void log(Object o) {
-        Log.d(LOG_TAG, o.toString());
     }
 
     @Override
@@ -112,12 +113,20 @@ public class MainActivity extends AppCompatActivity
 
         if (loggedIn) {
             // Set title and subtitle to scout and matchlist to user
-            scoutTextView.setText(CSPAuthState.shared.scout);
-            tournamentTextView.setText(CSPAuthState.shared.tournament);
+            scoutTextView.setText(ScoutAuthState.shared.scout);
+            tournamentTextView.setText(ScoutAuthState.shared.tournament);
         } else {
             // Set title and subtitle to scout and matchlist to placeholders
             scoutTextView.setText(R.string.nav_header_title);
             tournamentTextView.setText(R.string.nav_header_subtitle);
         }
+    }
+
+    /**
+     * Log anything to Logcat using the tag {@code LOG_TAG}
+     * @param o the object to be logged
+     */
+    public static void log(Object o) {
+        Log.d(LOG_TAG, o.toString());
     }
 }

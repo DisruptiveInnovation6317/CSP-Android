@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.frc63175985.csp.auth.CSPAuthState;
+import com.frc63175985.csp.auth.ScoutAuthState;
 
 public class WelcomeFragment extends Fragment implements View.OnClickListener {
     private EditText scoutNameEditText, tournamentNameEditText;
@@ -23,12 +23,12 @@ public class WelcomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
 
-        if (CSPAuthState.shared.isLoggedIn()) {
+        if (ScoutAuthState.shared.isLoggedIn()) {
             view.findViewById(R.id.welcome_loggedIn).setVisibility(View.VISIBLE);
             view.findViewById(R.id.welcome_notLoggedIn).setVisibility(View.GONE);
 
             TextView welcomeBackTextView = view.findViewById(R.id.welcome_welcomeBack_textView);
-            welcomeBackTextView.setText(String.format("Welcome %s!", CSPAuthState.shared.scout));
+            welcomeBackTextView.setText(String.format("Welcome %s!", ScoutAuthState.shared.scout));
 
             Button logoutButton = view.findViewById(R.id.welcome_logout_button);
             logoutButton.setOnClickListener(this);
@@ -49,13 +49,13 @@ public class WelcomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.welcome_logout_button) {
-            CSPAuthState.shared.logOut();
+            ScoutAuthState.shared.logOut();
             refreshFragment();
         } else if (v.getId() == R.id.welcome_login_button) {
             String scoutName = scoutNameEditText.getText().toString();
             String tournamentName = tournamentNameEditText.getText().toString();
 
-            if (CSPAuthState.shared.login(scoutName, tournamentName)) {
+            if (ScoutAuthState.shared.login(scoutName, tournamentName)) {
                 refreshFragment();
             } else {
                 Toast.makeText(getContext(),

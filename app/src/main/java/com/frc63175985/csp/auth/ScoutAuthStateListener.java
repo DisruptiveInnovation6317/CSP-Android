@@ -1,5 +1,5 @@
 package com.frc63175985.csp.auth;
 
-public interface CSPAuthStateListener {
+public interface ScoutAuthStateListener {
     void authStateChanged(boolean loggedIn);
 }
