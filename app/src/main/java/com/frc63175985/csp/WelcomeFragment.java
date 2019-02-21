@@ -24,10 +24,6 @@ public class WelcomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
 
-        if (getActivity() != null) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        }
-
         if (ScoutAuthState.shared.isLoggedIn()) {
             view.findViewById(R.id.welcome_loggedIn).setVisibility(View.VISIBLE);
             view.findViewById(R.id.welcome_notLoggedIn).setVisibility(View.GONE);

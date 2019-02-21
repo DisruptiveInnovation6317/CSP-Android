@@ -132,6 +132,16 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void tappedThumbnail(View thumbnailView) {
+        if (thumbnailView.getId() == R.id.match_scouting_thumbnail_rocket) {
+            // TODO - go to rocket screen
+        } else if (thumbnailView.getId() == R.id.match_scouting_thumbnail_cargo_ship) {
+            // TODO - go to cargo ship screen
+        } else {
+            // TODO - alert user there's been an error
+        }
+    }
+
     /**
      * Log anything to Logcat using the tag {@code LOG_TAG}
      * @param o the object to be logged
