@@ -21,14 +21,19 @@ import com.frc63175985.csp.auth.ScoutAuthStateListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ScoutAuthStateListener {
-    private static final String LOG_TAG = "CSP_Android";
-
     private NavigationView navigationView;
 
     // Fragments
     private Fragment welcomeFragment = new WelcomeFragment();
     private Fragment pitScoutingFragment = new PitScoutingFragment();
     private Fragment matchScoutingFragment = new MatchScoutingFragment();
+
+    /**
+     * Use this to quicken some processes of the app.
+     * Here's what it does:
+     * - Auto-sign scout
+     */
+    public static final boolean DEBUG_MODE = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +80,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.main, menu);
+        return false;
     }
 
     @Override
@@ -132,21 +137,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void tappedThumbnail(View thumbnailView) {
-        if (thumbnailView.getId() == R.id.match_scouting_thumbnail_rocket) {
-            // TODO - go to rocket screen
-        } else if (thumbnailView.getId() == R.id.match_scouting_thumbnail_cargo_ship) {
-            // TODO - go to cargo ship screen
-        } else {
-            // TODO - alert user there's been an error
-        }
+    /**
+     * Log verbosely to Logcat using the tag CSP_V
+     * @param o the object to be logged
+     */
+    public static void logV(Object o) {
+        Log.d("CSP_V", o.toString());
     }
 
     /**
-     * Log anything to Logcat using the tag {@code LOG_TAG}
+     * Log an error to Logcat using the tag CSP_E
      * @param o the object to be logged
      */
-    public static void log(Object o) {
-        Log.d(LOG_TAG, o.toString());
+    public static void logE(Object o) {
+        Log.d("CSP_E", o.toString());
     }
 }

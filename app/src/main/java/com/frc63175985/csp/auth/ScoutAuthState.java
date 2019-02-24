@@ -1,13 +1,40 @@
 package com.frc63175985.csp.auth;
 
+import android.os.Handler;
+import android.os.Looper;
+
+import com.frc63175985.csp.MainActivity;
+
 import java.util.LinkedList;
 
 public class ScoutAuthState {
     public static final ScoutAuthState shared = new ScoutAuthState();
-    private LinkedList<ScoutAuthStateListener> stateListeners = new LinkedList<>();
     public String scout, tournament;
+    private LinkedList<ScoutAuthStateListener> stateListeners = new LinkedList<>();
 
-    private ScoutAuthState() {}
+    private ScoutAuthState() {
+        // Auto login if in debug mode
+        if (MainActivity.DEBUG_MODE) {
+            scout = "Richards, Brandon";
+            tournament = "Cedar Falls";
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                notifyAuthStateChanged(true);
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
 
     /**
      * Add a listener to monitor when the auth state changes.

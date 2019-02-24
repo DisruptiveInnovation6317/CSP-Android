@@ -1,6 +1,5 @@
 package com.frc63175985.csp;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -71,7 +70,7 @@ public class WelcomeFragment extends Fragment implements View.OnClickListener {
     private void refreshFragment() {
         FragmentManager fm = getFragmentManager();
         if (fm == null) {
-            MainActivity.log("Could not refresh Welcome fragment");
+            MainActivity.logE("Could not refresh Welcome fragment");
             return;
         }
 
