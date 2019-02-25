@@ -36,14 +36,17 @@ public class Match {
         sb.append(ScoutAuthState.shared.tournament).append(","); // idEvent
 
         // Autonomous
-        sb.append(bool("auto_flState", false)).append(","); // auto_flState
+        sb.append(bool("auto_flState")).append(","); // auto_flState
         sb.append(num("auto_idStartPosition")).append(","); // auto_idStartPosition
         sb.append(num("auto_idStartLevel")).append(","); // auto_idStartLevel
-        sb.append(bool("auto_flBaseLine", false)).append(","); // auto_flBaseLine
+        sb.append(bool("auto_flBaseLine")).append(","); // auto_flBaseLine
         sb.append(num("auto_idStartObject")).append(","); // auto_idStartObject
 
-        sb.append(bool("auto_flLoseStartObject", false)).append(","); // auto_flLoseStartObject
-        sb.append(bool("auto_flRobotContact", false)).append(","); // auto_flRobotContact
+        sb.append(bool("auto_flLoseStartObject")).append(","); // auto_flLoseStartObject
+        sb.append(bool("auto_flRobotContact")).append(","); // auto_flRobotContact
+        sb.append(bool("auto_flFoul")).append(","); // auto_flFoul
+        sb.append(bool("auto_flCrossOver")).append(","); // auto_flCrossOver
+
         // TeleOp
 
         return sb.toString();
@@ -70,13 +73,10 @@ public class Match {
         return num == null ? 0 : (int)num;
     }
 
-    private String bool(String key, boolean defaultValue) {
+    private String bool(String key) {
         Object bool = findObject(key);
-        if (bool == null) {
-            return defaultValue ? "TRUE" : "FALSE";
-        } else {
-            return (boolean)bool ? "TRUE" : "FALSE";
-        }
+        if (bool == null) return "FALSE";
+        else return (boolean)bool ? "TRUE" : "FALSE";
     }
 }
 
@@ -91,11 +91,11 @@ flCrashed
 flYellow
 flRed
 
-auto_flState
-auto_idStartPosition
-auto_idStartLevel
-auto_flBaseLine
-auto_idStartObject
+X auto_flState
+X auto_idStartPosition
+X auto_idStartLevel
+X auto_flBaseLine
+X auto_idStartObject
 auto_numShipFrontHatchAttempt
 auto_numShipFrontHatchSuccess
 auto_numShipSideHatchAttempt
@@ -116,10 +116,10 @@ auto_numRocketMidCargoAttempt
 auto_numRocketMidCargoSuccess
 auto_numRocketHighCargoAttempt
 auto_numRocketHighCargoSuccess
-auto_flLoseStartObject
-auto_flRobotContact
-auto_flFoul
-auto_flCrossOver
+X auto_flLoseStartObject
+X auto_flRobotContact
+X auto_flFoul
+X auto_flCrossOver
 
 tele_numShipFrontHatchAttempt
 tele_numShipFrontHatchSuccess

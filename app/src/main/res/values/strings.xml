@@ -12,4 +12,7 @@
     <string name="scout">Scout</string>
     <string name="tournament">Tournament</string>
     <string name="login">Login</string>
+    <string name="rocket_ship_thumbnail">Rocket Ship Thumbnail</string>
+    <string name="cargo_ship_thumbnail">Cargo Ship Thumbnail</string>
+    <string name="rocket_closeup">Rocket Closeup</string>
 </resources>

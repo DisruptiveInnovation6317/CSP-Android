@@ -9,14 +9,14 @@
         android:id="@+id/match_scouting_thumbnail_rocket"
         android:layout_width="206dp"
         android:layout_height="wrap_content"
-        android:contentDescription="Rocket Ship Thumbnail"
+        android:contentDescription="@string/rocket_ship_thumbnail"
         android:src="@drawable/red_rocket" />
 
     <ImageView
         android:id="@+id/match_scouting_thumbnail_cargo_ship"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Cargo Ship Thumbnail"
+        android:contentDescription="@string/cargo_ship_thumbnail"
         android:src="@drawable/red_cargo_ship" />
 
 </LinearLayout>

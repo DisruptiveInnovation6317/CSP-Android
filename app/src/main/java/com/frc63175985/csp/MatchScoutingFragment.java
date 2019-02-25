@@ -10,8 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+enum ScoutingSubview {
+    THUMBNAIL, ROCKET, CARGO_SHIP
+}
+
 public class MatchScoutingFragment extends Fragment {
     private ThumbnailFragment thumbnailFragment;
+    private FragmentRocketCloseup rocketCloseup;
+    private FragmentCargoShipCloseup cargoShipCloseup;
 
     @Nullable
     @Override
@@ -19,10 +25,29 @@ public class MatchScoutingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_match_scouting, container, false);
 
         thumbnailFragment = new ThumbnailFragment();
+        rocketCloseup = new FragmentRocketCloseup();
+        cargoShipCloseup = new FragmentCargoShipCloseup();
 
-        FragmentTransaction fm = getChildFragmentManager().beginTransaction();
-        fm.replace(R.id.match_scouting_content_view, thumbnailFragment).commit();
+        switchView(ScoutingSubview.THUMBNAIL);
 
         return view;
+    }
+
+    public void switchView(ScoutingSubview scoutingSubview) {
+        FragmentTransaction fm = getChildFragmentManager().beginTransaction();
+
+        switch (scoutingSubview) {
+            case THUMBNAIL:
+                fm.replace(R.id.match_scouting_content_view, thumbnailFragment);
+                break;
+            case ROCKET:
+                fm.replace(R.id.match_scouting_content_view, rocketCloseup);
+                break;
+            case CARGO_SHIP:
+                fm.replace(R.id.match_scouting_content_view, cargoShipCloseup);
+                break;
+        }
+
+        fm.commit();
     }
 }
