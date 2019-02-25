@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Different views within the MatchScoutingFragment that
+ * can be displayed
+ */
 enum ScoutingSubview {
     THUMBNAIL, ROCKET, CARGO_SHIP
 }
@@ -32,6 +36,10 @@ public class MatchScoutingFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Change the subview of this {@link Fragment} to a different view.
+     * @param scoutingSubview The new subview to display
+     */
     public void switchView(ScoutingSubview scoutingSubview) {
         FragmentTransaction fm = getChildFragmentManager().beginTransaction();
 

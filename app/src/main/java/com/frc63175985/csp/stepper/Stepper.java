@@ -51,6 +51,9 @@ public class Stepper {
         this.listener = newListener;
     }
 
+    /**
+     * Add 1 to the counter
+     */
     private void increment() {
         if (listener != null && !listener.shouldChange()) {
             return;
@@ -67,6 +70,9 @@ public class Stepper {
         }
     }
 
+    /**
+     * Remove one from the counter
+     */
     private void decrement() {
         if (listener != null && !listener.shouldChange()) {
             return;

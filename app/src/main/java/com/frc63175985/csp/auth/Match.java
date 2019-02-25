@@ -18,9 +18,9 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  * and being able to export in CSV format.
  */
 public class Match {
-    public HashMap<String, Object> metaData;
-    public HashMap<String, Object> autonomous;
-    public HashMap<String, Object> teleop;
+    private HashMap<String, Object> metaData;
+    private HashMap<String, Object> autonomous;
+    private HashMap<String, Object> teleop;
 
     public Match() {
         metaData = new HashMap<>();
@@ -136,6 +136,11 @@ public class Match {
         return sb.toString();
     }
 
+    /**
+     * Search for and return a value in any of our {@link HashMap}'s
+     * @param key The key to searched for
+     * @return The value, if it exists, otherwise {@code null}
+     */
     @Nullable
     private Object findObject(String key) {
         Object potential = metaData.get(key);
@@ -152,11 +157,23 @@ public class Match {
         return potential;
     }
 
+    /**
+     * Search for and return a number in any of our {@link HashMap}'s
+     * @param key The key to be searched for
+     * @return The value, if it exists, otherwise {@code 0}
+     */
     public int num(String key) {
         Object num = findObject(key);
         return num == null ? 0 : (int)num;
     }
 
+    /**
+     * Search for and return a boolean in any of our {@link HashMap}'s
+     * This method returns the String representation of this boolean,
+     * e.g. {@code "TRUE"} or {@code "FALSE"}
+     * @param key The key to be searched for
+     * @return The value, if it exists, otherwise {@code "FALSE"}
+     */
     public String bool(String key) {
         Object bool = findObject(key);
         if (bool == null) return "FALSE";

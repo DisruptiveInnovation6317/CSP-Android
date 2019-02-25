@@ -78,7 +78,9 @@ public class FragmentRocketCloseup extends Fragment implements StepperValueChang
     }
 
     /**
-     * Autofill the information in this view
+     * Auto-fill the hatch and cargo information
+     * based on the selection
+     * @param selection What tier of the Rocket we are auto-filling for
      */
     private void autofill(LevelSelection selection) {
         levelSelection = selection;
