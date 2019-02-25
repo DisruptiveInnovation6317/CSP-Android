@@ -2,9 +2,15 @@ package com.frc63175985.csp.auth;
 
 import android.support.annotation.Nullable;
 
+import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.MainActivity;
+import com.frc63175985.csp.enums.ScoreObject;
 
 import java.util.HashMap;
+
+import static com.frc63175985.csp.enums.LevelSelection.TOP;
+import static com.frc63175985.csp.enums.ScoreObject.CARGO;
+import static com.frc63175985.csp.enums.ScoreObject.HATCH;
 
 /**
  * The object representation of a Match.
@@ -15,6 +21,84 @@ public class Match {
     public HashMap<String, Object> metaData;
     public HashMap<String, Object> autonomous;
     public HashMap<String, Object> teleop;
+
+    public Match() {
+        metaData = new HashMap<>();
+        autonomous = new HashMap<>();
+        teleop = new HashMap<>();
+    }
+
+    /**
+     * Update a value in our autonomous dictionary based on the information provided
+     * @param selection
+     * @param scoreObject
+     * @param newValue
+     * @throws IllegalArgumentException thrown if input is not of type {@link Integer} or {@link Boolean}
+     */
+    public void updateAutonomousRocketValue(
+            LevelSelection selection,
+            ScoreObject scoreObject,
+            Object newValue) throws IllegalArgumentException {
+        if (newValue instanceof Integer) {
+            // Attempt
+
+            if (scoreObject == HATCH) {
+                switch (selection) {
+                    case TOP:
+                        autonomous.put("auto_numRocketHighAttempt", newValue);
+                        break;
+                    case MIDDLE:
+                        autonomous.put("auto_numRocketMidHatchAttempt", newValue);
+                        break;
+                    case LOW:
+                        autonomous.put("auto_numRocketLowHatchAttempt", newValue);
+                        break;
+                }
+            } else if (scoreObject == CARGO) {
+                switch (selection) {
+                    case TOP:
+                        autonomous.put("auto_numRocketHighCargoAttempt", newValue);
+                        break;
+                    case MIDDLE:
+                        autonomous.put("auto_numRocketMidCargoAttempt", newValue);
+                        break;
+                    case LOW:
+                        autonomous.put("auto_numRocketLowCargoAttempt", newValue);
+                        break;
+                }
+            }
+        } else if (newValue instanceof Boolean) {
+            // Success
+
+            if (scoreObject == HATCH) {
+                switch (selection) {
+                    case TOP:
+                        autonomous.put("auto_numRocketHighSuccess", newValue);
+                        break;
+                    case MIDDLE:
+                        autonomous.put("auto_numRocketMidHatchSuccess", newValue);
+                        break;
+                    case LOW:
+                        autonomous.put("auto_numRocketLowHatchSuccess", newValue);
+                        break;
+                }
+            } else if (scoreObject == CARGO) {
+                switch (selection) {
+                    case TOP:
+                        autonomous.put("auto_numRocketHighCargoSuccess", newValue);
+                        break;
+                    case MIDDLE:
+                        autonomous.put("auto_numRocketMidCargoSuccess", newValue);
+                        break;
+                    case LOW:
+                        autonomous.put("auto_numRocketLowCargoSuccess", newValue);
+                        break;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("newValue must be Integer or Boolean");
+        }
+    }
 
     /**
      * Get this class expressed in CSV format in accordance to ProjectB's Microsoft
@@ -68,12 +152,12 @@ public class Match {
         return potential;
     }
 
-    private int num(String key) {
+    public int num(String key) {
         Object num = findObject(key);
         return num == null ? 0 : (int)num;
     }
 
-    private String bool(String key) {
+    public String bool(String key) {
         Object bool = findObject(key);
         if (bool == null) return "FALSE";
         else return (boolean)bool ? "TRUE" : "FALSE";

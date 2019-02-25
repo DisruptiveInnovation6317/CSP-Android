@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:id="@+id/rocket_closeup_hatch_success_checkbox"
             android:text="@string/success"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -83,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:id="@+id/rocket_closeup_cargo_success_checkbox"
             android:text="@string/success"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

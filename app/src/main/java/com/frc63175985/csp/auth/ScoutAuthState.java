@@ -10,9 +10,12 @@ import java.util.LinkedList;
 public class ScoutAuthState {
     public static final ScoutAuthState shared = new ScoutAuthState();
     public String scout, tournament;
+    public Match currentMatch;
     private LinkedList<ScoutAuthStateListener> stateListeners = new LinkedList<>();
 
     private ScoutAuthState() {
+        currentMatch = new Match();
+
         // Auto login if in debug mode
         if (MainActivity.DEBUG_MODE) {
             scout = "Richards, Brandon";
