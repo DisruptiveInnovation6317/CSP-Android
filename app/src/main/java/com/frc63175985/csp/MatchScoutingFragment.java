@@ -19,8 +19,8 @@ enum ScoutingSubview {
 
 public class MatchScoutingFragment extends Fragment {
     private ThumbnailFragment thumbnailFragment;
-    private FragmentRocketCloseup rocketCloseup;
-    private FragmentCargoShipCloseup cargoShipCloseup;
+    private RocketCloseupFragment rocketCloseup;
+    private CargoShipCloseupFragment cargoShipCloseup;
 
     @Nullable
     @Override
@@ -28,8 +28,8 @@ public class MatchScoutingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_match_scouting, container, false);
 
         thumbnailFragment = new ThumbnailFragment();
-        rocketCloseup = new FragmentRocketCloseup();
-        cargoShipCloseup = new FragmentCargoShipCloseup();
+        rocketCloseup = new RocketCloseupFragment();
+        cargoShipCloseup = new CargoShipCloseupFragment();
 
         switchView(ScoutingSubview.THUMBNAIL);
 

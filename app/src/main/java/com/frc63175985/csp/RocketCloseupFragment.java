@@ -1,5 +1,6 @@
 package com.frc63175985.csp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,7 +34,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rocket_closeup, container, false);
+        View view = getView() != null ? getView() : inflater.inflate(R.layout.fragment_rocket_closeup, container, false);
 
         view.findViewById(R.id.rocket_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,11 +45,14 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
 
         levelSelectionGroup = view.findViewById(R.id.rocket_closeup_level_selection);
         levelSelectionGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-            RadioButton button = (RadioButton)group.getChildAt(checkedId-1);
-            LevelSelection level = LevelSelection.valueOf(button.getText().toString().toUpperCase());
-            autofill(level);
+                View radioButtonView = group.findViewById(group.getCheckedRadioButtonId());
+                int radioIndex = group.indexOfChild(radioButtonView);
+                RadioButton radioButton = (RadioButton)group.getChildAt(radioIndex);
+                LevelSelection level = LevelSelection.valueOf(radioButton.getText().toString().toUpperCase());
+                autofill(level);
             }
         });
 
@@ -59,7 +63,11 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         hatchSuccessCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, HATCH, isChecked);
+                if (shouldChange()) {
+                    ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, HATCH, isChecked);
+                } else {
+                    buttonView.setChecked(!isChecked);
+                }
             }
         });
 
@@ -70,11 +78,13 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         cargoSuccessCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, CARGO, isChecked);
+                if (shouldChange()) {
+                    ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, CARGO, isChecked);
+                } else {
+                    buttonView.setChecked(!isChecked);
+                }
             }
         });
-
-        autofill(levelSelection);
 
         return view;
     }
@@ -82,6 +92,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
     /**
      * Auto-fill the hatch and cargo information
      * based on the selection
+     * @param selection What tier of the Rocket we are auto-filling for
      */
     private void autofill(LevelSelection selection) {
         levelSelection = selection;
