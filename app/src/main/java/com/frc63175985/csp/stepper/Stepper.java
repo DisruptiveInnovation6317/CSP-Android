@@ -1,7 +1,5 @@
 package com.frc63175985.csp.stepper;
 
-import android.content.Context;
-import android.util.Range;
 import android.view.View;
 import android.widget.TextView;
 

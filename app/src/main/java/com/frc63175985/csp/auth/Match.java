@@ -2,13 +2,12 @@ package com.frc63175985.csp.auth;
 
 import android.support.annotation.Nullable;
 
-import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.MainActivity;
+import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.enums.ScoreObject;
 
 import java.util.HashMap;
 
-import static com.frc63175985.csp.enums.LevelSelection.TOP;
 import static com.frc63175985.csp.enums.ScoreObject.CARGO;
 import static com.frc63175985.csp.enums.ScoreObject.HATCH;
 

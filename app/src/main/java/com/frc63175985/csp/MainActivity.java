@@ -1,32 +1,21 @@
 package com.frc63175985.csp;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.auth.ScoutAuthStateListener;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ScoutAuthStateListener {
-    private NavigationView navigationView;
-
-    // Fragments
-    private Fragment welcomeFragment = new WelcomeFragment();
-    private Fragment pitScoutingFragment = new PitScoutingFragment();
-    private Fragment matchScoutingFragment = new MatchScoutingFragment();
+public class MainActivity extends AppCompatActivity implements ScoutAuthStateListener, View.OnClickListener {
+    private EditText scoutNameEditText, tournamentNameEditText;
 
     /**
      * Use this to quicken some processes of the app.
@@ -39,101 +28,64 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-        fm.replace(R.id.content_frame, welcomeFragment).commit();
 
         ScoutAuthState.shared.addStateListener(this);
 
-        View headerView = navigationView.getHeaderView(0)
-                .findViewById(R.id.nav_header_main_linearLayout);
-        headerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigationView.setCheckedItem(navigationView.getMenu().getItem(0));
-                onNavigationItemSelected(navigationView.getMenu().getItem(0));
-            }
-        });
+        scoutNameEditText = findViewById(R.id.welcome_scout_login_editText);
+        tournamentNameEditText = findViewById(R.id.welcome_tournament_login_editText);
+
+        refreshView();
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == R.id.welcome_logout_button) {
+            ScoutAuthState.shared.logOut();
+        } else if (id == R.id.welcome_login_button) {
+            String scoutName = scoutNameEditText.getText().toString();
+            String tournamentName = tournamentNameEditText.getText().toString();
+            scoutNameEditText.clearFocus();
+            tournamentNameEditText.clearFocus();
+            if (!ScoutAuthState.shared.login(scoutName, tournamentName)) {
+                Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.welcome_match_scouting_button) {
+            Intent i = new Intent(MainActivity.this, MatchScoutingActivity.class);
+            startActivity(i);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.main, menu);
         return false;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-
-        if (id == R.id.nav_welcome_screen) {
-            setTitle(getResources().getString(R.string.app_name));
-            fm.replace(R.id.content_frame, welcomeFragment);
-        } else if (id == R.id.nav_pit_scout) {
-            setTitle(getResources().getString(R.string.pit_scout));
-            fm.replace(R.id.content_frame, pitScoutingFragment);
-        } else if (id == R.id.nav_match_scout) {
-            setTitle(getResources().getString(R.string.match_scout));
-            fm.replace(R.id.content_frame, matchScoutingFragment);
-        }
-
-        fm.commit();
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
     public void authStateChanged(boolean loggedIn) {
-        TextView scoutTextView = findViewById(R.id.nav_scout_name);
-        TextView tournamentTextView = findViewById(R.id.nav_tournament_name);
+        refreshView();
+    }
 
-        navigationView.getMenu().getItem(1).setEnabled(loggedIn);
-        navigationView.getMenu().getItem(2).setEnabled(loggedIn);
+    private void refreshView() {
+        if (ScoutAuthState.shared.isLoggedIn()) {
+            findViewById(R.id.welcome_loggedIn).setVisibility(View.VISIBLE);
+            findViewById(R.id.welcome_notLoggedIn).setVisibility(View.GONE);
 
-        if (loggedIn) {
-            // Set title and subtitle to scout and matchlist to user
-            scoutTextView.setText(ScoutAuthState.shared.scout);
-            tournamentTextView.setText(ScoutAuthState.shared.tournament);
+            TextView welcomeBackTextView = findViewById(R.id.welcome_welcomeBack_textView);
+            welcomeBackTextView.setText(String.format("Welcome %s!", ScoutAuthState.shared.scout));
+
+            Button logoutButton = findViewById(R.id.welcome_logout_button);
+            logoutButton.setOnClickListener(this);
         } else {
-            // Set title and subtitle to scout and matchlist to placeholders
-            scoutTextView.setText(R.string.nav_header_title);
-            tournamentTextView.setText(R.string.nav_header_subtitle);
+            findViewById(R.id.welcome_notLoggedIn).setVisibility(View.VISIBLE);
+            findViewById(R.id.welcome_loggedIn).setVisibility(View.GONE);
+
+            Button loginButton = findViewById(R.id.welcome_login_button);
+            loginButton.setOnClickListener(this);
+
+            scoutNameEditText = findViewById(R.id.welcome_scout_login_editText);
+            tournamentNameEditText = findViewById(R.id.welcome_tournament_login_editText);
         }
     }
 

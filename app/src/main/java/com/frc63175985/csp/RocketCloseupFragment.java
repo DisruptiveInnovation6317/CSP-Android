@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.LevelSelection;
-import com.frc63175985.csp.enums.ScoreObject;
 import com.frc63175985.csp.stepper.Stepper;
 import com.frc63175985.csp.stepper.StepperValueChangedListener;
 
@@ -39,7 +38,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         view.findViewById(R.id.rocket_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            ((MatchScoutingFragment)getParentFragment()).switchView(ScoutingSubview.THUMBNAIL);
+            ((AutonomousFragment)getParentFragment()).switchView(ScoutingSubview.THUMBNAIL);
             }
         });
 

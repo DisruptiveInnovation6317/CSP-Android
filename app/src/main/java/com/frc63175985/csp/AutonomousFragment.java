@@ -9,15 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Different views within the MatchScoutingFragment that
- * can be displayed
- */
 enum ScoutingSubview {
     THUMBNAIL, ROCKET, CARGO_SHIP
 }
 
-public class MatchScoutingFragment extends Fragment {
+public class AutonomousFragment extends Fragment {
     private ThumbnailFragment thumbnailFragment;
     private RocketCloseupFragment rocketCloseup;
     private CargoShipCloseupFragment cargoShipCloseup;
@@ -25,7 +21,7 @@ public class MatchScoutingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_match_scouting, container, false);
+        View view = inflater.inflate(R.layout.fragment_autonomous, container, false);
 
         thumbnailFragment = new ThumbnailFragment();
         rocketCloseup = new RocketCloseupFragment();
@@ -45,13 +41,13 @@ public class MatchScoutingFragment extends Fragment {
 
         switch (scoutingSubview) {
             case THUMBNAIL:
-                fm.replace(R.id.match_scouting_content_view, thumbnailFragment);
+                fm.replace(R.id.autonomous_content_view, thumbnailFragment);
                 break;
             case ROCKET:
-                fm.replace(R.id.match_scouting_content_view, rocketCloseup);
+                fm.replace(R.id.autonomous_content_view, rocketCloseup);
                 break;
             case CARGO_SHIP:
-                fm.replace(R.id.match_scouting_content_view, cargoShipCloseup);
+                fm.replace(R.id.autonomous_content_view, cargoShipCloseup);
                 break;
         }
 

@@ -17,7 +17,7 @@ public class CargoShipCloseupFragment extends Fragment {
         view.findViewById(R.id.cargo_ship_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MatchScoutingFragment)getParentFragment()).switchView(ScoutingSubview.THUMBNAIL);
+                ((AutonomousFragment)getParentFragment()).switchView(ScoutingSubview.THUMBNAIL);
             }
         });
 

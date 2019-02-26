@@ -36,6 +36,7 @@
         android:text="@string/hatches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -65,6 +66,7 @@
         android:text="@string/cargo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:textSize="30sp" />
 
     <LinearLayout
