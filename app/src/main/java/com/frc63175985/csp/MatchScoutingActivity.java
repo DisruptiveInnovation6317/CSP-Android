@@ -24,6 +24,11 @@ public class MatchScoutingActivity extends FragmentActivity {
 
         final ViewPager pager = findViewById(R.id.match_scouting_pager);
         pager.setAdapter(new MatchScoutingFragmentAdapter(getSupportFragmentManager()));
+
+        // TODO - remove. used to test a certain view
+        if (MainActivity.DEBUG_MODE) {
+            pager.setCurrentItem(1);
+        }
     }
 
     private class MatchScoutingFragmentAdapter extends FragmentStatePagerAdapter {

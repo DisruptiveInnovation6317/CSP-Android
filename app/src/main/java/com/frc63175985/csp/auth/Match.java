@@ -3,6 +3,7 @@ package com.frc63175985.csp.auth;
 import android.support.annotation.Nullable;
 
 import com.frc63175985.csp.MainActivity;
+import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.enums.ScoreObject;
 
@@ -25,6 +26,63 @@ public class Match {
         metaData = new HashMap<>();
         autonomous = new HashMap<>();
         teleop = new HashMap<>();
+    }
+
+    public void updateAutonomousCargoShipValue(
+            CargoShipSelection selection,
+            ScoreObject scoreObject,
+            Object newValue) throws IllegalArgumentException {
+        if (newValue instanceof Integer) {
+            if (scoreObject == HATCH) {
+                switch (selection) {
+                    case FRONT:
+                        // front hatch attempt
+                        autonomous.put("auto_numShipFrontHatchAttempt", newValue);
+                        break;
+                    case SIDE:
+                        // side hatch attempt
+                        autonomous.put("auto_numShipSideHatchAttempt", newValue);
+                        break;
+                }
+            } else if (scoreObject == CARGO) {
+                switch (selection) {
+                    case FRONT:
+                        // front cargo attempt
+                        autonomous.put("auto_numShipFrontCargoAttempt", newValue);
+                        break;
+                    case SIDE:
+                        // side cargo attempt
+                        autonomous.put("auto_numShipSideCargoAttempt", newValue);
+                        break;
+                }
+            }
+        } else if (newValue instanceof Boolean) {
+            if (scoreObject == HATCH) {
+                switch (selection) {
+                    case FRONT:
+                        // front hatch success
+                        autonomous.put("auto_numShipFrontHatchSuccess", newValue);
+                        break;
+                    case SIDE:
+                        // side hatch success
+                        autonomous.put("auto_numShipSideHatchSuccess", newValue);
+                        break;
+                }
+            } else if (scoreObject == CARGO) {
+                switch (selection) {
+                    case FRONT:
+                        // front cargo success
+                        autonomous.put("auto_numShipFrontCargoSuccess", newValue);
+                        break;
+                    case SIDE:
+                        // side cargo success
+                        autonomous.put("auto_numShipSideCargoSuccess", newValue);
+                        break;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("newValue must be Integer or Boolean");
+        }
     }
 
     /**
