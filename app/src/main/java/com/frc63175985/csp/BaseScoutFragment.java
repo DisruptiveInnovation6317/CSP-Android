@@ -7,22 +7,37 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
+import com.frc63175985.csp.enums.BaseScoutType;
+import com.frc63175985.csp.enums.CargoShipSelection;
+import com.frc63175985.csp.enums.ScoreObject;
 import com.frc63175985.csp.enums.ScoutingSubview;
+
+import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
+import static com.frc63175985.csp.enums.BaseScoutType.TELEOP;
 
 /**
  * This is a parent fragment to Autonomous and TeleOp scouting,
  * as they share a lot of logic
  */
-public class BaseScoutFragment extends Fragment {
+public abstract class BaseScoutFragment extends Fragment {
     private ThumbnailFragment thumbnailFragment;
     private RocketCloseupFragment rocketCloseup;
     private CargoShipCloseupFragment cargoShipCloseup;
+    private int contentViewId;
 
     public void initializeSubviews() {
         thumbnailFragment = new ThumbnailFragment();
         rocketCloseup = new RocketCloseupFragment();
         cargoShipCloseup = new CargoShipCloseupFragment();
+
+        if (getScoutType() == AUTONOMOUS) {
+            contentViewId = R.id.autonomous_content_view;
+        } else if (getScoutType() == TELEOP) {
+            contentViewId = R.id.teleop_content_view;
+        }
     }
+
+    public abstract BaseScoutType getScoutType();
 
     /**
      * Change the subview of this {@link Fragment} to a different view.
@@ -34,13 +49,13 @@ public class BaseScoutFragment extends Fragment {
 
         switch (scoutingSubview) {
             case THUMBNAIL:
-                fm.replace(R.id.autonomous_content_view, thumbnailFragment);
+                fm.replace(contentViewId, thumbnailFragment);
                 break;
             case ROCKET:
-                fm.replace(R.id.autonomous_content_view, rocketCloseup);
+                fm.replace(contentViewId, rocketCloseup);
                 break;
             case CARGO_SHIP:
-                fm.replace(R.id.autonomous_content_view, cargoShipCloseup);
+                fm.replace(contentViewId, cargoShipCloseup);
                 break;
         }
 

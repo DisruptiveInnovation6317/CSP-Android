@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
+import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.stepper.Stepper;
 import com.frc63175985.csp.stepper.StepperValueChangedListener;
@@ -43,6 +44,8 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
             }
         });
 
+        final BaseScoutType type = ((BaseScoutFragment)getParentFragment()).getScoutType();
+
         cargoSelectionGroup = view.findViewById(R.id.cargoship_closeup_level_selection);
         cargoSelectionGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("ResourceType")
@@ -61,7 +64,7 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (shouldChange()) {
-                    ScoutAuthState.shared.currentMatch.updateAutonomousCargoShipValue(cargoSelection, HATCH, isChecked);
+                    ScoutAuthState.shared.currentMatch.updateCargoShipValue(type, cargoSelection, HATCH, isChecked);
                 } else {
                     buttonView.setChecked(!isChecked);
                 }
@@ -76,7 +79,7 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (shouldChange()) {
-                    ScoutAuthState.shared.currentMatch.updateAutonomousCargoShipValue(cargoSelection, CARGO, isChecked);
+                    ScoutAuthState.shared.currentMatch.updateCargoShipValue(type, cargoSelection, CARGO, isChecked);
                 } else {
                     buttonView.setChecked(!isChecked);
                 }
@@ -140,10 +143,12 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
     @Override
     public void valueChanged(Stepper stepper, int newValue) {
         // Change value in match database
+        BaseScoutType type =((BaseScoutFragment)getParentFragment()).getScoutType();
+
         if (stepper == hatchAttemptStepper) {
-            ScoutAuthState.shared.currentMatch.updateAutonomousCargoShipValue(cargoSelection, HATCH, newValue);
+            ScoutAuthState.shared.currentMatch.updateCargoShipValue(type, cargoSelection, HATCH, newValue);
         } else if (stepper == cargoAttemptStepper) {
-            ScoutAuthState.shared.currentMatch.updateAutonomousCargoShipValue(cargoSelection, CARGO, newValue);
+            ScoutAuthState.shared.currentMatch.updateCargoShipValue(type, cargoSelection, CARGO, newValue);
         }
     }
 }

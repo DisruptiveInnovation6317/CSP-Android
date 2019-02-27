@@ -3,12 +3,19 @@ package com.frc63175985.csp.auth;
 import android.support.annotation.Nullable;
 
 import com.frc63175985.csp.MainActivity;
+import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.enums.ScoreObject;
 
 import java.util.HashMap;
 
+import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
+import static com.frc63175985.csp.enums.CargoShipSelection.FRONT;
+import static com.frc63175985.csp.enums.CargoShipSelection.SIDE;
+import static com.frc63175985.csp.enums.LevelSelection.LOW;
+import static com.frc63175985.csp.enums.LevelSelection.MIDDLE;
+import static com.frc63175985.csp.enums.LevelSelection.HIGH;
 import static com.frc63175985.csp.enums.ScoreObject.CARGO;
 import static com.frc63175985.csp.enums.ScoreObject.HATCH;
 
@@ -19,39 +26,43 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  */
 public class Match {
     /* Keys */
+    public static final String AUTO_PREFIX = "auto_";
+    public static final String TELEOP_PREFIX = "tele_";
+
     // Autonomous
     public static final String ACTIVE = "auto_flState";
     public static final String LEAVES_HAB = "auto_flBaseLine";
     public static final String START_OBJECT = "auto_idStartObject";
-
-    // Autonomous - Rocket
-    public static final String AUTO_ROCKET_LOW_HATCH_ATTEMPT = "auto_numRocketLowHatchAttempt";
-    public static final String AUTO_ROCKET_LOW_HATCH_SUCCESS = "auto_numRocketLowHatchSuccess";
-    public static final String AUTO_ROCKET_LOW_CARGO_ATTEMPT = "auto_numRocketLowCargoAttempt";
-    public static final String AUTO_ROCKET_LOW_CARGO_SUCCESS = "auto_numRocketLowCargoSuccess";
-    public static final String AUTO_ROCKET_MIDDLE_HATCH_ATTEMPT = "auto_numRocketMidHatchAttempt";
-    public static final String AUTO_ROCKET_MIDDLE_HATCH_SUCCESS = "auto_numRocketMidHatchSuccess";
-    public static final String AUTO_ROCKET_MIDDLE_CARGO_ATTEMPT = "auto_numRocketMidCargoAttempt";
-    public static final String AUTO_ROCKET_MIDDLE_CARGO_SUCCESS = "auto_numRocketMidCargoSuccess";
-    public static final String AUTO_ROCKET_HIGH_HATCH_ATTEMPT = "auto_numRocketHighAttempt";
-    public static final String AUTO_ROCKET_HIGH_HATCH_SUCCESS = "auto_numRocketHighSuccess";
-    public static final String AUTO_ROCKET_HIGH_CARGO_ATTEMPT = "auto_numRocketHighCargoAttempt";
-    public static final String AUTO_ROCKET_HIGH_CARGO_SUCCESS = "auto_numRocketHighCargoSuccess";
-
-    // Autonomous - Cargo
-    public static final String AUTO_CARGO_FRONT_HATCH_ATTEMPT = "auto_numShipFrontHatchAttempt";
-    public static final String AUTO_CARGO_FRONT_HATCH_SUCCESS = "auto_numShipFrontHatchSuccess";
-    public static final String AUTO_CARGO_FRONT_CARGO_ATTEMPT = "auto_numShipFrontCargoAttempt";
-    public static final String AUTO_CARGO_FRONT_CARGO_SUCCESS = "auto_numShipFrontCargoSuccess";
-    public static final String AUTO_CARGO_SIDE_HATCH_ATTEMPT = "auto_numShipSideHatchAttempt";
-    public static final String AUTO_CARGO_SIDE_HATCH_SUCCESS = "auto_numShipSideHatchSuccess";
-    public static final String AUTO_CARGO_SIDE_CARGO_ATTEMPT = "auto_numShipSideCargoAttempt";
-    public static final String AUTO_CARGO_SIDE_CARGO_SUCCESS = "auto_numShipSideCargoSuccess";
-
+    // AUTONOMOUS CARGOSHIP
+    // AUTONOMOUS ROCKET
     public static final String LOSES_START_OBJECT = "auto_flLoseStartObject";
     public static final String ROBOT_CONTACT = "auto_flRobotContact";
     public static final String FOUL = "auto_flFoul";
     public static final String CROSS_OVER = "auto_flCrossOver";
+
+    // Rocket
+    public static final String ROCKET_LOW_HATCH_ATTEMPT = "numRocketLowHatchAttempt";
+    public static final String ROCKET_LOW_HATCH_SUCCESS = "numRocketLowHatchSuccess";
+    public static final String ROCKET_LOW_CARGO_ATTEMPT = "numRocketLowCargoAttempt";
+    public static final String ROCKET_LOW_CARGO_SUCCESS = "numRocketLowCargoSuccess";
+    public static final String ROCKET_MIDDLE_HATCH_ATTEMPT = "numRocketMidHatchAttempt";
+    public static final String ROCKET_MIDDLE_HATCH_SUCCESS = "numRocketMidHatchSuccess";
+    public static final String ROCKET_MIDDLE_CARGO_ATTEMPT = "numRocketMidCargoAttempt";
+    public static final String ROCKET_MIDDLE_CARGO_SUCCESS = "numRocketMidCargoSuccess";
+    public static final String ROCKET_HIGH_HATCH_ATTEMPT = "numRocketHighAttempt";
+    public static final String ROCKET_HIGH_HATCH_SUCCESS = "numRocketHighSuccess";
+    public static final String ROCKET_HIGH_CARGO_ATTEMPT = "numRocketHighCargoAttempt";
+    public static final String ROCKET_HIGH_CARGO_SUCCESS = "numRocketHighCargoSuccess";
+
+    // Cargo Ship
+    public static final String CARGO_FRONT_HATCH_ATTEMPT = "numShipFrontHatchAttempt";
+    public static final String CARGO_FRONT_HATCH_SUCCESS = "numShipFrontHatchSuccess";
+    public static final String CARGO_FRONT_CARGO_ATTEMPT = "numShipFrontCargoAttempt";
+    public static final String CARGO_FRONT_CARGO_SUCCESS = "numShipFrontCargoSuccess";
+    public static final String CARGO_SIDE_HATCH_ATTEMPT = "numShipSideHatchAttempt";
+    public static final String CARGO_SIDE_HATCH_SUCCESS = "numShipSideHatchSuccess";
+    public static final String CARGO_SIDE_CARGO_ATTEMPT = "numShipSideCargoAttempt";
+    public static final String CARGO_SIDE_CARGO_SUCCESS = "numShipSideCargoSuccess";
 
     private HashMap<String, Object> data;
 
@@ -63,133 +74,128 @@ public class Match {
         data.put(key, value);
     }
 
-    public void updateAutonomousCargoShipValue(
-            CargoShipSelection selection,
-            ScoreObject scoreObject,
-            Object newValue) throws IllegalArgumentException {
-        if (newValue instanceof Integer) {
-            if (scoreObject == HATCH) {
-                switch (selection) {
-                    case FRONT:
-                        // front hatch attempt
-                        data.put(AUTO_CARGO_FRONT_HATCH_ATTEMPT, newValue);
-                        break;
-                    case SIDE:
-                        // side hatch attempt
-                        data.put(AUTO_CARGO_SIDE_HATCH_ATTEMPT, newValue);
-                        break;
+    public void updateRocketValue(BaseScoutType type, LevelSelection selection, ScoreObject object, Object value) {
+        if (!(value instanceof Integer) && !(value instanceof Boolean)) {
+            // Abort if the new value is not a number or boolean
+            throw new IllegalArgumentException("newValue must be Integer or Boolean");
+        }
+
+        // Add prefix to key
+        String key = type == AUTONOMOUS ? AUTO_PREFIX : TELEOP_PREFIX;
+
+        if (value instanceof Integer) {
+            // Attempt
+            if (object == HATCH) {
+                // Attempt Hatch
+                if (selection == HIGH) {
+                    // Attempt Hatch High
+                    key += ROCKET_HIGH_HATCH_ATTEMPT;
+                } else if (selection == MIDDLE) {
+                    // Attempt Hatch Middle
+                    key += ROCKET_MIDDLE_HATCH_ATTEMPT;
+                } else if (selection == LOW) {
+                    // Attempt Hatch Low
+                    key += ROCKET_LOW_HATCH_ATTEMPT;
                 }
-            } else if (scoreObject == CARGO) {
-                switch (selection) {
-                    case FRONT:
-                        // front cargo attempt
-                        data.put(AUTO_CARGO_FRONT_CARGO_ATTEMPT, newValue);
-                        break;
-                    case SIDE:
-                        // side cargo attempt
-                        data.put(AUTO_CARGO_SIDE_CARGO_ATTEMPT, newValue);
-                        break;
-                }
-            }
-        } else if (newValue instanceof Boolean) {
-            if (scoreObject == HATCH) {
-                switch (selection) {
-                    case FRONT:
-                        // front hatch success
-                        data.put(AUTO_CARGO_FRONT_HATCH_SUCCESS, newValue);
-                        break;
-                    case SIDE:
-                        // side hatch success
-                        data.put(AUTO_CARGO_SIDE_HATCH_SUCCESS, newValue);
-                        break;
-                }
-            } else if (scoreObject == CARGO) {
-                switch (selection) {
-                    case FRONT:
-                        // front cargo success
-                        data.put(AUTO_CARGO_FRONT_CARGO_SUCCESS, newValue);
-                        break;
-                    case SIDE:
-                        // side cargo success
-                        data.put(AUTO_CARGO_SIDE_CARGO_SUCCESS, newValue);
-                        break;
+            } else if (object == CARGO) {
+                // Attempt Cargo
+                if (selection == HIGH) {
+                    // Attempt Cargo High
+                    key += ROCKET_HIGH_CARGO_ATTEMPT;
+                } else if (selection == MIDDLE) {
+                    // Attempt Cargo Middle
+                    key += ROCKET_MIDDLE_CARGO_ATTEMPT;
+                } else if (selection == LOW) {
+                    // Attempt Cargo Low
+                    key += ROCKET_LOW_CARGO_ATTEMPT;
                 }
             }
         } else {
-            throw new IllegalArgumentException("newValue must be Integer or Boolean");
+            // Success
+            if (object == HATCH) {
+                // Success Hatch
+                if (selection == HIGH) {
+                    // Success Hatch High
+                    key += ROCKET_HIGH_HATCH_SUCCESS;
+                } else if (selection == MIDDLE) {
+                    // Success Hatch Middle
+                    key += ROCKET_MIDDLE_HATCH_SUCCESS;
+                } else if (selection == LOW) {
+                    // Success Hatch Low
+                    key += ROCKET_LOW_HATCH_SUCCESS;
+                }
+            } else if (object == CARGO) {
+                // Success Cargo
+                if (selection == HIGH) {
+                    // Success Cargo High
+                    key += ROCKET_HIGH_CARGO_SUCCESS;
+                } else if (selection == MIDDLE) {
+                    // Success Cargo Middle
+                    key += ROCKET_MIDDLE_CARGO_SUCCESS;
+                } else if (selection == LOW) {
+                    // Success Cargo Low
+                    key += ROCKET_LOW_CARGO_SUCCESS;
+                }
+            }
         }
+
+        data.put(key, value);
     }
 
-    /**
-     * Update a value in our autonomous dictionary based on the information provided
-     * @param selection
-     * @param scoreObject
-     * @param newValue
-     * @throws IllegalArgumentException thrown if {@code newValue} is not of type {@link Integer} or {@link Boolean}
-     */
-    public void updateAutonomousRocketValue(
-            LevelSelection selection,
-            ScoreObject scoreObject,
-            Object newValue) throws IllegalArgumentException {
-        if (newValue instanceof Integer) {
+    public void updateCargoShipValue(BaseScoutType type, CargoShipSelection selection, ScoreObject object, Object value) {
+        if (!(value instanceof Integer) && !(value instanceof Boolean)) {
+            // Abort if the new value is not a number or boolean
+            throw new IllegalArgumentException("newValue must be Integer or Boolean");
+        }
+
+        // Add prefix to key
+        String key = type == AUTONOMOUS ? AUTO_PREFIX : TELEOP_PREFIX;
+
+        if (value instanceof Integer) {
             // Attempt
-
-            if (scoreObject == HATCH) {
-                switch (selection) {
-                    case TOP:
-                        data.put(AUTO_ROCKET_HIGH_HATCH_ATTEMPT, newValue);
-                        break;
-                    case MIDDLE:
-                        data.put(AUTO_ROCKET_MIDDLE_HATCH_ATTEMPT, newValue);
-                        break;
-                    case LOW:
-                        data.put(AUTO_ROCKET_LOW_HATCH_ATTEMPT, newValue);
-                        break;
+            if (object == HATCH) {
+                // Attempt Hatch
+                if (selection == FRONT) {
+                    // Attempt Hatch Front
+                    key += CARGO_FRONT_HATCH_ATTEMPT;
+                } else if (selection == SIDE) {
+                    // Attempt Hatch Side
+                    key += CARGO_SIDE_HATCH_ATTEMPT;
                 }
-            } else if (scoreObject == CARGO) {
-                switch (selection) {
-                    case TOP:
-                        data.put(AUTO_ROCKET_HIGH_CARGO_ATTEMPT, newValue);
-                        break;
-                    case MIDDLE:
-                        data.put(AUTO_ROCKET_MIDDLE_CARGO_ATTEMPT, newValue);
-                        break;
-                    case LOW:
-                        data.put(AUTO_ROCKET_LOW_CARGO_ATTEMPT, newValue);
-                        break;
-                }
-            }
-        } else if (newValue instanceof Boolean) {
-            // Success
-
-            if (scoreObject == HATCH) {
-                switch (selection) {
-                    case TOP:
-                        data.put(AUTO_ROCKET_HIGH_HATCH_SUCCESS, newValue);
-                        break;
-                    case MIDDLE:
-                        data.put(AUTO_ROCKET_MIDDLE_HATCH_SUCCESS, newValue);
-                        break;
-                    case LOW:
-                        data.put(AUTO_ROCKET_LOW_HATCH_SUCCESS, newValue);
-                        break;
-                }
-            } else if (scoreObject == CARGO) {
-                switch (selection) {
-                    case TOP:
-                        data.put(AUTO_ROCKET_HIGH_CARGO_SUCCESS, newValue);
-                        break;
-                    case MIDDLE:
-                        data.put(AUTO_ROCKET_MIDDLE_CARGO_SUCCESS, newValue);
-                        break;
-                    case LOW:
-                        data.put(AUTO_ROCKET_LOW_CARGO_SUCCESS, newValue);
-                        break;
+            } else if (object == CARGO) {
+                // Attempt Cargo
+                if (selection == FRONT) {
+                    // Attempt Cargo Front
+                    key += CARGO_FRONT_CARGO_ATTEMPT;
+                } else if (selection == SIDE) {
+                    // Attempt Cargo Side
+                    key += CARGO_SIDE_CARGO_ATTEMPT;
                 }
             }
         } else {
-            throw new IllegalArgumentException("newValue must be Integer or Boolean");
+            // Success
+            if (object == HATCH) {
+                // Success Hatch
+                if (selection == FRONT) {
+                    // Success Hatch Front
+                    key += CARGO_FRONT_HATCH_SUCCESS;
+                } else if (selection == SIDE) {
+                    // Success Hatch Side
+                    key += CARGO_SIDE_HATCH_SUCCESS;
+                }
+            } else if (object == CARGO) {
+                // Success Cargo
+                if (selection == FRONT) {
+                    // Success Cargo Front
+                    key += CARGO_FRONT_CARGO_SUCCESS;
+                } else if (selection == SIDE) {
+                    // Success Cargo Side
+                    key += CARGO_SIDE_CARGO_SUCCESS;
+                }
+            }
         }
+
+        data.put(key, value);
     }
 
     /**

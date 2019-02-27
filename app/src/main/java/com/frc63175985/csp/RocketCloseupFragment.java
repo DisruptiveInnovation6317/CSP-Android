@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
+import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.stepper.Stepper;
 import com.frc63175985.csp.stepper.StepperValueChangedListener;
@@ -43,6 +44,8 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
             }
         });
 
+        final BaseScoutType type = ((BaseScoutFragment)getParentFragment()).getScoutType();
+
         levelSelectionGroup = view.findViewById(R.id.rocket_closeup_level_selection);
         levelSelectionGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("ResourceType")
@@ -64,7 +67,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (shouldChange()) {
-                    ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, HATCH, isChecked);
+                    ScoutAuthState.shared.currentMatch.updateRocketValue(type, levelSelection, HATCH, isChecked);
                 } else {
                     buttonView.setChecked(!isChecked);
                 }
@@ -79,7 +82,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (shouldChange()) {
-                    ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, CARGO, isChecked);
+                    ScoutAuthState.shared.currentMatch.updateRocketValue(type, levelSelection, CARGO, isChecked);
                 } else {
                     buttonView.setChecked(!isChecked);
                 }
@@ -100,7 +103,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         String cargoAttemptKey = null, cargoSuccessKey = null;
 
         switch (selection) {
-            case TOP:
+            case HIGH:
                 hatchAttemptKey = "auto_numRocketHighAttempt";
                 hatchSuccessKey = "auto_numRocketHighSuccess";
                 cargoAttemptKey = "auto_numRocketHighCargoAttempt";
@@ -147,11 +150,13 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
 
     @Override
     public void valueChanged(Stepper stepper, int newValue) {
+        BaseScoutType type = ((BaseScoutFragment)getParentFragment()).getScoutType();
+
         // Change value in match database
         if (stepper == hatchAttemptStepper) {
-            ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, HATCH, newValue);
+            ScoutAuthState.shared.currentMatch.updateRocketValue(type, levelSelection, HATCH, newValue);
         } else if (stepper == cargoAttemptStepper) {
-            ScoutAuthState.shared.currentMatch.updateAutonomousRocketValue(levelSelection, CARGO, newValue);
+            ScoutAuthState.shared.currentMatch.updateRocketValue(type, levelSelection, CARGO, newValue);
         }
     }
 }

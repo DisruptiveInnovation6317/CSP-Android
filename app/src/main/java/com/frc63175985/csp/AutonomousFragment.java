@@ -3,21 +3,18 @@ package com.frc63175985.csp;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.ScoutAuthState;
-import com.frc63175985.csp.enums.ScoutingSubview;
+import com.frc63175985.csp.enums.BaseScoutType;
 
+import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
 import static com.frc63175985.csp.enums.ScoutingSubview.THUMBNAIL;
 
 public class AutonomousFragment extends BaseScoutFragment {
@@ -27,7 +24,6 @@ public class AutonomousFragment extends BaseScoutFragment {
         View view = inflater.inflate(R.layout.fragment_autonomous, container, false);
 
         initializeSubviews();
-
         switchView(THUMBNAIL);
 
         String[] objects = {"Start Object", "Nothing", "Hatch", "Cargo"};
@@ -42,7 +38,7 @@ public class AutonomousFragment extends BaseScoutFragment {
         startObjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                position--; // to move default to -1 and "Nothing" to 0.
+                position--; // to move "Start Object" to -1 and "Nothing" to 0.
                 ScoutAuthState.shared.currentMatch.set(Match.START_OBJECT, position);
             }
 
@@ -51,5 +47,10 @@ public class AutonomousFragment extends BaseScoutFragment {
         });
 
         return view;
+    }
+
+    @Override
+    public BaseScoutType getScoutType() {
+        return AUTONOMOUS;
     }
 }
