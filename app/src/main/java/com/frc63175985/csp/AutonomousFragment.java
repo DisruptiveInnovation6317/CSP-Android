@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-enum ScoutingSubview {
-    THUMBNAIL, ROCKET, CARGO_SHIP
-}
+import com.frc63175985.csp.enums.ScoutingSubview;
+
+import static com.frc63175985.csp.enums.ScoutingSubview.THUMBNAIL;
 
 public class AutonomousFragment extends Fragment {
     private ThumbnailFragment thumbnailFragment;
@@ -27,7 +27,7 @@ public class AutonomousFragment extends Fragment {
         rocketCloseup = new RocketCloseupFragment();
         cargoShipCloseup = new CargoShipCloseupFragment();
 
-        switchView(ScoutingSubview.THUMBNAIL);
+        switchView(THUMBNAIL);
 
         return view;
     }

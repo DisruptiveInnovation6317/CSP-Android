@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static com.frc63175985.csp.enums.ScoutingSubview.CARGO_SHIP;
+import static com.frc63175985.csp.enums.ScoutingSubview.ROCKET;
+
 public class ThumbnailFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
@@ -24,9 +27,9 @@ public class ThumbnailFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.match_scouting_thumbnail_rocket) {
-            ((AutonomousFragment)getParentFragment()).switchView(ScoutingSubview.ROCKET);
+            ((AutonomousFragment)getParentFragment()).switchView(ROCKET);
         } else if (v.getId() == R.id.match_scouting_thumbnail_cargo_ship) {
-            ((AutonomousFragment)getParentFragment()).switchView(ScoutingSubview.CARGO_SHIP);
+            ((AutonomousFragment)getParentFragment()).switchView(CARGO_SHIP);
         }
     }
 }

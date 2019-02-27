@@ -21,6 +21,7 @@ import com.frc63175985.csp.stepper.StepperValueChangedListener;
 
 import static com.frc63175985.csp.enums.ScoreObject.CARGO;
 import static com.frc63175985.csp.enums.ScoreObject.HATCH;
+import static com.frc63175985.csp.enums.ScoutingSubview.THUMBNAIL;
 
 public class RocketCloseupFragment extends Fragment implements StepperValueChangedListener {
     private Stepper hatchAttemptStepper;
@@ -38,7 +39,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         view.findViewById(R.id.rocket_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            ((AutonomousFragment)getParentFragment()).switchView(ScoutingSubview.THUMBNAIL);
+            ((AutonomousFragment)getParentFragment()).switchView(THUMBNAIL);
             }
         });
 

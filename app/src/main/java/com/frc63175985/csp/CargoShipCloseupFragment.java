@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static com.frc63175985.csp.enums.ScoutingSubview.THUMBNAIL;
+
 public class CargoShipCloseupFragment extends Fragment {
     @Nullable
     @Override
@@ -17,7 +19,7 @@ public class CargoShipCloseupFragment extends Fragment {
         view.findViewById(R.id.cargo_ship_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AutonomousFragment)getParentFragment()).switchView(ScoutingSubview.THUMBNAIL);
+                ((AutonomousFragment)getParentFragment()).switchView(THUMBNAIL);
             }
         });
 
