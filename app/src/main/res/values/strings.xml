@@ -25,4 +25,6 @@
     <string name="front">Front</string>
     <string name="side">Side</string>
     <string name="attempts">Attempts:</string>
+    <string name="foul">Foul</string>
+    <string name="crosses_midline">Crosses Midline</string>
 </resources>

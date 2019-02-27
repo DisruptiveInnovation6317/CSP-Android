@@ -39,7 +39,7 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         view.findViewById(R.id.rocket_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            ((AutonomousFragment)getParentFragment()).switchView(THUMBNAIL);
+            ((BaseScoutFragment)getParentFragment()).switchView(THUMBNAIL);
             }
         });
 

@@ -18,14 +18,49 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  * and being able to export in CSV format.
  */
 public class Match {
-    private HashMap<String, Object> metaData;
-    private HashMap<String, Object> autonomous;
-    private HashMap<String, Object> teleop;
+    /* Keys */
+    // Autonomous
+    public static final String ACTIVE = "auto_flState";
+    public static final String LEAVES_HAB = "auto_flBaseLine";
+    public static final String START_OBJECT = "auto_idStartObject";
+
+    // Autonomous - Rocket
+    public static final String AUTO_ROCKET_LOW_HATCH_ATTEMPT = "auto_numRocketLowHatchAttempt";
+    public static final String AUTO_ROCKET_LOW_HATCH_SUCCESS = "auto_numRocketLowHatchSuccess";
+    public static final String AUTO_ROCKET_LOW_CARGO_ATTEMPT = "auto_numRocketLowCargoAttempt";
+    public static final String AUTO_ROCKET_LOW_CARGO_SUCCESS = "auto_numRocketLowCargoSuccess";
+    public static final String AUTO_ROCKET_MIDDLE_HATCH_ATTEMPT = "auto_numRocketMidHatchAttempt";
+    public static final String AUTO_ROCKET_MIDDLE_HATCH_SUCCESS = "auto_numRocketMidHatchSuccess";
+    public static final String AUTO_ROCKET_MIDDLE_CARGO_ATTEMPT = "auto_numRocketMidCargoAttempt";
+    public static final String AUTO_ROCKET_MIDDLE_CARGO_SUCCESS = "auto_numRocketMidCargoSuccess";
+    public static final String AUTO_ROCKET_HIGH_HATCH_ATTEMPT = "auto_numRocketHighAttempt";
+    public static final String AUTO_ROCKET_HIGH_HATCH_SUCCESS = "auto_numRocketHighSuccess";
+    public static final String AUTO_ROCKET_HIGH_CARGO_ATTEMPT = "auto_numRocketHighCargoAttempt";
+    public static final String AUTO_ROCKET_HIGH_CARGO_SUCCESS = "auto_numRocketHighCargoSuccess";
+
+    // Autonomous - Cargo
+    public static final String AUTO_CARGO_FRONT_HATCH_ATTEMPT = "auto_numShipFrontHatchAttempt";
+    public static final String AUTO_CARGO_FRONT_HATCH_SUCCESS = "auto_numShipFrontHatchSuccess";
+    public static final String AUTO_CARGO_FRONT_CARGO_ATTEMPT = "auto_numShipFrontCargoAttempt";
+    public static final String AUTO_CARGO_FRONT_CARGO_SUCCESS = "auto_numShipFrontCargoSuccess";
+    public static final String AUTO_CARGO_SIDE_HATCH_ATTEMPT = "auto_numShipSideHatchAttempt";
+    public static final String AUTO_CARGO_SIDE_HATCH_SUCCESS = "auto_numShipSideHatchSuccess";
+    public static final String AUTO_CARGO_SIDE_CARGO_ATTEMPT = "auto_numShipSideCargoAttempt";
+    public static final String AUTO_CARGO_SIDE_CARGO_SUCCESS = "auto_numShipSideCargoSuccess";
+
+    public static final String LOSES_START_OBJECT = "auto_flLoseStartObject";
+    public static final String ROBOT_CONTACT = "auto_flRobotContact";
+    public static final String FOUL = "auto_flFoul";
+    public static final String CROSS_OVER = "auto_flCrossOver";
+
+    private HashMap<String, Object> data;
 
     public Match() {
-        metaData = new HashMap<>();
-        autonomous = new HashMap<>();
-        teleop = new HashMap<>();
+        data = new HashMap<>();
+    }
+
+    public void set(String key, Object value) {
+        data.put(key, value);
     }
 
     public void updateAutonomousCargoShipValue(
@@ -37,22 +72,22 @@ public class Match {
                 switch (selection) {
                     case FRONT:
                         // front hatch attempt
-                        autonomous.put("auto_numShipFrontHatchAttempt", newValue);
+                        data.put(AUTO_CARGO_FRONT_HATCH_ATTEMPT, newValue);
                         break;
                     case SIDE:
                         // side hatch attempt
-                        autonomous.put("auto_numShipSideHatchAttempt", newValue);
+                        data.put(AUTO_CARGO_SIDE_HATCH_ATTEMPT, newValue);
                         break;
                 }
             } else if (scoreObject == CARGO) {
                 switch (selection) {
                     case FRONT:
                         // front cargo attempt
-                        autonomous.put("auto_numShipFrontCargoAttempt", newValue);
+                        data.put(AUTO_CARGO_FRONT_CARGO_ATTEMPT, newValue);
                         break;
                     case SIDE:
                         // side cargo attempt
-                        autonomous.put("auto_numShipSideCargoAttempt", newValue);
+                        data.put(AUTO_CARGO_SIDE_CARGO_ATTEMPT, newValue);
                         break;
                 }
             }
@@ -61,22 +96,22 @@ public class Match {
                 switch (selection) {
                     case FRONT:
                         // front hatch success
-                        autonomous.put("auto_numShipFrontHatchSuccess", newValue);
+                        data.put(AUTO_CARGO_FRONT_HATCH_SUCCESS, newValue);
                         break;
                     case SIDE:
                         // side hatch success
-                        autonomous.put("auto_numShipSideHatchSuccess", newValue);
+                        data.put(AUTO_CARGO_SIDE_HATCH_SUCCESS, newValue);
                         break;
                 }
             } else if (scoreObject == CARGO) {
                 switch (selection) {
                     case FRONT:
                         // front cargo success
-                        autonomous.put("auto_numShipFrontCargoSuccess", newValue);
+                        data.put(AUTO_CARGO_FRONT_CARGO_SUCCESS, newValue);
                         break;
                     case SIDE:
                         // side cargo success
-                        autonomous.put("auto_numShipSideCargoSuccess", newValue);
+                        data.put(AUTO_CARGO_SIDE_CARGO_SUCCESS, newValue);
                         break;
                 }
             }
@@ -90,7 +125,7 @@ public class Match {
      * @param selection
      * @param scoreObject
      * @param newValue
-     * @throws IllegalArgumentException thrown if input is not of type {@link Integer} or {@link Boolean}
+     * @throws IllegalArgumentException thrown if {@code newValue} is not of type {@link Integer} or {@link Boolean}
      */
     public void updateAutonomousRocketValue(
             LevelSelection selection,
@@ -102,25 +137,25 @@ public class Match {
             if (scoreObject == HATCH) {
                 switch (selection) {
                     case TOP:
-                        autonomous.put("auto_numRocketHighAttempt", newValue);
+                        data.put(AUTO_ROCKET_HIGH_HATCH_ATTEMPT, newValue);
                         break;
                     case MIDDLE:
-                        autonomous.put("auto_numRocketMidHatchAttempt", newValue);
+                        data.put(AUTO_ROCKET_MIDDLE_HATCH_ATTEMPT, newValue);
                         break;
                     case LOW:
-                        autonomous.put("auto_numRocketLowHatchAttempt", newValue);
+                        data.put(AUTO_ROCKET_LOW_HATCH_ATTEMPT, newValue);
                         break;
                 }
             } else if (scoreObject == CARGO) {
                 switch (selection) {
                     case TOP:
-                        autonomous.put("auto_numRocketHighCargoAttempt", newValue);
+                        data.put(AUTO_ROCKET_HIGH_CARGO_ATTEMPT, newValue);
                         break;
                     case MIDDLE:
-                        autonomous.put("auto_numRocketMidCargoAttempt", newValue);
+                        data.put(AUTO_ROCKET_MIDDLE_CARGO_ATTEMPT, newValue);
                         break;
                     case LOW:
-                        autonomous.put("auto_numRocketLowCargoAttempt", newValue);
+                        data.put(AUTO_ROCKET_LOW_CARGO_ATTEMPT, newValue);
                         break;
                 }
             }
@@ -130,25 +165,25 @@ public class Match {
             if (scoreObject == HATCH) {
                 switch (selection) {
                     case TOP:
-                        autonomous.put("auto_numRocketHighSuccess", newValue);
+                        data.put(AUTO_ROCKET_HIGH_HATCH_SUCCESS, newValue);
                         break;
                     case MIDDLE:
-                        autonomous.put("auto_numRocketMidHatchSuccess", newValue);
+                        data.put(AUTO_ROCKET_MIDDLE_HATCH_SUCCESS, newValue);
                         break;
                     case LOW:
-                        autonomous.put("auto_numRocketLowHatchSuccess", newValue);
+                        data.put(AUTO_ROCKET_LOW_HATCH_SUCCESS, newValue);
                         break;
                 }
             } else if (scoreObject == CARGO) {
                 switch (selection) {
                     case TOP:
-                        autonomous.put("auto_numRocketHighCargoSuccess", newValue);
+                        data.put(AUTO_ROCKET_HIGH_CARGO_SUCCESS, newValue);
                         break;
                     case MIDDLE:
-                        autonomous.put("auto_numRocketMidCargoSuccess", newValue);
+                        data.put(AUTO_ROCKET_MIDDLE_CARGO_SUCCESS, newValue);
                         break;
                     case LOW:
-                        autonomous.put("auto_numRocketLowCargoSuccess", newValue);
+                        data.put(AUTO_ROCKET_LOW_CARGO_SUCCESS, newValue);
                         break;
                 }
             }
@@ -177,41 +212,24 @@ public class Match {
         sb.append(ScoutAuthState.shared.tournament).append(","); // idEvent
 
         // Autonomous
-        sb.append(bool("auto_flState")).append(","); // auto_flState
+        sb.append(bool(ACTIVE)).append(","); // auto_flState
         sb.append(num("auto_idStartPosition")).append(","); // auto_idStartPosition
         sb.append(num("auto_idStartLevel")).append(","); // auto_idStartLevel
-        sb.append(bool("auto_flBaseLine")).append(","); // auto_flBaseLine
-        sb.append(num("auto_idStartObject")).append(","); // auto_idStartObject
+        sb.append(bool(LEAVES_HAB)).append(","); // auto_flBaseLine
+        sb.append(num(START_OBJECT)).append(","); // auto_idStartObject
 
-        sb.append(bool("auto_flLoseStartObject")).append(","); // auto_flLoseStartObject
-        sb.append(bool("auto_flRobotContact")).append(","); // auto_flRobotContact
-        sb.append(bool("auto_flFoul")).append(","); // auto_flFoul
-        sb.append(bool("auto_flCrossOver")).append(","); // auto_flCrossOver
+        // TODO Autonomous - Rocket
+
+        // TODO Autonomous - Cargo Ship
+
+        sb.append(bool(LOSES_START_OBJECT)).append(","); // auto_flLoseStartObject
+        sb.append(bool(ROBOT_CONTACT)).append(","); // auto_flRobotContact
+        sb.append(bool(FOUL)).append(","); // auto_flFoul
+        sb.append(bool(CROSS_OVER)).append(","); // auto_flCrossOver
 
         // TeleOp
 
         return sb.toString();
-    }
-
-    /**
-     * Search for and return a value in any of our {@link HashMap}'s
-     * @param key The key to searched for
-     * @return The value, if it exists, otherwise {@code null}
-     */
-    @Nullable
-    private Object findObject(String key) {
-        Object potential = metaData.get(key);
-        if (potential == null) {
-            potential = autonomous.get(key);
-            if (potential == null) {
-                potential = teleop.get(key);
-                if (potential == null) {
-                    return null;
-                }
-            }
-        }
-
-        return potential;
     }
 
     /**
@@ -220,7 +238,7 @@ public class Match {
      * @return The value, if it exists, otherwise {@code 0}
      */
     public int num(String key) {
-        Object num = findObject(key);
+        Object num = data.get(key);
         return num == null ? 0 : (int)num;
     }
 
@@ -232,7 +250,7 @@ public class Match {
      * @return The value, if it exists, otherwise {@code "FALSE"}
      */
     public String bool(String key) {
-        Object bool = findObject(key);
+        Object bool = data.get(key);
         if (bool == null) return "FALSE";
         else return (boolean)bool ? "TRUE" : "FALSE";
     }

@@ -27,9 +27,9 @@ public class ThumbnailFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.match_scouting_thumbnail_rocket) {
-            ((AutonomousFragment)getParentFragment()).switchView(ROCKET);
+            ((BaseScoutFragment)getParentFragment()).switchView(ROCKET);
         } else if (v.getId() == R.id.match_scouting_thumbnail_cargo_ship) {
-            ((AutonomousFragment)getParentFragment()).switchView(CARGO_SHIP);
+            ((BaseScoutFragment)getParentFragment()).switchView(CARGO_SHIP);
         }
     }
 }

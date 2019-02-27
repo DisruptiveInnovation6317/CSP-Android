@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.CargoShipSelection;
-import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.stepper.Stepper;
 import com.frc63175985.csp.stepper.StepperValueChangedListener;
 
@@ -40,7 +39,7 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
         view.findViewById(R.id.cargoship_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AutonomousFragment)getParentFragment()).switchView(THUMBNAIL);
+                ((BaseScoutFragment)getParentFragment()).switchView(THUMBNAIL);
             }
         });
 
