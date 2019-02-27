@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.LevelSelection;
@@ -102,24 +103,27 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         String hatchAttemptKey = null, hatchSuccessKey = null;
         String cargoAttemptKey = null, cargoSuccessKey = null;
 
+        BaseScoutType type = ((BaseScoutFragment)getParentFragment()).getScoutType();
+        String prefix = type == BaseScoutType.AUTONOMOUS ? Match.AUTO_PREFIX : Match.TELEOP_PREFIX;
+
         switch (selection) {
             case HIGH:
-                hatchAttemptKey = "auto_numRocketHighAttempt";
-                hatchSuccessKey = "auto_numRocketHighSuccess";
-                cargoAttemptKey = "auto_numRocketHighCargoAttempt";
-                cargoSuccessKey = "auto_numRocketHighCargoSuccess";
+                hatchAttemptKey = prefix + Match.ROCKET_HIGH_HATCH_ATTEMPT;
+                hatchSuccessKey = prefix + Match.ROCKET_HIGH_HATCH_SUCCESS;
+                cargoAttemptKey = prefix + Match.ROCKET_HIGH_CARGO_ATTEMPT;
+                cargoSuccessKey = prefix + Match.ROCKET_HIGH_CARGO_SUCCESS;
                 break;
             case MIDDLE:
-                hatchAttemptKey = "auto_numRocketMidHatchAttempt";
-                hatchSuccessKey = "auto_numRocketMidHatchSuccess";
-                cargoAttemptKey = "auto_numRocketMidCargoAttempt";
-                cargoSuccessKey = "auto_numRocketMidCargoSuccess";
+                hatchAttemptKey = prefix + Match.ROCKET_MIDDLE_HATCH_ATTEMPT;
+                hatchSuccessKey = prefix + Match.ROCKET_MIDDLE_HATCH_SUCCESS;
+                cargoAttemptKey = prefix + Match.ROCKET_MIDDLE_CARGO_ATTEMPT;
+                cargoSuccessKey = prefix + Match.ROCKET_MIDDLE_CARGO_SUCCESS;
                 break;
             case LOW:
-                hatchAttemptKey = "auto_numRocketLowHatchAttempt";
-                hatchSuccessKey = "auto_numRocketLowHatchSuccess";
-                cargoAttemptKey = "auto_numRocketLowCargoAttempt";
-                cargoSuccessKey = "auto_numRocketLowCargoSuccess";
+                hatchAttemptKey = prefix + Match.ROCKET_LOW_HATCH_ATTEMPT;
+                hatchSuccessKey = prefix + Match.ROCKET_LOW_HATCH_SUCCESS;
+                cargoAttemptKey = prefix + Match.ROCKET_LOW_CARGO_ATTEMPT;
+                cargoSuccessKey = prefix + Match.ROCKET_LOW_CARGO_SUCCESS;
                 break;
         }
 

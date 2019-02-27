@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
@@ -100,18 +101,21 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
         String hatchAttemptKey = null, hatchSuccessKey = null;
         String cargoAttemptKey = null, cargoSuccessKey = null;
 
+        BaseScoutType type = ((BaseScoutFragment)getParentFragment()).getScoutType();
+        String prefix = type == BaseScoutType.AUTONOMOUS ? Match.AUTO_PREFIX : Match.TELEOP_PREFIX;
+
         switch (cargoSelection) {
             case FRONT:
-                hatchAttemptKey = "auto_numShipFrontHatchAttempt";
-                hatchSuccessKey = "auto_numShipFrontHatchSuccess";
-                cargoAttemptKey = "auto_numShipFrontCargoAttempt";
-                cargoSuccessKey = "auto_numShipFrontCargoSuccess";
+                hatchAttemptKey = prefix + Match.CARGO_FRONT_HATCH_ATTEMPT;
+                hatchSuccessKey = prefix + Match.CARGO_FRONT_HATCH_SUCCESS;
+                cargoAttemptKey = prefix + Match.CARGO_FRONT_CARGO_ATTEMPT;
+                cargoSuccessKey = prefix + Match.CARGO_FRONT_CARGO_SUCCESS;
                 break;
             case SIDE:
-                hatchAttemptKey = "auto_numShipSideHatchAttempt";
-                hatchSuccessKey = "auto_numShipSideHatchSuccess";
-                cargoAttemptKey = "auto_numShipSideCargoAttempt";
-                cargoSuccessKey = "auto_numShipSideCargoSuccess";
+                hatchAttemptKey = prefix + Match.CARGO_SIDE_HATCH_ATTEMPT;
+                hatchSuccessKey = prefix + Match.CARGO_SIDE_HATCH_SUCCESS;
+                cargoAttemptKey = prefix + Match.CARGO_SIDE_CARGO_ATTEMPT;
+                cargoSuccessKey = prefix + Match.CARGO_SIDE_CARGO_SUCCESS;
                 break;
         }
 

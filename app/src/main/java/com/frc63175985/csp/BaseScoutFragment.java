@@ -8,8 +8,6 @@ import android.widget.CompoundButton;
 
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
-import com.frc63175985.csp.enums.CargoShipSelection;
-import com.frc63175985.csp.enums.ScoreObject;
 import com.frc63175985.csp.enums.ScoutingSubview;
 
 import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;

@@ -13,9 +13,9 @@ import java.util.HashMap;
 import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
 import static com.frc63175985.csp.enums.CargoShipSelection.FRONT;
 import static com.frc63175985.csp.enums.CargoShipSelection.SIDE;
+import static com.frc63175985.csp.enums.LevelSelection.HIGH;
 import static com.frc63175985.csp.enums.LevelSelection.LOW;
 import static com.frc63175985.csp.enums.LevelSelection.MIDDLE;
-import static com.frc63175985.csp.enums.LevelSelection.HIGH;
 import static com.frc63175985.csp.enums.ScoreObject.CARGO;
 import static com.frc63175985.csp.enums.ScoreObject.HATCH;
 
