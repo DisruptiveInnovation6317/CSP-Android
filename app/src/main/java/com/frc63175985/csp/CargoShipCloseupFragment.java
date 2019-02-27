@@ -16,7 +16,7 @@ public class CargoShipCloseupFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cargoship_closeup, container, false);
 
-        view.findViewById(R.id.cargo_ship_closeup_back).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.cargoship_closeup_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((AutonomousFragment)getParentFragment()).switchView(THUMBNAIL);
