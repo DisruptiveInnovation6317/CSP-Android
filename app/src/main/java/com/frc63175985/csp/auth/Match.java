@@ -1,9 +1,12 @@
 package com.frc63175985.csp.auth;
 
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import com.frc63175985.csp.MainActivity;
 import com.frc63175985.csp.enums.BaseScoutType;
@@ -77,6 +80,17 @@ public class Match {
     public static final String CARGO_SIDE_CARGO_SUCCESS = "numShipSideCargoSuccess";
 
     public static final String DEFENSE = "tele_flDefence";
+
+    // Comments
+    public static final String COMMENTS = "comm_txNotes";
+    public static final String HIGHLIGHT = "comm_flHighlight";
+    public static final String WARNING = "comm_flWarning";
+    public static final String DRIVE_RATING = "comm_idDriveRating";
+    public static final String WORK_WITH_ALLIANCE = "comm_flAlliance";
+    public static final String RECOVER = "comm_flRecovery";
+    public static final String WORKED_STRATEGY = "comm_flStrategy";
+    public static final String WORKED_SOLO = "comm_flOwnThing";
+    public static final String EFFECTIVE_DEFENCE = "comm_flGoodDefence";
 
     private HashMap<String, Object> data;
 
@@ -302,6 +316,8 @@ public class Match {
          */
         public static void bindCheckbox(View parentView, int id, final String key) {
             CheckBox checkBox = parentView.findViewById(id);
+
+            // Add listener
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -309,8 +325,45 @@ public class Match {
                 }
             });
 
+            // Preload data
             boolean checked = ScoutAuthState.shared.currentMatch.bool(key).equals("TRUE");
             checkBox.setChecked(checked);
+        }
+
+        public static void bindEditText(View parentView, int id, final String key) {
+            EditText editText = parentView.findViewById(id);
+
+            // Add listener
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    ScoutAuthState.shared.currentMatch.set(key, s.toString());
+                }
+            });
+
+            // Preload data
+            String comments = ScoutAuthState.shared.currentMatch.str(key);
+            if (comments != null) {
+                editText.setText(comments);
+            }
+        }
+
+        /**
+         * TODO
+         * @param parentView
+         * @param id
+         * @param key
+         * @param options
+         * @param enumClass
+         */
+        public static void bindSpinner(View parentView, int id, final String key, String[] options, Class enumClass) {
+
         }
     }
 }

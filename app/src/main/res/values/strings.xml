@@ -30,4 +30,5 @@
     <string name="defence">Defence</string>
     <string name="loses_start_object">Loses Start Object</string>
     <string name="leaves_hab">Leaves HAB</string>
+    <string name="comments">Comments</string>
 </resources>

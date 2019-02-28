@@ -5,4 +5,75 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/comments_comments_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/comments"
+        android:textSize="20sp"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"/>
+
+    <CheckBox
+        android:id="@+id/comments_highlight_checkBox"
+        android:text="Highlight"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_warning_checkBox"
+        android:text="Warning"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/comments_drive_rating_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <CheckBox
+        android:id="@+id/comments_worked_with_alliance_checkBox"
+        android:text="Worked with Alliance"
+        android:layout_marginTop="10dp"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_recovered_checkBox"
+        android:text="Recovered"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_strategy_checkBox"
+        android:text="Strategy"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_solo_checkBox"
+        android:text="Worked Solo"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_good_defence_checkBox"
+        android:text="Effective Defence"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

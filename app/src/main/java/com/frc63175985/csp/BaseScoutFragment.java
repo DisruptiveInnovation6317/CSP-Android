@@ -2,12 +2,7 @@ package com.frc63175985.csp;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
-import com.frc63175985.csp.auth.Match;
-import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.ScoutingSubview;
 

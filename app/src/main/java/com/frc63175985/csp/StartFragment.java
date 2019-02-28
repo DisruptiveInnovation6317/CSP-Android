@@ -9,17 +9,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.AllianceColor;
-import com.frc63175985.csp.enums.LevelSelection;
 
 import static com.frc63175985.csp.enums.AllianceColor.RED;
 
