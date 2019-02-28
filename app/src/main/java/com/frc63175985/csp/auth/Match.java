@@ -1,6 +1,9 @@
 package com.frc63175985.csp.auth;
 
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.frc63175985.csp.MainActivity;
 import com.frc63175985.csp.enums.BaseScoutType;
@@ -22,7 +25,7 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
 /**
  * The object representation of a Match.
  * This will be responsible for storing match information, conforming to the database
- * and being able to export in CSV format.
+ * schema and being able to export in CSV format.
  */
 public class Match {
     /* Keys */
@@ -33,6 +36,10 @@ public class Match {
     public static final String TEAM_NUMBER = "idTeam";
     public static final String ALLIANCE = "idAlliance";
     public static final String DRIVE_STATION = "idDriveStation";
+
+    public static final String ROBOT_CRASHED = "flCrashed";
+    public static final String YELLOW_CARD = "flYellow";
+    public static final String RED_CARD = "flRed";
 
     // Autonomous
     public static final String ACTIVE = "auto_flState";
@@ -277,6 +284,34 @@ public class Match {
         Object bool = data.get(key);
         if (bool == null) return "FALSE";
         else return (boolean)bool ? "TRUE" : "FALSE";
+    }
+
+    /**
+     * A class GUI helpers revolving around displaying Match information
+     */
+    public static class GUI {
+        /**
+         * Creates a listener that keeps the value of a {@link CheckBox} in sync
+         * with the value of the current {@link Match}.
+         * Also preloads the checkbox checked value to what the current value in the
+         * {@link Match} database is.
+         * @param parentView The parent view hosting the {@link CheckBox}
+         * @param id The identifier of the {@link CheckBox}
+         * @param key The key that should be updated in the current {@link Match} object
+         * @see Match
+         */
+        public static void bindCheckbox(View parentView, int id, final String key) {
+            CheckBox checkBox = parentView.findViewById(id);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ScoutAuthState.shared.currentMatch.set(key, isChecked);
+                }
+            });
+
+            boolean checked = ScoutAuthState.shared.currentMatch.bool(key).equals("TRUE");
+            checkBox.setChecked(checked);
+        }
     }
 }
 

@@ -18,10 +18,35 @@
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/teleop_robot_crashed_checkBox"
+            android:text="Robot Crashed"
+            android:textSize="24sp"
+            android:textColor="@color/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/teleop_yellow_card"
+            android:text="Yellow Card"
+            android:textSize="24sp"
+            android:textColor="@color/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/teleop_red_card"
+            android:text="Red Card"
+            android:textSize="24sp"
+            android:textColor="@color/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </com.google.android.flexbox.FlexboxLayout>
 
     <FrameLayout
         android:id="@+id/teleop_content_view"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

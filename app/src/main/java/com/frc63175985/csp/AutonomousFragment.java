@@ -30,10 +30,10 @@ public class AutonomousFragment extends BaseScoutFragment {
         String[] objects = {"Start Object", "Nothing", "Hatch", "Cargo"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_drop_down_item, objects);
 
-        addCheckBoxListener(view, R.id.autonomous_foul_checkbox, Match.FOUL);
-        addCheckBoxListener(view, R.id.autonomous_crosses_midline_checkbox, Match.CROSS_OVER);
-        addCheckBoxListener(view, R.id.autonomous_loses_start_obj_checkbox, Match.LOSES_START_OBJECT);
-        addCheckBoxListener(view, R.id.autonomous_leaves_hab, Match.LEAVES_HAB);
+        Match.GUI.bindCheckbox(view, R.id.autonomous_foul_checkbox, Match.FOUL);
+        Match.GUI.bindCheckbox(view, R.id.autonomous_crosses_midline_checkbox, Match.CROSS_OVER);
+        Match.GUI.bindCheckbox(view, R.id.autonomous_loses_start_obj_checkbox, Match.LOSES_START_OBJECT);
+        Match.GUI.bindCheckbox(view, R.id.autonomous_leaves_hab, Match.LEAVES_HAB);
 
         Spinner startObjectSpinner = view.findViewById(R.id.autonomous_start_object_spinner);
         startObjectSpinner.setAdapter(adapter);
@@ -57,20 +57,8 @@ public class AutonomousFragment extends BaseScoutFragment {
      * Auto fill autonomous meta bar
      */
     private void autofill(View view) {
-        boolean leavesHab = ScoutAuthState.shared.currentMatch.bool(Match.LEAVES_HAB).equals("TRUE");
-        ((CheckBox)view.findViewById(R.id.autonomous_leaves_hab)).setChecked(leavesHab);
-
-        boolean foul = ScoutAuthState.shared.currentMatch.bool(Match.FOUL).equals("TRUE");
-        ((CheckBox)view.findViewById(R.id.autonomous_foul_checkbox)).setChecked(foul);
-
-        boolean crossesMidline = ScoutAuthState.shared.currentMatch.bool(Match.CROSS_OVER).equals("TRUE");
-        ((CheckBox)view.findViewById(R.id.autonomous_crosses_midline_checkbox)).setChecked(crossesMidline);
-
         int startObjectId = ScoutAuthState.shared.currentMatch.num(Match.START_OBJECT) + 1;
         ((Spinner)view.findViewById(R.id.autonomous_start_object_spinner)).setSelection(startObjectId);
-
-        boolean losesStartObj = ScoutAuthState.shared.currentMatch.bool(Match.LOSES_START_OBJECT).equals("TRUE");
-        ((CheckBox)view.findViewById(R.id.autonomous_loses_start_obj_checkbox)).setChecked(losesStartObj);
     }
 
     @Override

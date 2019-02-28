@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.ScoutingSubview;
@@ -23,6 +24,13 @@ public abstract class BaseScoutFragment extends Fragment {
     private CargoShipCloseupFragment cargoShipCloseup;
     private int contentViewId;
 
+    /**
+     * Initialize the fragments used for scouting, as well as the
+     * id of the contentView based on the result of {@link #getScoutType()}
+     * @see ThumbnailFragment
+     * @see RocketCloseupFragment
+     * @see CargoShipCloseupFragment
+     */
     public void initializeSubviews() {
         thumbnailFragment = new ThumbnailFragment();
         rocketCloseup = new RocketCloseupFragment();
@@ -35,6 +43,11 @@ public abstract class BaseScoutFragment extends Fragment {
         }
     }
 
+    /**
+     * Get whether this {@link Fragment} is hosting a scouting view
+     * for autonomous or teleop
+     * @return What category of content is being displayed
+     */
     public abstract BaseScoutType getScoutType();
 
     /**
@@ -58,15 +71,5 @@ public abstract class BaseScoutFragment extends Fragment {
         }
 
         fm.commit();
-    }
-
-    protected void addCheckBoxListener(View parentView, int id, final String key) {
-        CheckBox checkBox = parentView.findViewById(id);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ScoutAuthState.shared.currentMatch.set(key, isChecked);
-            }
-        });
     }
 }

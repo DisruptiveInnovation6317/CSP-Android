@@ -24,7 +24,10 @@ public class TeleOpFragment extends BaseScoutFragment {
         initializeSubviews();
         switchView(THUMBNAIL);
 
-        addCheckBoxListener(view, R.id.teleop_defence_checkBox, Match.DEFENSE);
+        Match.GUI.bindCheckbox(view, R.id.teleop_defence_checkBox, Match.DEFENSE);
+        Match.GUI.bindCheckbox(view, R.id.teleop_robot_crashed_checkBox, Match.ROBOT_CRASHED);
+        Match.GUI.bindCheckbox(view, R.id.teleop_yellow_card, Match.YELLOW_CARD);
+        Match.GUI.bindCheckbox(view, R.id.teleop_red_card, Match.RED_CARD);
 
         autofill(view);
 
