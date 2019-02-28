@@ -23,17 +23,17 @@ public class ScoutAuthState {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        Thread.sleep(1000);
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                notifyAuthStateChanged(true);
-                            }
-                        });
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    Thread.sleep(1000);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                        notifyAuthStateChanged(true);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 }
             }).start();
         }

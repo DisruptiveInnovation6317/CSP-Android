@@ -3,8 +3,117 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Match #"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp"/>
 
+        <EditText
+            android:id="@+id/start_match_num_editText"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        <TextView
+            android:text="Team #"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp"/>
+
+        <EditText
+            android:id="@+id/start_team_num_editText"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        <TextView
+            android:text="Alliance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp"/>
+
+        <RadioGroup
+            android:id="@+id/start_alliance_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/start_alliance_red_radio"
+                android:text="Red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"/>
+            <RadioButton
+                android:id="@+id/start_alliance_blue_radio"
+                android:text="Blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        <TextView
+            android:text="Drive Station"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp"/>
+
+        <RadioGroup
+            android:id="@+id/start_drive_station_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/start_drive_station_1_radio"
+                android:text="1"
+                android:layout_marginStart="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"/>
+            <RadioButton
+                android:id="@+id/start_drive_station_2_radio"
+                android:text="2"
+                android:layout_marginStart="5sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"/>
+
+            <RadioButton
+                android:id="@+id/start_drive_station_3_radio"
+                android:text="3"
+                android:layout_marginStart="5sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"/>
+        </RadioGroup>
+    </LinearLayout>
 
 </LinearLayout>

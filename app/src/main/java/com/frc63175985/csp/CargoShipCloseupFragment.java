@@ -120,9 +120,11 @@ public class CargoShipCloseupFragment extends Fragment implements StepperValueCh
         }
 
         int hatchAttempts = ScoutAuthState.shared.currentMatch.num(hatchAttemptKey);
+        if (hatchAttempts == -1) hatchAttempts = 0;
         boolean hatchSuccess = ScoutAuthState.shared.currentMatch.bool(hatchSuccessKey)
                 .equals("TRUE");
         int cargoAttempts = ScoutAuthState.shared.currentMatch.num(cargoAttemptKey);
+        if (cargoAttempts == -1) cargoAttempts = 0;
         boolean cargoSuccess = ScoutAuthState.shared.currentMatch.bool(cargoSuccessKey)
                 .equals("TRUE");
 

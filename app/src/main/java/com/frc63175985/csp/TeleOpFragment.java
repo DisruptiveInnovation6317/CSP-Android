@@ -6,7 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
+import com.frc63175985.csp.auth.Match;
+import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
 
 import static com.frc63175985.csp.enums.BaseScoutType.TELEOP;
@@ -21,7 +24,16 @@ public class TeleOpFragment extends BaseScoutFragment {
         initializeSubviews();
         switchView(THUMBNAIL);
 
+        addCheckBoxListener(view, R.id.teleop_defence_checkBox, Match.DEFENSE);
+
+        autofill(view);
+
         return view;
+    }
+
+    private void autofill(View view) {
+        boolean defence = ScoutAuthState.shared.currentMatch.bool(Match.DEFENSE).equals("TRUE");
+        ((CheckBox)view.findViewById(R.id.teleop_defence_checkBox)).setChecked(defence);
     }
 
     @Override

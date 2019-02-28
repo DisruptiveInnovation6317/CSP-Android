@@ -55,8 +55,8 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
                 View radioButtonView = group.findViewById(group.getCheckedRadioButtonId());
                 int radioIndex = group.indexOfChild(radioButtonView);
                 RadioButton radioButton = (RadioButton)group.getChildAt(radioIndex);
-                LevelSelection level = LevelSelection.valueOf(radioButton.getText().toString().toUpperCase());
-                autofill(level);
+                levelSelection = LevelSelection.valueOf(radioButton.getText().toString().toUpperCase());
+                autofill();
             }
         });
 
@@ -96,17 +96,15 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
     /**
      * Auto-fill the hatch and cargo information
      * based on the selection
-     * @param selection What tier of the Rocket we are auto-filling for
      */
-    private void autofill(LevelSelection selection) {
-        levelSelection = selection;
+    private void autofill() {
         String hatchAttemptKey = null, hatchSuccessKey = null;
         String cargoAttemptKey = null, cargoSuccessKey = null;
 
         BaseScoutType type = ((BaseScoutFragment)getParentFragment()).getScoutType();
         String prefix = type == BaseScoutType.AUTONOMOUS ? Match.AUTO_PREFIX : Match.TELEOP_PREFIX;
 
-        switch (selection) {
+        switch (levelSelection) {
             case HIGH:
                 hatchAttemptKey = prefix + Match.ROCKET_HIGH_HATCH_ATTEMPT;
                 hatchSuccessKey = prefix + Match.ROCKET_HIGH_HATCH_SUCCESS;
@@ -128,9 +126,11 @@ public class RocketCloseupFragment extends Fragment implements StepperValueChang
         }
 
         int hatchAttempts = ScoutAuthState.shared.currentMatch.num(hatchAttemptKey);
+        if (hatchAttempts == -1) hatchAttempts = 0;
         boolean hatchSuccess = ScoutAuthState.shared.currentMatch.bool(hatchSuccessKey)
                 .equals("TRUE");
         int cargoAttempts = ScoutAuthState.shared.currentMatch.num(cargoAttemptKey);
+        if (cargoAttempts == -1) cargoAttempts = 0;
         boolean cargoSuccess = ScoutAuthState.shared.currentMatch.bool(cargoSuccessKey)
                 .equals("TRUE");
 

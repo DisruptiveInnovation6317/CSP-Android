@@ -29,6 +29,11 @@ public class Match {
     public static final String AUTO_PREFIX = "auto_";
     public static final String TELEOP_PREFIX = "tele_";
 
+    public static final String MATCH_NUMBER = "numMatch";
+    public static final String TEAM_NUMBER = "idTeam";
+    public static final String ALLIANCE = "idAlliance";
+    public static final String DRIVE_STATION = "idDriveStation";
+
     // Autonomous
     public static final String ACTIVE = "auto_flState";
     public static final String LEAVES_HAB = "auto_flBaseLine";
@@ -63,6 +68,8 @@ public class Match {
     public static final String CARGO_SIDE_HATCH_SUCCESS = "numShipSideHatchSuccess";
     public static final String CARGO_SIDE_CARGO_ATTEMPT = "numShipSideCargoAttempt";
     public static final String CARGO_SIDE_CARGO_SUCCESS = "numShipSideCargoSuccess";
+
+    public static final String DEFENSE = "tele_flDefence";
 
     private HashMap<String, Object> data;
 
@@ -235,7 +242,18 @@ public class Match {
 
         // TeleOp
 
+        // Other
+
         return sb.toString();
+    }
+
+    public String str(String key) {
+        Object value = data.get(key);
+        if (value == null) {
+            return null;
+        } else {
+            return (String)value;
+        }
     }
 
     /**
@@ -245,7 +263,7 @@ public class Match {
      */
     public int num(String key) {
         Object num = data.get(key);
-        return num == null ? 0 : (int)num;
+        return num == null ? -1 : (int)num;
     }
 
     /**

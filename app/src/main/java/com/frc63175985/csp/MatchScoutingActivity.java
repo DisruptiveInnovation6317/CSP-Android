@@ -10,8 +10,8 @@ import android.support.v4.view.ViewPager;
 
 public class MatchScoutingActivity extends FragmentActivity {
     // Scouting Views
-    private Fragment[] fragments = new Fragment[3];
-    private String[] fragmentTitles = {"Start", "Autonomous", "TeleOp"};
+    private Fragment[] fragments = new Fragment[4];
+    private String[] fragmentTitles = {"Start", "Autonomous", "TeleOp", "Info"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,14 +21,10 @@ public class MatchScoutingActivity extends FragmentActivity {
         fragments[0] = new StartFragment();
         fragments[1] = new AutonomousFragment();
         fragments[2] = new TeleOpFragment();
+        fragments[3] = new MatchInfoFragment();
 
         final ViewPager pager = findViewById(R.id.match_scouting_pager);
         pager.setAdapter(new MatchScoutingFragmentAdapter(getSupportFragmentManager()));
-
-        // TODO - remove. used to test a certain view
-        if (MainActivity.DEBUG_MODE) {
-            pager.setCurrentItem(1);
-        }
     }
 
     private class MatchScoutingFragmentAdapter extends FragmentStatePagerAdapter {
