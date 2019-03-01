@@ -1,14 +1,19 @@
 package com.frc63175985.csp.auth;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.frc63175985.csp.MainActivity;
+import com.frc63175985.csp.R;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
@@ -46,6 +51,8 @@ public class Match {
 
     // Autonomous
     public static final String ACTIVE = "auto_flState";
+    public static final String START_POSITION = "auto_idStartPosition";
+    public static final String START_LEVEL = "auto_idStartLevel";
     public static final String LEAVES_HAB = "auto_flBaseLine";
     public static final String START_OBJECT = "auto_idStartObject";
     // AUTONOMOUS CARGOSHIP
@@ -55,31 +62,35 @@ public class Match {
     public static final String FOUL = "auto_flFoul";
     public static final String CROSS_OVER = "auto_flCrossOver";
 
-    // Rocket
-    public static final String ROCKET_LOW_HATCH_ATTEMPT = "numRocketLowHatchAttempt";
-    public static final String ROCKET_LOW_HATCH_SUCCESS = "numRocketLowHatchSuccess";
-    public static final String ROCKET_LOW_CARGO_ATTEMPT = "numRocketLowCargoAttempt";
-    public static final String ROCKET_LOW_CARGO_SUCCESS = "numRocketLowCargoSuccess";
-    public static final String ROCKET_MIDDLE_HATCH_ATTEMPT = "numRocketMidHatchAttempt";
-    public static final String ROCKET_MIDDLE_HATCH_SUCCESS = "numRocketMidHatchSuccess";
-    public static final String ROCKET_MIDDLE_CARGO_ATTEMPT = "numRocketMidCargoAttempt";
-    public static final String ROCKET_MIDDLE_CARGO_SUCCESS = "numRocketMidCargoSuccess";
-    public static final String ROCKET_HIGH_HATCH_ATTEMPT = "numRocketHighAttempt";
-    public static final String ROCKET_HIGH_HATCH_SUCCESS = "numRocketHighSuccess";
-    public static final String ROCKET_HIGH_CARGO_ATTEMPT = "numRocketHighCargoAttempt";
-    public static final String ROCKET_HIGH_CARGO_SUCCESS = "numRocketHighCargoSuccess";
-
     // Cargo Ship
     public static final String CARGO_FRONT_HATCH_ATTEMPT = "numShipFrontHatchAttempt";
     public static final String CARGO_FRONT_HATCH_SUCCESS = "numShipFrontHatchSuccess";
-    public static final String CARGO_FRONT_CARGO_ATTEMPT = "numShipFrontCargoAttempt";
-    public static final String CARGO_FRONT_CARGO_SUCCESS = "numShipFrontCargoSuccess";
     public static final String CARGO_SIDE_HATCH_ATTEMPT = "numShipSideHatchAttempt";
     public static final String CARGO_SIDE_HATCH_SUCCESS = "numShipSideHatchSuccess";
+    public static final String CARGO_FRONT_CARGO_ATTEMPT = "numShipFrontCargoAttempt";
+    public static final String CARGO_FRONT_CARGO_SUCCESS = "numShipFrontCargoSuccess";
     public static final String CARGO_SIDE_CARGO_ATTEMPT = "numShipSideCargoAttempt";
     public static final String CARGO_SIDE_CARGO_SUCCESS = "numShipSideCargoSuccess";
 
+    // Rocket
+    public static final String ROCKET_LOW_HATCH_ATTEMPT = "numRocketLowHatchAttempt";
+    public static final String ROCKET_LOW_HATCH_SUCCESS = "numRocketLowHatchSuccess";
+    public static final String ROCKET_MIDDLE_HATCH_ATTEMPT = "numRocketMidHatchAttempt";
+    public static final String ROCKET_MIDDLE_HATCH_SUCCESS = "numRocketMidHatchSuccess";
+    public static final String ROCKET_HIGH_HATCH_ATTEMPT = "numRocketHighAttempt";
+    public static final String ROCKET_HIGH_HATCH_SUCCESS = "numRocketHighSuccess";
+    public static final String ROCKET_LOW_CARGO_ATTEMPT = "numRocketLowCargoAttempt";
+    public static final String ROCKET_LOW_CARGO_SUCCESS = "numRocketLowCargoSuccess";
+    public static final String ROCKET_MIDDLE_CARGO_ATTEMPT = "numRocketMidCargoAttempt";
+    public static final String ROCKET_MIDDLE_CARGO_SUCCESS = "numRocketMidCargoSuccess";
+    public static final String ROCKET_HIGH_CARGO_ATTEMPT = "numRocketHighCargoAttempt";
+    public static final String ROCKET_HIGH_CARGO_SUCCESS = "numRocketHighCargoSuccess";
+
+    // TeleOp
+
     public static final String DEFENSE = "tele_flDefence";
+
+    // End Game
 
     // Comments
     public static final String COMMENTS = "comm_txNotes";
@@ -227,6 +238,16 @@ public class Match {
     }
 
     /**
+     * Validate the data about to be submitted. If the data is invalid,
+     * the error is returned in a localized string format. If there is no problems,
+     * the returning string will be {@code null}.
+     * @return
+     */
+    /* TODO @Nullable private String validate() {
+
+    }*/
+
+    /**
      * Get this class expressed in CSV format in accordance to ProjectB's Microsoft
      * Access database tables.
      * @return this match in CSV format
@@ -242,28 +263,96 @@ public class Match {
         StringBuilder sb = new StringBuilder();
 
         // Meta
-        sb.append("NULL").append(","); // ID
+        sb.append("DEFAULT").append(","); // ID
         sb.append(ScoutAuthState.shared.tournament).append(","); // idEvent
+        sb.append(str(MATCH_NUMBER)).append(","); // numMatch
+        sb.append(str(TEAM_NUMBER)).append(","); // idTeam
+        sb.append(num(ALLIANCE)).append(","); // idAlliance
+        sb.append(num(DRIVE_STATION)).append(","); // idDriveStation
+        sb.append(ScoutAuthState.shared.scout).append(","); // txScoutName
+        sb.append(bool(ROBOT_CRASHED)).append(","); // flCrashed
+        sb.append(bool(YELLOW_CARD)).append(","); // flYellow
+        sb.append(bool(RED_CARD)).append(","); // flRed
 
         // Autonomous
         sb.append(bool(ACTIVE)).append(","); // auto_flState
-        sb.append(num("auto_idStartPosition")).append(","); // auto_idStartPosition
-        sb.append(num("auto_idStartLevel")).append(","); // auto_idStartLevel
+        sb.append(num(START_POSITION)).append(","); // auto_idStartPosition
+        sb.append(num(START_LEVEL)).append(","); // auto_idStartLevel
         sb.append(bool(LEAVES_HAB)).append(","); // auto_flBaseLine
         sb.append(num(START_OBJECT)).append(","); // auto_idStartObject
 
-        // TODO Autonomous - Rocket
+        // Autonomous - Cargo Ship
+        sb.append(num(AUTO_PREFIX + CARGO_FRONT_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + CARGO_FRONT_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_SIDE_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + CARGO_SIDE_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_FRONT_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + CARGO_FRONT_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_SIDE_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + CARGO_SIDE_CARGO_SUCCESS)).append(",");
 
-        // TODO Autonomous - Cargo Ship
+        // Autonomous - Rocket
+        sb.append(num(AUTO_PREFIX + ROCKET_LOW_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + ROCKET_LOW_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + ROCKET_HIGH_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_LOW_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + ROCKET_LOW_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
         sb.append(bool(LOSES_START_OBJECT)).append(","); // auto_flLoseStartObject
         sb.append(bool(ROBOT_CONTACT)).append(","); // auto_flRobotContact
         sb.append(bool(FOUL)).append(","); // auto_flFoul
         sb.append(bool(CROSS_OVER)).append(","); // auto_flCrossOver
 
-        // TeleOp
+        // TeleOp - Cargo Ship
+        sb.append(num(TELEOP_PREFIX + CARGO_FRONT_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + CARGO_FRONT_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_SIDE_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + CARGO_SIDE_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_FRONT_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + CARGO_FRONT_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_SIDE_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + CARGO_SIDE_CARGO_SUCCESS)).append(",");
 
-        // Other
+        // TeleOp - Rocket
+        sb.append(num(TELEOP_PREFIX + ROCKET_LOW_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + ROCKET_LOW_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + ROCKET_HIGH_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_LOW_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + ROCKET_LOW_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT)).append(",");
+        sb.append(bool(TELEOP_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
+
+        // End Game
+
+        // Comments
+        sb.append(str(COMMENTS)).append(","); // comm_txNotes
+        sb.append(bool(HIGHLIGHT)).append(","); // comm_flHighlight
+        sb.append(bool(WARNING)).append(","); // comm_flWarning
+        sb.append(num(DRIVE_RATING)).append(","); // comm_idDriveRating
+        sb.append(bool(WORK_WITH_ALLIANCE)).append(","); // comm_flAlliance
+        sb.append(bool(RECOVER)).append(","); // comm_flRecovery
+        sb.append(bool(WORKED_STRATEGY)).append(","); // comm_flStrategy
+        sb.append(bool(WORKED_SOLO)).append(","); // comm_flOwnThing
+        sb.append(bool(EFFECTIVE_DEFENCE)).append(","); // comm_flGoodDefence
+
+        // TODO Creation
+        // dtCreation
+        // dtModified
+        // txComputerName
+        // flRanking1
+        // flRanking2
 
         return sb.toString();
     }
@@ -354,109 +443,27 @@ public class Match {
             }
         }
 
-        /**
-         * TODO
-         * @param parentView
-         * @param id
-         * @param key
-         * @param options
-         * @param enumClass
-         */
-        public static void bindSpinner(View parentView, int id, final String key, String[] options, Class enumClass) {
+        public static void bindSpinner(Context context, View parentView, int id,
+                                       final String key, String[] options) {
+            // Create listener
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    context, R.layout.spinner_drop_down_item, options);
+            Spinner spinner = parentView.findViewById(id);
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ScoutAuthState.shared.currentMatch.set(key, position);
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            });
+
+            // Prefill
+            int savedIndex = ScoutAuthState.shared.currentMatch.num(key);
+            if (savedIndex == -1) savedIndex = 0;
+            spinner.setSelection(savedIndex);
         }
     }
 }
-
-
-/*
-numMatch
-idTeam
-idAlliance
-idDriveStation
-txScoutName
-flCrashed
-flYellow
-flRed
-
-X auto_flState
-X auto_idStartPosition
-X auto_idStartLevel
-X auto_flBaseLine
-X auto_idStartObject
-auto_numShipFrontHatchAttempt
-auto_numShipFrontHatchSuccess
-auto_numShipSideHatchAttempt
-auto_numShipSideHatchSuccess
-auto_numShipFrontCargoAttempt
-auto_numShipFrontCargoSuccess
-auto_numShipSideCargoAttempt
-auto_numShipSideCargoSuccess
-auto_numRocketLowHatchAttempt
-auto_numRocketLowHatchSuccess
-auto_numRocketMidHatchAttempt
-auto_numRocketMidHatchSuccess
-auto_numRocketHighAttempt
-auto_numRocketHighSuccess
-auto_numRocketLowCargoAttempt
-auto_numRocketLowCargoSuccess
-auto_numRocketMidCargoAttempt
-auto_numRocketMidCargoSuccess
-auto_numRocketHighCargoAttempt
-auto_numRocketHighCargoSuccess
-X auto_flLoseStartObject
-X auto_flRobotContact
-X auto_flFoul
-X auto_flCrossOver
-
-tele_numShipFrontHatchAttempt
-tele_numShipFrontHatchSuccess
-tele_numShipSideHatchAttempt
-tele_numShipSideHatchSuccess
-tele_numShipFrontCargoAttempt
-tele_numShipFrontCargoSuccess
-tele_numShipSideCargoAttempt
-tele_numShipSideCargoSuccess
-tele_numRocketLowHatchAttempt
-tele_numRocketLowHatchSuccess
-tele_numRocketMidHatchAttempt
-tele_numRocketMidHatchSuccess
-tele_numRocketHighAttempt
-tele_numRocketHighSuccess
-tele_numRocketLowCargoAttempt
-tele_numRocketLowCargoSuccess
-tele_numRocketMidCargoAttempt
-tele_numRocketMidCargoSuccess
-tele_numRocketHighCargoAttempt
-tele_numRocketHighCargoSuccess
-
-tele_idClimb
-tele_idClimbOutcome
-tele_idClimbGrab
-tele_idClimbSpeed
-tele_numClimbAssists
-tele_idClimbLevel
-tele_flClimbFall
-tele_flDefence
-
-flIntakeHatchGround
-flIntakeHatchStation
-flIntakeCargoGround
-flIntakeCargoStation
-
-comm_txNotes
-comm_flHighlight
-comm_flWarning
-comm_idDriveRating
-comm_flAlliance
-comm_flRecovery
-comm_flStrategy
-comm_flOwnThing
-comm_flGoodDefence
-
-dtCreation
-dtModified
-txComputerName
-flRanking1
-flRanking2
- */

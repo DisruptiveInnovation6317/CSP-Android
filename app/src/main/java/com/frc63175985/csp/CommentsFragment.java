@@ -19,8 +19,8 @@ public class CommentsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_comments, container, false);
 
         String[] driveRatings = {"Driver Rating", "Terrible", "Average", "Good", "Amazing"};
-        ArrayAdapter<String> driveRatingsAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_drop_down_item, driveRatings);
-        ((Spinner)view.findViewById(R.id.comments_drive_rating_spinner)).setAdapter(driveRatingsAdapter);
+        Match.GUI.bindSpinner(getContext(), view, R.id.comments_drive_rating_spinner,
+                Match.DRIVE_RATING, driveRatings);
 
         Match.GUI.bindEditText(view, R.id.comments_comments_editText, Match.COMMENTS);
         Match.GUI.bindCheckbox(view, R.id.comments_highlight_checkBox, Match.HIGHLIGHT);

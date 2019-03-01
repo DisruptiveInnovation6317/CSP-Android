@@ -26,12 +26,8 @@ public class StartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
 
         // Match # listener
-        ((EditText)view.findViewById(R.id.start_match_num_editText))
-                .addTextChangedListener(new DatabaseTextWatcher(Match.MATCH_NUMBER));
-
-        // Team # listener
-        ((EditText)view.findViewById(R.id.start_team_num_editText))
-                .addTextChangedListener(new DatabaseTextWatcher(Match.TEAM_NUMBER));
+        Match.GUI.bindEditText(view, R.id.start_match_num_editText, Match.MATCH_NUMBER);
+        Match.GUI.bindEditText(view, R.id.start_team_num_editText, Match.TEAM_NUMBER);
 
         // Alliance listener
         ((RadioGroup)view.findViewById(R.id.start_alliance_radioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -66,14 +62,6 @@ public class StartFragment extends Fragment {
      * Auto fill information from the start
      */
     private void autofill(View view) {
-        // Match #
-        String matchNumber = ScoutAuthState.shared.currentMatch.str(Match.MATCH_NUMBER);
-        ((EditText)view.findViewById(R.id.start_match_num_editText)).setText(matchNumber);
-
-        // Team #
-        String teamNumber = ScoutAuthState.shared.currentMatch.str(Match.TEAM_NUMBER);
-        ((EditText)view.findViewById(R.id.start_team_num_editText)).setText(teamNumber);
-
         // Alliance
         int alliance = ScoutAuthState.shared.currentMatch.num(Match.ALLIANCE);
         if (alliance == 0) {
@@ -96,24 +84,5 @@ public class StartFragment extends Fragment {
             ((RadioGroup)view.findViewById(R.id.start_drive_station_radioGroup))
                     .check(R.id.start_drive_station_3_radio);
         }
-    }
-}
-
-class DatabaseTextWatcher implements TextWatcher {
-    private String key;
-
-    public DatabaseTextWatcher(String key) {
-        this.key = key;
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        ScoutAuthState.shared.currentMatch.set(key, s.toString());
     }
 }
