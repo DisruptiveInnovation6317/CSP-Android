@@ -34,7 +34,7 @@ public class StartFragment extends Fragment {
                 int radioIndex = group.indexOfChild(radioButtonView);
                 RadioButton radioButton = (RadioButton)group.getChildAt(radioIndex);
                 AllianceColor color = AllianceColor.valueOf(radioButton.getText().toString().toUpperCase());
-                ScoutAuthState.shared.currentMatch.set(Match.ALLIANCE, color == RED ? 0 : 1);
+                ScoutAuthState.shared.currentMatch.set(Match.ALLIANCE, color == RED ? 1 : 2);
             }
         });
 

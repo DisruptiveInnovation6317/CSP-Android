@@ -87,7 +87,6 @@ public class Match {
     public static final String ROCKET_HIGH_CARGO_SUCCESS = "numRocketHighCargoSuccess";
 
     // TeleOp
-
     public static final String DEFENSE = "tele_flDefence";
 
     // End Game
@@ -236,16 +235,6 @@ public class Match {
 
         data.put(key, value);
     }
-
-    /**
-     * Validate the data about to be submitted. If the data is invalid,
-     * the error is returned in a localized string format. If there is no problems,
-     * the returning string will be {@code null}.
-     * @return
-     */
-    /* TODO @Nullable private String validate() {
-
-    }*/
 
     /**
      * Get this class expressed in CSV format in accordance to ProjectB's Microsoft

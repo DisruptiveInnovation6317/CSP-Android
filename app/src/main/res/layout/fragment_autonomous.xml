@@ -13,6 +13,13 @@
         app:alignItems="stretch"
         app:alignContent="stretch">
         <CheckBox
+            android:id="@+id/autonomous_active"
+            android:text="Active"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <CheckBox
             android:id="@+id/autonomous_leaves_hab"
             android:text="@string/leaves_hab"
             android:textSize="24sp"
@@ -22,6 +29,13 @@
         <CheckBox
             android:id="@+id/autonomous_crosses_midline_checkbox"
             android:text="@string/crosses_midline"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/autonomous_robot_contact_checkBox"
+            android:text="Robot Contact"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

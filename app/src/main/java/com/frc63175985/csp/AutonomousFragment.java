@@ -22,6 +22,8 @@ public class AutonomousFragment extends BaseScoutFragment {
         initializeSubviews();
         switchView(THUMBNAIL);
 
+        Match.GUI.bindCheckbox(view, R.id.autonomous_active, Match.ACTIVE);
+        Match.GUI.bindCheckbox(view, R.id.autonomous_robot_contact_checkBox, Match.ROBOT_CONTACT);
         Match.GUI.bindCheckbox(view, R.id.autonomous_foul_checkbox, Match.FOUL);
         Match.GUI.bindCheckbox(view, R.id.autonomous_crosses_midline_checkbox, Match.CROSS_OVER);
         Match.GUI.bindCheckbox(view, R.id.autonomous_loses_start_obj_checkbox, Match.LOSES_START_OBJECT);
