@@ -17,13 +17,6 @@ import com.frc63175985.csp.auth.ScoutAuthStateListener;
 public class MainActivity extends AppCompatActivity implements ScoutAuthStateListener, View.OnClickListener {
     private EditText scoutNameEditText, tournamentNameEditText;
 
-    /**
-     * Use this to quicken some processes of the app.
-     * Here's what it does:
-     * - Auto-sign scout
-     */
-    public static final boolean DEBUG_MODE = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
             }
         } else if (id == R.id.welcome_match_scouting_button) {
             Intent i = new Intent(MainActivity.this, MatchScoutingActivity.class);
+            startActivity(i);
+        } else if (id == R.id.welcome_qr_aggregator_button) {
+            Intent i = new Intent(MainActivity.this, QrAggregatorActivity.class);
             startActivity(i);
         }
     }

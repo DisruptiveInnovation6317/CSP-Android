@@ -3,7 +3,7 @@ package com.frc63175985.csp.auth;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.frc63175985.csp.MainActivity;
+import com.frc63175985.csp.Debug;
 
 import java.util.LinkedList;
 
@@ -17,9 +17,9 @@ public class ScoutAuthState {
         currentMatch = new Match();
 
         // Auto login if in debug mode
-        if (MainActivity.DEBUG_MODE) {
+        if (Debug.AUTO_SIGNIN) {
             scout = "Richards, Brandon";
-            tournament = "Cedar Falls";
+            tournament = "CAAV";
             new Thread(new Runnable() {
                 @Override
                 public void run() {

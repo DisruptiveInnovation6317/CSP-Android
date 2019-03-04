@@ -122,6 +122,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Button
+            android:id="@+id/welcome_qr_aggregator_button"
+            android:text="QR Aggregator"
+            android:onClick="onClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </LinearLayout>

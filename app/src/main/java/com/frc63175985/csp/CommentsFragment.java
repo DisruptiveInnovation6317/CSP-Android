@@ -1,5 +1,8 @@
 package com.frc63175985.csp;
 
+import android.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,10 +10,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.frc63175985.csp.auth.Match;
+import com.frc63175985.csp.auth.ScoutAuthState;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 public class CommentsFragment extends Fragment {
     @Nullable
@@ -30,6 +38,22 @@ public class CommentsFragment extends Fragment {
         Match.GUI.bindCheckbox(view, R.id.comments_strategy_checkBox, Match.WORKED_STRATEGY);
         Match.GUI.bindCheckbox(view, R.id.comments_solo_checkBox, Match.WORKED_SOLO);
         Match.GUI.bindCheckbox(view, R.id.comments_good_defence_checkBox, Match.EFFECTIVE_DEFENCE);
+
+        view.findViewById(R.id.comments_finalize_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String contents = ScoutAuthState.shared.currentMatch.export();
+                if (contents == null) {
+                    Toast.makeText(getContext(), "Error in validation", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                AlertDialog dialog = QrHelper.qrDialogFromString(getContext(), "Match", contents);
+                if (dialog != null) {
+                    dialog.show();
+                }
+            }
+        });
 
         return view;
     }

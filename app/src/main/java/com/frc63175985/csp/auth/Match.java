@@ -357,10 +357,10 @@ public class Match {
         return sb.toString();
     }
 
-    public String str(String key) {
+    private String str(String key) {
         Object value = data.get(key);
         if (value == null) {
-            return null;
+            return "";
         } else {
             return (String)value;
         }

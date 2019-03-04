@@ -31,4 +31,6 @@
     <string name="loses_start_object">Loses Start Object</string>
     <string name="leaves_hab">Leaves HAB</string>
     <string name="comments">Comments</string>
+    <string name="clear">Clear</string>
+    <string name="export">Export</string>
 </resources>

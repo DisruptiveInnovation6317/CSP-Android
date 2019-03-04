@@ -6,12 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.frc63175985.csp.auth.Match;
-import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.enums.BaseScoutType;
 
 import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
