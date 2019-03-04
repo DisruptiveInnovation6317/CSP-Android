@@ -58,6 +58,16 @@
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/autonomous_start_position_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/autonomous_start_level_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </com.google.android.flexbox.FlexboxLayout>
 
     <FrameLayout

@@ -29,9 +29,17 @@ public class AutonomousFragment extends BaseScoutFragment {
         Match.GUI.bindCheckbox(view, R.id.autonomous_loses_start_obj_checkbox, Match.LOSES_START_OBJECT);
         Match.GUI.bindCheckbox(view, R.id.autonomous_leaves_hab, Match.LEAVES_HAB);
 
-        String[] options = {"Start Object", "Nothing", "Hatch", "Cargo"};
+        String[] startObjectOptions = {"Start Object", "Nothing", "Hatch", "Cargo"};
         Match.GUI.bindSpinner(getContext(), view, R.id.autonomous_start_object_spinner,
-                Match.START_OBJECT, options);
+                Match.START_OBJECT, startObjectOptions);
+
+        String[] startPositionOptions = {"Start Position", "Left", "Middle", "Right"};
+        Match.GUI.bindSpinner(getContext(), view, R.id.autonomous_start_position_spinner,
+                Match.START_POSITION, startPositionOptions);
+
+        String[] startLevelOptions = {"Start Level", "1", "2", "3"};
+        Match.GUI.bindSpinner(getContext(), view, R.id.autonomous_start_level_spinner,
+                Match.START_LEVEL, startLevelOptions);
 
         return view;
     }

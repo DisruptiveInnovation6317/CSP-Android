@@ -43,7 +43,7 @@
 
         <EditText
             android:id="@+id/welcome_scout_login_editText"
-            android:hint="Doe, John"
+            android:hint="Last_First"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1" />
@@ -56,7 +56,7 @@
 
         <EditText
             android:id="@+id/welcome_tournament_login_editText"
-            android:hint="Cedar Falls"
+            android:hint="Event Code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1" />

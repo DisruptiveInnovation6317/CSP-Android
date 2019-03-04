@@ -362,7 +362,7 @@ public class Match {
      */
     public int num(String key) {
         Object num = data.get(key);
-        return num == null ? -1 : (int)num;
+        return num == null ? 0 : (int)num;
     }
 
     /**

@@ -18,7 +18,7 @@ public class ScoutAuthState {
 
         // Auto login if in debug mode
         if (Debug.AUTO_SIGNIN) {
-            scout = "Richards, Brandon";
+            scout = "Brandon_Richards";
             tournament = "CAAV";
             new Thread(new Runnable() {
                 @Override
@@ -62,7 +62,7 @@ public class ScoutAuthState {
         }
 
         // Check if the name is formatted properly
-        if (!scoutName.matches("^[A-Z][a-z]+, [A-Z][a-z]+$")) {
+        if (!scoutName.matches("^[A-Z][a-z]+_[A-Z][a-z]+$")) {
             return false;
         }
 
