@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -461,6 +463,18 @@ public class Match {
             if (comments != null) {
                 editText.setText(comments);
             }
+
+            // Disallow commas
+            editText.setFilters(new InputFilter[]{new InputFilter() {
+                @Override
+                public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                    if (source != null && source.toString().contains(",")) {
+                        return "";
+                    }
+
+                    return null;
+                }
+            }});
         }
 
         public static void bindSpinner(Context context, View parentView, int id,

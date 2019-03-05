@@ -1,7 +1,7 @@
 package com.frc63175985.csp;
 
 /**
- * Yeah.
+ * Used for enabling debugging features
  */
 public class Debug {
     public static final String TAG = "CSP_LOG";
