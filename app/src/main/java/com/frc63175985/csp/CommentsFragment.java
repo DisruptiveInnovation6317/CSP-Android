@@ -46,10 +46,10 @@ public class CommentsFragment extends Fragment {
                     return;
                 }
 
-                Toast.makeText(getContext(), "Generating QR...", Toast.LENGTH_SHORT).show();
                 AlertDialog dialog = QrHelper.qrDialogFromString(getContext(), "Match", contents);
                 if (dialog != null) {
                     dialog.show();
+                    ScoutAuthState.shared.currentMatch.saveToFile();
                 }
             }
         });

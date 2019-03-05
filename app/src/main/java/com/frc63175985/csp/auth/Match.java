@@ -2,6 +2,8 @@ package com.frc63175985.csp.auth;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -22,6 +24,9 @@ import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.enums.ScoreObject;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -499,5 +504,37 @@ public class Match {
             if (savedIndex == -1) savedIndex = 0;
             spinner.setSelection(savedIndex);
         }
+    }
+
+    @Nullable public String saveToFile() {
+        try {
+            FileWriter writer = new FileWriter(getAbsPath());
+            writer.write(export());
+            writer.close();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
+    @NonNull private File getAbsPath() {
+        SimpleDateFormat format = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
+        String filename = format.format(new Date()) + ".csv";
+        String rootPath = Environment.getExternalStorageDirectory() + "/CSP/";
+        File rootFile = new File(rootPath);
+        if (!rootFile.exists()) {
+            rootFile.mkdir();
+        }
+
+        String absFilePath = rootPath + filename;
+        File file = new File(absFilePath);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return file;
     }
 }
