@@ -76,6 +76,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <CheckBox
+        android:id="@+id/comments_ranking_1"
+        android:text="Completed Rocket"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_ranking_2"
+        android:text="Completed HAB Climb"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/comments_finalize_button"
         android:text="Finalize"

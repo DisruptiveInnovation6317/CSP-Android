@@ -31,6 +31,8 @@ public class CommentsFragment extends Fragment {
         Match.GUI.bindCheckbox(view, R.id.comments_strategy_checkBox, Match.WORKED_STRATEGY);
         Match.GUI.bindCheckbox(view, R.id.comments_solo_checkBox, Match.WORKED_SOLO);
         Match.GUI.bindCheckbox(view, R.id.comments_good_defence_checkBox, Match.EFFECTIVE_DEFENCE);
+        Match.GUI.bindCheckbox(view, R.id.comments_ranking_1, Match.RANKING_1);
+        Match.GUI.bindCheckbox(view, R.id.comments_ranking_2, Match.RANKING_2);
 
         view.findViewById(R.id.comments_finalize_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,8 @@ public class CommentsFragment extends Fragment {
                 }
             }
         });
+
+
 
         return view;
     }

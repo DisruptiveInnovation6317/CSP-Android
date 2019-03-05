@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,6 +40,10 @@ public class QrHelper {
                 for (int y = 0; y < height; y++) {
                     bitmap.setPixel(x, y, matrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
+            }
+
+            if (Debug.LOG_GENERATED_QR_CODE) {
+                Log.v(Debug.TAG, message);
             }
 
             return bitmap;

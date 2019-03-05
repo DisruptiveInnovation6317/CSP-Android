@@ -1,6 +1,7 @@
 package com.frc63175985.csp.auth;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +20,10 @@ import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.enums.ScoreObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
 import static com.frc63175985.csp.enums.CargoShipSelection.FRONT;
@@ -88,8 +92,19 @@ public class Match {
 
     // TeleOp
     public static final String DEFENSE = "tele_flDefence";
+    public static final String TAKE_HATCH_GROUND = "flIntakeHatchGround";
+    public static final String TAKE_HATCH_STATION = "flIntakeHatchStation";
+    public static final String TAKE_CARGO_GROUND = "flIntakeCargoGround";
+    public static final String TAKE_CARGO_STATION = "flIntakeCargoStation";
 
     // End Game
+    public static final String CLIMB = "tele_idClimb";
+    public static final String CLIMB_OUTCOME = "tele_idClimbOutcome";
+    public static final String CLIMB_GRAB = "tele_idClimbGrab";
+    public static final String CLIMB_SPEED = "tele_idClimbSpeed";
+    public static final String NUMBER_CLIMB_ASSISTS = "tele_numClimbAssists";
+    public static final String CLIMB_LEVEL = "tele_idClimbLevel";
+    public static final String CLIMB_FALL = "tele_flClimbFall";
 
     // Comments
     public static final String COMMENTS = "comm_txNotes";
@@ -101,6 +116,9 @@ public class Match {
     public static final String WORKED_STRATEGY = "comm_flStrategy";
     public static final String WORKED_SOLO = "comm_flOwnThing";
     public static final String EFFECTIVE_DEFENCE = "comm_flGoodDefence";
+
+    public static final String RANKING_1 = "flRanking1";
+    public static final String RANKING_2 = "flRanking2";
 
     private HashMap<String, Object> data;
 
@@ -324,6 +342,19 @@ public class Match {
         sb.append(bool(TELEOP_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
         // End Game
+        sb.append(num(CLIMB)).append(","); // tele_idClimb
+        sb.append(num(CLIMB_OUTCOME)).append(","); // tele_idClimbOutcome
+        sb.append(num(CLIMB_GRAB)).append(","); // tele_idClimbGrab
+        sb.append(num(CLIMB_SPEED)).append(","); // tele_idClimbSpeed
+        sb.append(str(NUMBER_CLIMB_ASSISTS)).append(","); // tele_numClimbAssists
+        sb.append(num(CLIMB_LEVEL)).append(","); // tele_idClimbLevel
+        sb.append(bool(CLIMB_FALL)).append(","); // tele_flClimbFall
+
+        sb.append(bool(DEFENSE)).append(","); // tele_flDefence
+        sb.append(bool(TAKE_HATCH_GROUND)).append(","); // flIntakeHatchGround
+        sb.append(bool(TAKE_HATCH_STATION)).append(","); // flIntakeHatchStation
+        sb.append(bool(TAKE_CARGO_GROUND)).append(","); // flIntakeCargoGround
+        sb.append(bool(TAKE_CARGO_STATION)).append(","); // flIntakeCargoStation
 
         // Comments
         sb.append(str(COMMENTS)).append(","); // comm_txNotes
@@ -336,12 +367,12 @@ public class Match {
         sb.append(bool(WORKED_SOLO)).append(","); // comm_flOwnThing
         sb.append(bool(EFFECTIVE_DEFENCE)).append(","); // comm_flGoodDefence
 
-        // TODO Creation
-        // dtCreation
-        // dtModified
-        // txComputerName
-        // flRanking1
-        // flRanking2
+        // Creation
+        sb.append(new SimpleDateFormat("y-M-d-k-h-m-s", Locale.US).format(new Date())).append(","); // dtCreation
+        sb.append(new SimpleDateFormat("y-M-d-k-h-m-s", Locale.US).format(new Date())).append(","); // dtModified
+        sb.append(Build.MODEL == null || Build.MODEL.isEmpty() ? "Android-Device" : Build.MODEL).append(","); // txComputerName
+        sb.append(bool(RANKING_1)).append(","); // flRanking1
+        sb.append(bool(RANKING_2)); // flRanking2
 
         return sb.toString();
     }

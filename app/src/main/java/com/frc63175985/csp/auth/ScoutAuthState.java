@@ -18,7 +18,7 @@ public class ScoutAuthState {
 
         // Auto login if in debug mode
         if (Debug.AUTO_SIGNIN) {
-            scout = "Brandon_Richards";
+            scout = "LAST_FIRST";
             tournament = "CAAV";
             new Thread(new Runnable() {
                 @Override
