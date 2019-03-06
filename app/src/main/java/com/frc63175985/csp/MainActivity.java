@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
             if (!ScoutAuthState.shared.login(scoutName, tournamentName)) {
                 Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT).show();
             }
+        } else if (id == R.id.welcome_pit_scouting_button) {
+            Intent i = new Intent(MainActivity.this, PitScoutingActivity.class);
+            startActivity(i);
         } else if (id == R.id.welcome_match_scouting_button) {
             Intent i = new Intent(MainActivity.this, MatchScoutingActivity.class);
             startActivity(i);

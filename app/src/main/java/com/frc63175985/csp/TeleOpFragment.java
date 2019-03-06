@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.enums.BaseScoutType;
 
 import static com.frc63175985.csp.enums.BaseScoutType.TELEOP;
-import static com.frc63175985.csp.enums.ScoutingSubview.THUMBNAIL;
 
 public class TeleOpFragment extends BaseScoutFragment {
     @Nullable

@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="100dp">
+
+    <TextView
+        android:id="@+id/pit_hatches_section_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="HACHES"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_can_manipulate_hatch"
+        android:text="Can Manipulate Hatch?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_hatches_section_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_hatch_floor_intake"
+        android:text="Floor Intake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_can_manipulate_hatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_hatch_exchange_intake"
+        android:text="Exchange Intake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_hatch_floor_intake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_deliver_hatch_low_level"
+        app:layout_constraintTop_toBottomOf="@+id/pit_hatches_section_header"
+        app:layout_constraintStart_toEndOf="@+id/pit_can_manipulate_hatch"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Deliver Low Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_deliver_hatch_mid_level"
+        app:layout_constraintTop_toBottomOf="@+id/pit_deliver_hatch_low_level"
+        app:layout_constraintStart_toStartOf="@+id/pit_deliver_hatch_low_level"
+        android:text="Deliver Mid Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_deliver_hatch_high_level"
+        app:layout_constraintTop_toBottomOf="@+id/pit_deliver_hatch_mid_level"
+        app:layout_constraintStart_toStartOf="@+id/pit_deliver_hatch_mid_level"
+        android:text="Deliver High Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/pit_hatch_intake_notes_editText"
+        app:layout_constraintTop_toBottomOf="@+id/pit_hatch_exchange_intake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Hatch Intake Notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_cargo_section_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_hatch_intake_notes_editText"
+        android:text="CARGO"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_can_manipulate_cargo"
+        android:text="Can Manipulate Cargo?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_cargo_section_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_cargo_floor_intake"
+        android:text="Floor Intake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_can_manipulate_cargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_cargo_exchange_intake"
+        android:text="Exchange Intake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_cargo_floor_intake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_deliver_cargo_low_level"
+        app:layout_constraintTop_toBottomOf="@+id/pit_cargo_section_header"
+        app:layout_constraintStart_toEndOf="@+id/pit_can_manipulate_cargo"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Deliver Low Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_deliver_cargo_mid_level"
+        app:layout_constraintTop_toBottomOf="@+id/pit_deliver_cargo_low_level"
+        app:layout_constraintStart_toStartOf="@+id/pit_deliver_cargo_low_level"
+        android:text="Deliver Mid Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_deliver_cargo_high_level"
+        app:layout_constraintTop_toBottomOf="@+id/pit_deliver_cargo_mid_level"
+        app:layout_constraintStart_toStartOf="@+id/pit_deliver_cargo_mid_level"
+        android:text="Deliver High Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/pit_cargo_intake_notes_editText"
+        app:layout_constraintTop_toBottomOf="@+id/pit_cargo_exchange_intake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Cargo Intake Notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_sandstorm_section_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_cargo_intake_notes_editText"
+        android:text="SANDSTORM"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_sandstorm_active"
+        android:text="Sandstorm Mode?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_section_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_sandstorm_control_textView"
+        android:text="Control: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_sandstorm_control_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_control_textView"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_sandstorm_max_hab_textView"
+        android:text="Max HAB: "
+        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_control_spinner"
+        app:layout_constraintTop_toTopOf="@+id/pit_sandstorm_max_hab_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_sandstorm_max_hab_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_max_hab_textView"
+        app:layout_constraintTop_toTopOf="@id/pit_sandstorm_control_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_sandstorm_deliver_hatch"
+        android:text="Deliver Hatch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_control_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_sandstorm_deliver_cargo"
+        android:text="Deliver Cargo"
+        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_deliver_hatch"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_control_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_max_hatches_textView"
+        android:text="Max Hatches:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_deliver_hatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/pit_max_hatches_stepper"
+        app:layout_constraintTop_toTopOf="@+id/pit_max_hatches_textView"
+        app:layout_constraintStart_toEndOf="@+id/pit_max_hatches_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/stepper" />
+
+    <TextView
+        android:id="@+id/pit_max_height_textView"
+        android:text="Max Height:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_max_hatches_stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_hatch_max_height_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_max_height_textView"
+        app:layout_constraintTop_toBottomOf="@+id/pit_max_cargo_stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_max_cargo_textView"
+        android:text="Max Cargo:"
+        app:layout_constraintStart_toStartOf="@+id/pit_sandstorm_deliver_cargo"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_deliver_cargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/pit_max_cargo_stepper"
+        app:layout_constraintTop_toTopOf="@+id/pit_max_cargo_textView"
+        app:layout_constraintStart_toEndOf="@+id/pit_max_cargo_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/stepper" />
+
+    <TextView
+        android:text="Max Height:"
+        app:layout_constraintStart_toStartOf="@+id/pit_max_cargo_textView"
+        app:layout_constraintTop_toBottomOf="@+id/pit_max_cargo_stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_max_height_cargo_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/pit_max_cargo_stepper"
+        app:layout_constraintStart_toStartOf="@+id/pit_max_cargo_stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_climb_section_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_max_height_cargo_spinner"
+        android:text="CLIMB"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_climb_active_checkBox"
+        android:text="Can Climb?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pit_climb_section_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_climb_climb_type_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_climb_active_checkBox"
+        android:text="Climb Type: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_climb_climb_type_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_climb_climb_type_textView"
+        app:layout_constraintTop_toTopOf="@+id/pit_climb_climb_type_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_climb_grab_speed_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_climb_climb_type_spinner"
+        android:text="Grab Speed: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_climb_grab_speed_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_climb_grab_speed_textView"
+        app:layout_constraintTop_toTopOf="@+id/pit_climb_grab_speed_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_climb_climb_speed_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_climb_grab_speed_spinner"
+        android:text="Grab Speed: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_climb_climb_speed_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_climb_climb_speed_textView"
+        app:layout_constraintTop_toTopOf="@+id/pit_climb_climb_speed_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_sandstorm_num_robots_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_climb_climb_speed_spinner"
+        android:text="# Robots: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/pit_climb_num_robots_stepper"
+        app:layout_constraintTop_toTopOf="@+id/pit_sandstorm_num_robots_textView"
+        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_num_robots_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/stepper" />
+
+    <TextView
+        android:id="@+id/pit_climb_max_height_textView"
+        android:text="Max Height: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_climb_num_robots_stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/pit_climb_max_height_spinner"
+        app:layout_constraintStart_toEndOf="@+id/pit_climb_max_height_textView"
+        app:layout_constraintTop_toTopOf="@+id/pit_climb_max_height_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pit_image_section_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_climb_max_height_spinner"
+        android:text="IMAGE"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/pit_image_front_button"
+        app:layout_constraintTop_toTopOf="@+id/pit_image_front_imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/pit_image_front_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pit_image_front_imageView"
+        android:text="FRONT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/pit_image_front_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/pit_image_section_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/border"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="Front Image of Robot"/>
+
+    <Button
+        android:id="@+id/pit_image_side_button"
+        app:layout_constraintTop_toTopOf="@+id/pit_image_side_imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/pit_image_side_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pit_image_side_imageView"
+        android:text="SIDE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/pit_image_side_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/pit_image_front_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/border"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="Side Image of Robot"/>
+
+    <TextView
+        android:id="@+id/pit_notes_section_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_image_side_imageView"
+        android:text="NOTES"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/pit_notes_defensive_driver_checkBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_notes_section_header"
+        android:text="Defensive Driver?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/pit_notes_notes_editText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_notes_defensive_driver_checkBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="General Notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/pit_notes_submit_button"
+        android:text="Finalize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pit_notes_notes_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

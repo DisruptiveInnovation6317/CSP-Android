@@ -111,7 +111,6 @@
             android:id="@+id/welcome_pit_scouting_button"
             android:text="Pit Scouting"
             android:onClick="onClick"
-            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
