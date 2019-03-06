@@ -1,148 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:flexWrap="wrap"
-            app:alignItems="stretch"
-            app:alignContent="stretch">
-            <CheckBox
-                android:id="@+id/teleop_defence_checkBox"
-                android:text="@string/defence"
-                android:textSize="24sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <CheckBox
-                android:id="@+id/teleop_robot_crashed_checkBox"
-                android:text="Robot Crashed"
-                android:textSize="24sp"
-                android:textColor="@color/red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <CheckBox
-                android:id="@+id/teleop_yellow_card"
-                android:text="Yellow Card"
-                android:textSize="24sp"
-                android:textColor="@color/red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <CheckBox
-                android:id="@+id/teleop_red_card"
-                android:text="Red Card"
-                android:textSize="24sp"
-                android:textColor="@color/red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <FrameLayout
-            android:id="@+id/teleop_content_view"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Pick Up"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:id="@+id/teleop_hatch_from_ground"
-            android:text="Hatch from Ground"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:id="@+id/teleop_hatch_from_station"
-            android:text="Hatch from Station"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:id="@+id/teleop_cargo_from_ground"
-            android:text="Cargo from Ground"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:id="@+id/teleop_cargo_from_station"
-            android:text="Cargo from Station"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Climbing"
-            android:textSize="24sp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:flexWrap="wrap"
-            app:alignItems="stretch"
-            app:alignContent="stretch"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-            <Spinner
-                android:id="@+id/teleop_climb_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Spinner
-                android:id="@+id/teleop_climb_outcome_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Spinner
-                android:id="@+id/teleop_climb_grab_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Spinner
-                android:id="@+id/teleop_climb_speed_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/teleop_climb_attempts_editText"
-                android:hint="Climb Attempts"
-                android:textSize="24sp"
-                android:inputType="numberSigned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Spinner
-                android:id="@+id/teleop_climb_level_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <CheckBox
-                android:id="@+id/teleop_climb_robot_fell"
-                android:text="Robot Fell"
-                android:textSize="24sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.google.android.flexbox.FlexboxLayout>
-
+        <include
+            layout="@layout/fragment_base_scout" />
     </LinearLayout>
 </ScrollView>

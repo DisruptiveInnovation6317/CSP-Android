@@ -297,27 +297,27 @@ public class Match {
 
         // Autonomous - Cargo Ship
         sb.append(num(AUTO_PREFIX + CARGO_FRONT_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + CARGO_FRONT_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_FRONT_HATCH_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + CARGO_SIDE_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + CARGO_SIDE_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_SIDE_HATCH_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + CARGO_FRONT_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + CARGO_FRONT_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_FRONT_CARGO_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + CARGO_SIDE_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + CARGO_SIDE_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + CARGO_SIDE_CARGO_SUCCESS)).append(",");
 
         // Autonomous - Rocket
         sb.append(num(AUTO_PREFIX + ROCKET_LOW_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + ROCKET_LOW_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_LOW_HATCH_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + ROCKET_HIGH_HATCH_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_HIGH_HATCH_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_LOW_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + ROCKET_LOW_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_LOW_CARGO_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
+        sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
         sb.append(bool(LOSES_START_OBJECT)).append(","); // auto_flLoseStartObject
         sb.append(bool(ROBOT_CONTACT)).append(","); // auto_flRobotContact
@@ -326,27 +326,27 @@ public class Match {
 
         // TeleOp - Cargo Ship
         sb.append(num(TELEOP_PREFIX + CARGO_FRONT_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + CARGO_FRONT_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_FRONT_HATCH_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + CARGO_SIDE_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + CARGO_SIDE_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_SIDE_HATCH_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + CARGO_FRONT_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + CARGO_FRONT_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_FRONT_CARGO_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + CARGO_SIDE_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + CARGO_SIDE_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + CARGO_SIDE_CARGO_SUCCESS)).append(",");
 
         // TeleOp - Rocket
         sb.append(num(TELEOP_PREFIX + ROCKET_LOW_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + ROCKET_LOW_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_LOW_HATCH_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + ROCKET_HIGH_HATCH_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_HATCH_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + ROCKET_LOW_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + ROCKET_LOW_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_LOW_CARGO_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS)).append(",");
         sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT)).append(",");
-        sb.append(bool(TELEOP_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
+        sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
         // End Game
         sb.append(num(CLIMB)).append(","); // tele_idClimb
@@ -375,6 +375,7 @@ public class Match {
         sb.append(bool(EFFECTIVE_DEFENCE)).append(","); // comm_flGoodDefence
 
         // Creation
+        // TODO - change date export to YYYY/MM/DD HH:MM:SS format
         sb.append(new SimpleDateFormat("y-M-d-k-h-m-s", Locale.US).format(new Date())).append(","); // dtCreation
         sb.append(new SimpleDateFormat("y-M-d-k-h-m-s", Locale.US).format(new Date())).append(","); // dtModified
         sb.append(Build.MODEL == null || Build.MODEL.isEmpty() ? "Android-Device" : Build.MODEL).append(","); // txComputerName

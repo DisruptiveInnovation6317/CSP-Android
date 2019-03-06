@@ -14,57 +14,10 @@ import static com.frc63175985.csp.enums.BaseScoutType.TELEOP;
  * as they share a lot of logic
  */
 public abstract class BaseScoutFragment extends Fragment {
-    private ThumbnailFragment thumbnailFragment;
-    private RocketCloseupFragment rocketCloseup;
-    private CargoShipCloseupFragment cargoShipCloseup;
-    private int contentViewId;
-
-    /**
-     * Initialize the fragments used for scouting, as well as the
-     * id of the contentView based on the result of {@link #getScoutType()}
-     * @see ThumbnailFragment
-     * @see RocketCloseupFragment
-     * @see CargoShipCloseupFragment
-     */
-    public void initializeSubviews() {
-        thumbnailFragment = new ThumbnailFragment();
-        rocketCloseup = new RocketCloseupFragment();
-        cargoShipCloseup = new CargoShipCloseupFragment();
-
-        if (getScoutType() == AUTONOMOUS) {
-            contentViewId = R.id.autonomous_content_view;
-        } else if (getScoutType() == TELEOP) {
-            contentViewId = R.id.teleop_content_view;
-        }
-    }
-
     /**
      * Get whether this {@link Fragment} is hosting a scouting view
-     * for autonomous or teleop
+     * for Autonomous or TeleOp
      * @return What category of content is being displayed
      */
     public abstract BaseScoutType getScoutType();
-
-    /**
-     * Change the subview of this {@link Fragment} to a different view.
-     *
-     * @param scoutingSubview The new subview to display
-     */
-    public void switchView(ScoutingSubview scoutingSubview) {
-        FragmentTransaction fm = getChildFragmentManager().beginTransaction();
-
-        switch (scoutingSubview) {
-            case THUMBNAIL:
-                fm.replace(contentViewId, thumbnailFragment);
-                break;
-            case ROCKET:
-                fm.replace(contentViewId, rocketCloseup);
-                break;
-            case CARGO_SHIP:
-                fm.replace(contentViewId, cargoShipCloseup);
-                break;
-        }
-
-        fm.commit();
-    }
 }
