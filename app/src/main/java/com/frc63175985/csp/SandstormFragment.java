@@ -13,7 +13,7 @@ import com.frc63175985.csp.enums.BaseScoutType;
 import static com.frc63175985.csp.enums.BaseScoutType.AUTONOMOUS;
 import static com.frc63175985.csp.enums.ScoutingSubview.THUMBNAIL;
 
-public class AutonomousFragment extends BaseScoutFragment {
+public class SandstormFragment extends BaseScoutFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

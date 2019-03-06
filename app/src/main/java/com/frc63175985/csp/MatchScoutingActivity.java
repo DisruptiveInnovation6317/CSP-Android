@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 public class MatchScoutingActivity extends FragmentActivity {
     // Scouting Views
     private Fragment[] fragments = new Fragment[4];
-    private String[] fragmentTitles = {"Start", "Autonomous", "TeleOp", "Comments"};
+    private String[] fragmentTitles = {"Start", "Sandstorm", "TeleOp", "Comments"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class MatchScoutingActivity extends FragmentActivity {
         setContentView(R.layout.activity_match_scouting);
 
         fragments[0] = new StartFragment();
-        fragments[1] = new AutonomousFragment();
+        fragments[1] = new SandstormFragment();
         fragments[2] = new TeleOpFragment();
         fragments[3] = new CommentsFragment();
 
