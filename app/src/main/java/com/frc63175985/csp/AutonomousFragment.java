@@ -17,9 +17,11 @@ public class AutonomousFragment extends BaseScoutFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_autonomous, container, false);
+        View view = inflater.inflate(R.layout.new_fragment_sandstorm, container, false);
 
-        initializeSubviews();
+
+
+        /*initializeSubviews();
         switchView(THUMBNAIL);
 
         Match.GUI.bindCheckbox(view, R.id.autonomous_active, Match.ACTIVE);
@@ -39,7 +41,7 @@ public class AutonomousFragment extends BaseScoutFragment {
 
         String[] startLevelOptions = {"Start Level", "1", "2", "3"};
         Match.GUI.bindSpinner(getContext(), view, R.id.autonomous_start_level_spinner,
-                Match.START_LEVEL, startLevelOptions);
+                Match.START_LEVEL, startLevelOptions);*/
 
         return view;
     }

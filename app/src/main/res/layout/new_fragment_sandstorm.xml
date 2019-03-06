@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/cargoship_section_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:text="CARGO SHIP"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_top_attempts"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_cargoship_cargo_top_attempts_square"
+        app:layout_constraintTop_toBottomOf="@+id/cargoship_section_header" />
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_top_attempts_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_cargo_top_attempts"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_cargoship_cargo_top_attempts" />
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_top_successes_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_cargo_top_successes"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_cargoship_cargo_top_successes" />
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_top_successes"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_cargoship_cargo_top_successes_square"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_cargoship_cargo_top_attempts"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_graphic" />
+
+    <ImageView
+        android:id="@+id/sandstorm_cargo_icon"
+        android:src="@drawable/cargo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_cargoship_cargo_top_successes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_graphic"
+        android:contentDescription="@string/cargo" />
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_side_attempts"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_cargoship_cargo_side_attempts_square"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_cargo_icon"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_graphic"/>
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_side_attempts_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_cargoship_cargo_side_attempts"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_cargo_side_attempts"/>
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_side_successes_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_cargoship_cargo_side_successes"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_cargo_side_successes"/>
+
+    <include
+        android:id="@+id/sandstorm_cargoship_cargo_side_successes"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_cargoship_cargo_side_successes_square"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_cargoship_cargo_side_attempts"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_cargoship_graphic" />
+
+    <ImageView
+        android:id="@+id/sandstorm_cargoship_graphic"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:src="@drawable/red_cargo_new"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_cargoship_cargo_top_attempts"
+        app:layout_constraintTop_toBottomOf="@+id/cargoship_section_header"
+        android:contentDescription="@string/cargo_ship_thumbnail" />
+
+</android.support.constraint.ConstraintLayout>
