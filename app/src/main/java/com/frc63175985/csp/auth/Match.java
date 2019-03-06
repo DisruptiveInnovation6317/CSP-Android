@@ -375,9 +375,8 @@ public class Match {
         sb.append(bool(EFFECTIVE_DEFENCE)).append(","); // comm_flGoodDefence
 
         // Creation
-        // TODO - change date export to YYYY/MM/DD HH:MM:SS format
-        sb.append(new SimpleDateFormat("y-M-d-k-h-m-s", Locale.US).format(new Date())).append(","); // dtCreation
-        sb.append(new SimpleDateFormat("y-M-d-k-h-m-s", Locale.US).format(new Date())).append(","); // dtModified
+        sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtCreation
+        sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtModified
         sb.append(Build.MODEL == null || Build.MODEL.isEmpty() ? "Android-Device" : Build.MODEL).append(","); // txComputerName
         sb.append(bool(RANKING_1)).append(","); // flRanking1
         sb.append(bool(RANKING_2)); // flRanking2

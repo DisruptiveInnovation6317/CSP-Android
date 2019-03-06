@@ -184,23 +184,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/pit_sandstorm_max_hab_textView"
-        android:text="Max HAB: "
-        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_control_spinner"
-        app:layout_constraintTop_toTopOf="@+id/pit_sandstorm_max_hab_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Spinner
-        android:id="@+id/pit_sandstorm_max_hab_spinner"
-        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_max_hab_textView"
-        app:layout_constraintTop_toTopOf="@id/pit_sandstorm_control_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <CheckBox
-        android:id="@+id/pit_sandstorm_deliver_hatch"
+        android:id="@+id/pit_sandstorm_deliver_hatch_checkBox"
         android:text="Deliver Hatch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_control_spinner"
@@ -208,9 +193,9 @@
         android:layout_height="wrap_content" />
 
     <CheckBox
-        android:id="@+id/pit_sandstorm_deliver_cargo"
+        android:id="@+id/pit_sandstorm_deliver_cargo_checkBox"
         android:text="Deliver Cargo"
-        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_deliver_hatch"
+        app:layout_constraintStart_toEndOf="@+id/pit_sandstorm_deliver_hatch_checkBox"
         app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_control_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
@@ -220,7 +205,7 @@
         android:id="@+id/pit_max_hatches_textView"
         android:text="Max Hatches:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_deliver_hatch"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_deliver_hatch_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -241,7 +226,7 @@
         android:layout_height="wrap_content" />
 
     <Spinner
-        android:id="@+id/pit_hatch_max_height_spinner"
+        android:id="@+id/pit_sandstorm_hatch_max_height_spinner"
         app:layout_constraintStart_toEndOf="@+id/pit_max_height_textView"
         app:layout_constraintTop_toBottomOf="@+id/pit_max_cargo_stepper"
         android:layout_width="wrap_content"
@@ -250,8 +235,8 @@
     <TextView
         android:id="@+id/pit_max_cargo_textView"
         android:text="Max Cargo:"
-        app:layout_constraintStart_toStartOf="@+id/pit_sandstorm_deliver_cargo"
-        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_deliver_cargo"
+        app:layout_constraintStart_toStartOf="@+id/pit_sandstorm_deliver_cargo_checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandstorm_deliver_cargo_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -271,7 +256,7 @@
         android:layout_height="wrap_content" />
 
     <Spinner
-        android:id="@+id/pit_max_height_cargo_spinner"
+        android:id="@+id/pit_sandsstorm_max_height_cargo_spinner"
         app:layout_constraintTop_toBottomOf="@+id/pit_max_cargo_stepper"
         app:layout_constraintStart_toStartOf="@+id/pit_max_cargo_stepper"
         android:layout_width="wrap_content"
@@ -281,7 +266,7 @@
         android:id="@+id/pit_climb_section_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pit_max_height_cargo_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandsstorm_max_height_cargo_spinner"
         android:text="CLIMB"
         android:textAlignment="center"
         android:background="@android:color/black"

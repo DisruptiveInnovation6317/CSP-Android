@@ -11,10 +11,12 @@ public class ScoutAuthState {
     public static final ScoutAuthState shared = new ScoutAuthState();
     public String scout, tournament;
     public Match currentMatch;
+    public PitScoutRecord pitScoutRecord;
     private LinkedList<ScoutAuthStateListener> stateListeners = new LinkedList<>();
 
     private ScoutAuthState() {
         currentMatch = new Match();
+        pitScoutRecord = new PitScoutRecord();
 
         // Auto login if in debug mode
         if (Debug.AUTO_SIGNIN) {
