@@ -1,16 +1,30 @@
 package com.frc63175985.csp;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.frc63175985.csp.auth.PitScoutRecord;
 import com.frc63175985.csp.auth.ScoutAuthState;
 
+import java.io.File;
+
 public class PitScoutingActivity extends Activity {
+    public static final int REQUEST_FRONT_ROBOT_IMAGE = 1;
+    public static final int REQUEST_SIDE_ROBOT_IMAGE = 2;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,17 +67,33 @@ public class PitScoutingActivity extends Activity {
 
         String[] climbTypeOptions = {"Climb Type", "Self Only", "Self Plus Others", "Others Only", "Assisted"};
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_climb_type_spinner), PitScoutRecord.CLIMB_TYPE, climbTypeOptions);
-
-        // TODO grab speed
-        String[] grabSpeedOptions = {"Grab Speed", "N/A", "Slow", "Moderate", "Fast"};
-
-        // TODO climb speed
-
-        // TODO # robots
-
-        // TODO max height
+        PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_grab_speed_spinner), PitScoutRecord.CLIMB_GRAB_SPEED, PitScoutRecord.SPEED_OPTIONS);
+        PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_climb_speed_spinner), PitScoutRecord.CLIMB_SPEED, PitScoutRecord.SPEED_OPTIONS);
+        PitScoutRecord.GUI.bindStepper(findViewById(R.id.pit_climb_num_robots_stepper), PitScoutRecord.NUM_CLIMB_ASSISTS);
+        PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_max_height_spinner), PitScoutRecord.CLIMB_HEIGHT, PitScoutRecord.HEIGHT_OPTIONS);
 
         // IMAGE
+        findViewById(R.id.pit_image_front_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                if (pictureIntent.resolveActivity(getPackageManager()) != null) {
+                    File imageFile = FileManager.shared.getNewImageFile();
+                    if (imageFile == null) {
+                        return;
+                    }
+
+                    Log.d("TEST123", "FILENAME: " + imageFile.getAbsolutePath());
+                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.example.android.fileprovider", imageFile);
+                    pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+                    startActivityForResult(pictureIntent, REQUEST_FRONT_ROBOT_IMAGE);
+                } else {
+                    Toast.makeText(PitScoutingActivity.this, "Could not start camera", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         // NOTES
         PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_notes_notes_editText), PitScoutRecord.COMMENTS);
@@ -79,17 +109,27 @@ public class PitScoutingActivity extends Activity {
 
                 AlertDialog alert = QrHelper.qrDialogFromString(PitScoutingActivity.this, "Pit Scouting", contents);
                 if (alert != null) {
+                    FileManager.shared.savePit();
                     alert.show();
                 }
             }
         });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
     }
 
-    private void takeFrontImage() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
 
-    }
-
-    private void takeSideImage() {
-
+        if (requestCode == REQUEST_FRONT_ROBOT_IMAGE || requestCode == REQUEST_SIDE_ROBOT_IMAGE) {
+            // TODO
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -7,7 +7,7 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="100dp">
+    android:paddingBottom="50dp">
 
     <TextView
         android:id="@+id/pit_hatches_section_header"
@@ -425,22 +425,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <CheckBox
-        android:id="@+id/pit_notes_defensive_driver_checkBox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pit_notes_section_header"
-        android:text="Defensive Driver?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <EditText
         android:id="@+id/pit_notes_notes_editText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pit_notes_defensive_driver_checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/pit_notes_section_header"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="General Notes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"/>
 
     <Button
         android:id="@+id/pit_notes_submit_button"

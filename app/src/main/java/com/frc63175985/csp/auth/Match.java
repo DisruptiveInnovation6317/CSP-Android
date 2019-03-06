@@ -2,8 +2,6 @@ package com.frc63175985.csp.auth;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -23,10 +21,9 @@ import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
 import com.frc63175985.csp.enums.ScoreObject;
+import com.frc63175985.csp.stepper.Stepper;
+import com.frc63175985.csp.stepper.StepperValueChangedListener;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,6 +44,9 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  * schema and being able to export in CSV format.
  */
 public class Match {
+    public static final String[] SPEED_OPTIONS = {"Speed", "Slow (>7 sec)", "Med (3-7 sec)", "Fast (<3 sec)"};
+    public static final String[] LEVELS_OPTIONS = {"Level", "1", "2", "3"};
+
     /* Keys */
     public static final String AUTO_PREFIX = "auto_";
     public static final String TELEOP_PREFIX = "tele_";
@@ -61,7 +61,7 @@ public class Match {
     public static final String RED_CARD = "flRed";
 
     // Autonomous
-    public static final String ACTIVE = "auto_flState";
+    public static final String SANDSTORM_ACTIVE = "auto_flState";
     public static final String START_POSITION = "auto_idStartPosition";
     public static final String START_LEVEL = "auto_idStartLevel";
     public static final String LEAVES_HAB = "auto_flBaseLine";
@@ -289,7 +289,7 @@ public class Match {
         sb.append(bool(RED_CARD)).append(","); // flRed
 
         // Autonomous
-        sb.append(bool(ACTIVE)).append(","); // auto_flState
+        sb.append(bool(SANDSTORM_ACTIVE)).append(","); // auto_flState
         sb.append(num(START_POSITION)).append(","); // auto_idStartPosition
         sb.append(num(START_LEVEL)).append(","); // auto_idStartLevel
         sb.append(bool(LEAVES_HAB)).append(","); // auto_flBaseLine
@@ -353,7 +353,7 @@ public class Match {
         sb.append(num(CLIMB_OUTCOME)).append(","); // tele_idClimbOutcome
         sb.append(num(CLIMB_GRAB)).append(","); // tele_idClimbGrab
         sb.append(num(CLIMB_SPEED)).append(","); // tele_idClimbSpeed
-        sb.append(str(NUMBER_CLIMB_ASSISTS)).append(","); // tele_numClimbAssists
+        sb.append(num(NUMBER_CLIMB_ASSISTS)).append(","); // tele_numClimbAssists
         sb.append(num(CLIMB_LEVEL)).append(","); // tele_idClimbLevel
         sb.append(bool(CLIMB_FALL)).append(","); // tele_flClimbFall
 
@@ -504,37 +504,24 @@ public class Match {
             if (savedIndex == -1) savedIndex = 0;
             spinner.setSelection(savedIndex);
         }
-    }
 
-    @Nullable public String saveToFile() {
-        try {
-            FileWriter writer = new FileWriter(getAbsPath());
-            writer.write(export());
-            writer.close();
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
+        public static void bindStepper(View parentView, int id, final String key) {
+            Stepper stepper = new Stepper(parentView.findViewById(id));
+            StepperValueChangedListener listener = new StepperValueChangedListener() {
+                @Override
+                public boolean shouldChange() {
+                    return true;
+                }
+
+                @Override
+                public void valueChanged(Stepper stepper, int newValue) {
+                    ScoutAuthState.shared.currentMatch.set(key, newValue);
+                }
+            };
+            stepper.setOnValueChangedListener(listener);
+
+            // Preload
+            stepper.setValue(ScoutAuthState.shared.currentMatch.num(key));
         }
-    }
-
-    @NonNull private File getAbsPath() {
-        SimpleDateFormat format = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
-        String filename = format.format(new Date()) + ".csv";
-        String rootPath = Environment.getExternalStorageDirectory() + "/CSP/";
-        File rootFile = new File(rootPath);
-        if (!rootFile.exists()) {
-            rootFile.mkdir();
-        }
-
-        String absFilePath = rootPath + filename;
-        File file = new File(absFilePath);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return file;
     }
 }

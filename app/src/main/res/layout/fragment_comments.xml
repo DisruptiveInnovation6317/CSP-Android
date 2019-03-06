@@ -5,6 +5,72 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/comments_rating_section_header"
+        android:text="RATINGS"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/comments_drive_rating_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <CheckBox
+        android:id="@+id/comments_worked_with_alliance_checkBox"
+        android:text="Worked with Alliance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_recovered_checkBox"
+        android:text="Recovered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_strategy_checkBox"
+        android:text="Strategy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_solo_checkBox"
+        android:text="Worked Solo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_good_defence_checkBox"
+        android:text="Effective Defence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_ranking_1"
+        android:text="Completed Rocket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/comments_ranking_2"
+        android:text="Completed HAB Climb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/comments_comments_section_header"
+        android:text="COMMENTS"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/comments_comments_editText"
         android:layout_width="match_parent"
@@ -17,7 +83,6 @@
     <CheckBox
         android:id="@+id/comments_highlight_checkBox"
         android:text="Highlight"
-        android:textSize="24sp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -25,77 +90,22 @@
     <CheckBox
         android:id="@+id/comments_warning_checkBox"
         android:text="Warning"
-        android:textSize="24sp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Spinner
-        android:id="@+id/comments_drive_rating_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
-
-    <CheckBox
-        android:id="@+id/comments_worked_with_alliance_checkBox"
-        android:text="Worked with Alliance"
-        android:layout_marginTop="10dp"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_recovered_checkBox"
-        android:text="Recovered"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_strategy_checkBox"
-        android:text="Strategy"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_solo_checkBox"
-        android:text="Worked Solo"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_good_defence_checkBox"
-        android:text="Effective Defence"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_ranking_1"
-        android:text="Completed Rocket"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_ranking_2"
-        android:text="Completed HAB Climb"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/comments_submit_section_header"
+        android:text="SUBMIT"
+        android:textAlignment="center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/comments_finalize_button"
         android:text="Finalize"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

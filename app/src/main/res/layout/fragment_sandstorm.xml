@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sandstorm_start_section_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:text="START"
+            android:textAlignment="center"
+            android:textColor="@android:color/white" />
+
+        <CheckBox
+            android:id="@+id/sandstorm_sandstorm_active"
+            android:text="Does Auto?"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <CheckBox
+            android:id="@+id/sandstorm_leaves_hab_checkBox"
+            android:text="Leaves HAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:text="HAB Level: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/sandstorm_hab_level_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sandstorm_errors_section_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:text="ERRORS"
+            android:textAlignment="center"
+            android:textColor="@android:color/white" />
+
+        <CheckBox
+            android:id="@+id/sandstorm_drop_start_object_checkBox"
+            android:text="Drop Start Object"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/sandstorm_contact_robot_checkBox"
+            android:text="Contact Robot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/sandstorm_field_collision_checkBox"
+            android:text="Field Collision"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/fragment_base_scout" />
+    </LinearLayout>
+</ScrollView>

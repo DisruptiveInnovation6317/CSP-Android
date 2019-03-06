@@ -110,39 +110,39 @@
 
     <!-- Hatch -->
     <include
-        android:id="@+id/base_scout_cargoship_hatch_top_attempts"
+        android:id="@+id/base_scout_cargoship_hatch_front_attempts"
         layout="@layout/stepper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_top_attempts_square"
+        app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_front_attempts_square"
         app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_section_header"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <include
-        android:id="@+id/base_scout_cargoship_hatch_top_attempts_square"
+        android:id="@+id/base_scout_cargoship_hatch_front_attempts_square"
         layout="@layout/attempt_square"
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:layout_constraintStart_toEndOf="@id/base_scout_cargoship_graphic"
-        app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_top_attempts"
-        app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_top_attempts" />
+        app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_front_attempts"
+        app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_front_attempts" />
 
     <include
-        android:id="@+id/base_scout_cargoship_hatch_top_successes_square"
+        android:id="@+id/base_scout_cargoship_hatch_front_successes_square"
         layout="@layout/success_square"
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:layout_constraintStart_toEndOf="@id/base_scout_cargoship_graphic"
-        app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_top_successes"
-        app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_top_successes" />
+        app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_front_successes"
+        app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_front_successes" />
 
     <include
-        android:id="@+id/base_scout_cargoship_hatch_top_successes"
+        android:id="@+id/base_scout_cargoship_hatch_front_successes"
         layout="@layout/stepper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_top_successes_square"
-        app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_top_attempts"
+        app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_front_successes_square"
+        app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_front_attempts"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
@@ -150,7 +150,7 @@
         android:src="@drawable/hatch"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_top_successes"
+        app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_front_successes"
         app:layout_constraintStart_toEndOf="@id/base_scout_cargoship_graphic"
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="@string/cargo" />

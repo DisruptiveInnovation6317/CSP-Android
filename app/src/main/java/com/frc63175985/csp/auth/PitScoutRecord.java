@@ -9,12 +9,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.frc63175985.csp.R;
 import com.frc63175985.csp.stepper.Stepper;
@@ -27,6 +25,7 @@ import java.util.Locale;
 
 public class PitScoutRecord {
     public static final String[] HEIGHT_OPTIONS = {"Height", "Low", "Mid", "High"};
+    public static final String[] SPEED_OPTIONS = {"Grab Speed", "N/A", "Slow", "Moderate", "Fast"};
 
     public static final String TEAM_NUMBER = "idTeam";
 
@@ -60,7 +59,7 @@ public class PitScoutRecord {
     public static final String CLIMB_GRAB_SPEED = "tele_idClimbGrab";
     public static final String CLIMB_SPEED = "tele_idClimbSpeed";
     public static final String NUM_CLIMB_ASSISTS = "tele_numClimbAssists";
-    public static final String CLIMB_LEVEL = "tele_idClimbLevel";
+    public static final String CLIMB_HEIGHT = "tele_idClimbLevel";
 
     public static final String ROBOT_FRONT_FILENAME = "imgRobotFront";
     public static final String ROBOT_SIDE_FILENAME = "imgRobotSide";
@@ -111,7 +110,7 @@ public class PitScoutRecord {
         sb.append(num(CLIMB_GRAB_SPEED)).append(","); // tele_idClimbGrab
         sb.append(num(CLIMB_SPEED)).append(","); // tele_idClimbSpeed
         sb.append(num(NUM_CLIMB_ASSISTS)).append(","); // tele_numClimbAssists
-        sb.append(num(CLIMB_LEVEL)).append(","); // tele_idClimbLevel
+        sb.append(num(CLIMB_HEIGHT)).append(","); // tele_idClimbLevel
 
         sb.append(str(ROBOT_FRONT_FILENAME)).append(","); // imgRobotFront
         sb.append(str(ROBOT_SIDE_FILENAME)).append(","); // imgRobotSide

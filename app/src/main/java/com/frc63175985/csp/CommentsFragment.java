@@ -46,7 +46,7 @@ public class CommentsFragment extends Fragment {
                 AlertDialog dialog = QrHelper.qrDialogFromString(getContext(), "Match", contents);
                 if (dialog != null) {
                     dialog.show();
-                    ScoutAuthState.shared.currentMatch.saveToFile();
+                    FileManager.shared.saveMatch();
                 }
             }
         });
