@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/sandstorm_cargoship_section_header"
@@ -191,6 +191,9 @@
         app:layout_constraintTop_toBottomOf="@+id/sandstorm_cargoship_hatch_side_attempts"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
+
+    <!-- ROCKET -->
     <TextView
         android:id="@+id/sandstorm_rocket_section_header"
         android:layout_width="match_parent"
@@ -202,4 +205,233 @@
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/sandstorm_cargoship_hatch_side_successes" />
 
+    <ImageView
+        android:id="@+id/sandstorm_rocket_graphic"
+        android:src="@drawable/red_rocket_new"
+        android:layout_width="175dp"
+        android:layout_height="275dp"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_section_header"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_top_attempt"/>
+
+    <ImageView
+        android:id="@+id/sandstorm_rocket_cargo_header"
+        android:src="@drawable/cargo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_section_header"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_top_attempt_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_cargo_top_attempt"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_top_attempt"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_cargo_header"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_top_attempt_square"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_top_success_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_cargo_top_success"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_top_success"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_cargo_top_attempt"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_top_success_square"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic" />
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_middle_attempt_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_cargo_middle_attempt"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_middle_attempt"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_cargo_top_success"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_middle_attempt_square"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_middle_success_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_cargo_middle_success"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_middle_success"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_cargo_middle_attempt"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_middle_success_square"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_low_attempt_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_cargo_low_attempt"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_low_attempt"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_cargo_middle_success"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_low_attempt_square"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_low_success_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_cargo_low_success"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_cargo_low_success"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_cargo_low_attempt"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_cargo_low_success_square"
+        app:layout_constraintEnd_toStartOf="@+id/sandstorm_rocket_graphic"/>
+
+    <ImageView
+        android:id="@+id/sandstorm_rocket_hatch_header"
+        android:src="@drawable/hatch"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_section_header"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_top_attempt_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_hatch_top_attempt"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_top_attempt"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_hatch_header"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_hatch_top_attempt_square"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_top_success_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_hatch_top_success"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_top_success"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_hatch_top_attempt"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_hatch_top_success_square"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_middle_attempt_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_hatch_middle_attempt"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_middle_attempt"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_hatch_top_success"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_hatch_middle_attempt_square"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_middle_success_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_hatch_middle_success"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_middle_success"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_hatch_middle_attempt"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_hatch_middle_success_square"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_low_attempt_square"
+        layout="@layout/attempt_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_hatch_low_attempt"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_low_attempt"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_hatch_middle_success"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_hatch_low_attempt_square"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_low_success_square"
+        layout="@layout/success_square"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_graphic"
+        app:layout_constraintTop_toTopOf="@+id/sandstorm_rocket_hatch_low_success"/>
+
+    <include
+        android:id="@+id/sandstorm_rocket_hatch_low_success"
+        layout="@layout/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sandstorm_rocket_hatch_low_attempt"
+        app:layout_constraintStart_toEndOf="@+id/sandstorm_rocket_hatch_low_success_square"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </android.support.constraint.ConstraintLayout>
