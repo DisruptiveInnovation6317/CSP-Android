@@ -36,4 +36,7 @@
     <string name="pit_scouting">Pit Scouting</string>
     <string name="match_scouting">Match Scouting</string>
     <string name="qr_aggregator">QR Aggregator</string>
+    <string name="hatch">Hatch</string>
+    <string name="cargo_ship">CARGO SHIP</string>
+    <string name="rocket">ROCKET</string>
 </resources>

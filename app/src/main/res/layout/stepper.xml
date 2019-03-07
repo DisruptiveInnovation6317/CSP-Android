@@ -7,8 +7,8 @@
     <Button
         android:id="@+id/stepper_decrement"
         android:text="-"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
 
     <TextView
         android:id="@+id/stepper_number"
@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/stepper_increment"
         android:text="+"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
 
 </LinearLayout>

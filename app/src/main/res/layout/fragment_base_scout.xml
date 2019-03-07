@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -11,10 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
-        android:text="CARGO SHIP"
+        android:text="@string/cargo_ship"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@android:color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,17 +28,12 @@
                     android:id="@+id/base_scout_cargoship_cargo_top_attempts_square"
                     layout="@layout/attempt_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_cargo_top_attempts" />
+                    android:layout_height="30dp"/>
                 <include
                     android:id="@+id/base_scout_cargoship_cargo_top_attempts"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_cargo_top_attempts_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_section_header"
-                    app:layout_constraintEnd_toStartOf="@id/base_scout_cargoship_graphic"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,28 +42,24 @@
                     android:id="@+id/base_scout_cargoship_cargo_top_successes_square"
                     layout="@layout/success_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_cargo_top_successes"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_cargo_top_successes" />
+                    android:layout_height="30dp" />
                 <include
                     android:id="@+id/base_scout_cargoship_cargo_top_successes"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_cargo_top_successes_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_cargo_top_attempts"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_graphic" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-            <ImageView
-                android:id="@+id/base_scout_cargo_icon"
-                android:src="@drawable/cargo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_cargo_top_successes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_graphic"
-                android:contentDescription="@string/cargo" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/base_scout_cargoship_cargo_icon"
+                    android:src="@drawable/cargo"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/cargo" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -78,18 +67,12 @@
                     android:id="@+id/base_scout_cargoship_cargo_side_attempts_square"
                     layout="@layout/attempt_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_cargo_side_attempts"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_cargo_side_attempts"/>
+                    android:layout_height="30dp"/>
                 <include
                     android:id="@+id/base_scout_cargoship_cargo_side_attempts"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_cargo_side_attempts_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargo_icon"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_graphic"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,31 +81,23 @@
                     android:id="@+id/base_scout_cargoship_cargo_side_successes_square"
                     layout="@layout/success_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_cargo_side_successes"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_cargo_side_successes"/>
+                    android:layout_height="30dp"/>
 
                 <include
                     android:id="@+id/base_scout_cargoship_cargo_side_successes"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_cargo_side_successes_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_cargo_side_attempts"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_graphic" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/base_scout_cargoship_graphic"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="200dp"
             android:src="@drawable/red_cargoship"
             android:paddingStart="0dp"
             android:paddingEnd="5dp"
-            app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_cargo_top_attempts"
-            app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_section_header"
             android:contentDescription="@string/cargo_ship_thumbnail" />
 
         <LinearLayout
@@ -136,18 +111,12 @@
                     android:id="@+id/base_scout_cargoship_hatch_front_attempts_square"
                     layout="@layout/attempt_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toEndOf="@id/base_scout_cargoship_graphic"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_front_attempts"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_front_attempts" />
+                    android:layout_height="30dp" />
                 <include
                     android:id="@+id/base_scout_cargoship_hatch_front_attempts"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_front_attempts_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_section_header"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -156,30 +125,25 @@
                     android:id="@+id/base_scout_cargoship_hatch_front_successes_square"
                     layout="@layout/success_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toEndOf="@id/base_scout_cargoship_graphic"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_front_successes"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_front_successes" />
+                    android:layout_height="30dp" />
 
                 <include
                     android:id="@+id/base_scout_cargoship_hatch_front_successes"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_front_successes_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_front_attempts"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-            <ImageView
-                android:id="@+id/base_scout_hatch_icon"
-                android:src="@drawable/hatch"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_front_successes"
-                app:layout_constraintStart_toEndOf="@id/base_scout_cargoship_graphic"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/cargo" />
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/base_scout_cargoship_hatch_icon"
+                    android:src="@drawable/hatch"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/hatch" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -187,18 +151,12 @@
                     android:id="@+id/base_scout_cargoship_hatch_side_attempts_square"
                     layout="@layout/attempt_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_graphic"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_side_attempts"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_side_attempts"/>
+                    android:layout_height="30dp"/>
                 <include
                     android:id="@+id/base_scout_cargoship_hatch_side_attempts"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_side_attempts_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargo_icon"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -207,19 +165,13 @@
                     android:id="@+id/base_scout_cargoship_hatch_side_successes_square"
                     layout="@layout/success_square"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_graphic"
-                    app:layout_constraintTop_toTopOf="@+id/base_scout_cargoship_hatch_side_successes"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_cargoship_hatch_side_successes"/>
+                    android:layout_height="30dp"/>
 
                 <include
                     android:id="@+id/base_scout_cargoship_hatch_side_successes"
                     layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_hatch_side_successes_square"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_side_attempts"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -231,11 +183,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
-        android:text="ROCKET"
+        android:text="@string/rocket"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/base_scout_cargoship_hatch_side_successes" />
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -247,14 +198,18 @@
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/base_scout_rocket_cargo_header"
-                    android:src="@drawable/cargo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_section_header"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+                    <ImageView
+                        android:id="@+id/base_scout_rocket_cargo_header"
+                        android:src="@drawable/cargo"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/cargo"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -262,36 +217,27 @@
                         android:id="@+id/base_scout_rocket_cargo_top_attempt_square"
                         layout="@layout/attempt_square"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_cargo_top_attempt"/>
+                        android:layout_height="30dp"/>
                     <include
                         android:id="@+id/base_scout_rocket_cargo_top_attempt"
                         layout="@layout/stepper"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_cargo_header"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_top_attempt_square"
-                        app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic"/>
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
                     <include
                         android:id="@+id/base_scout_rocket_cargo_top_success_square"
                         layout="@layout/success_square"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_cargo_top_success"/>
+                        android:layout_height="30dp"/>
                     <include
                         android:id="@+id/base_scout_rocket_cargo_top_success"
                         layout="@layout/stepper"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_cargo_top_attempt"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_top_success_square"
-                        app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -300,38 +246,29 @@
                         android:id="@+id/base_scout_rocket_cargo_middle_attempt_square"
                         layout="@layout/attempt_square"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_cargo_middle_attempt"/>
+                        android:layout_height="30dp"/>
 
                     <include
                         android:id="@+id/base_scout_rocket_cargo_middle_attempt"
                         layout="@layout/stepper"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_cargo_top_success"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_middle_attempt_square"
-                        app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic"/>
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
                     <include
                         android:id="@+id/base_scout_rocket_cargo_middle_success_square"
                         layout="@layout/success_square"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_cargo_middle_success"/>
+                        android:layout_height="30dp"/>
 
                     <include
                         android:id="@+id/base_scout_rocket_cargo_middle_success"
                         layout="@layout/stepper"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_cargo_middle_attempt"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_middle_success_square"
-                        app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic"/>
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -340,18 +277,13 @@
                         android:id="@+id/base_scout_rocket_cargo_low_attempt_square"
                         layout="@layout/attempt_square"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_cargo_low_attempt"/>
+                        android:layout_height="30dp"/>
 
                     <include
                         android:id="@+id/base_scout_rocket_cargo_low_attempt"
                         layout="@layout/stepper"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_cargo_middle_success"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_low_attempt_square"
-                        app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic"/>
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -360,163 +292,129 @@
                         android:id="@+id/base_scout_rocket_cargo_low_success_square"
                         layout="@layout/success_square"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_cargo_low_success"/>
+                        android:layout_height="30dp"/>
 
                     <include
                         android:id="@+id/base_scout_rocket_cargo_low_success"
                         layout="@layout/stepper"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_cargo_low_attempt"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_low_success_square"
-                        app:layout_constraintEnd_toStartOf="@+id/base_scout_rocket_graphic"/>
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <ImageView
             android:id="@+id/base_scout_rocket_graphic"
             android:src="@drawable/red_rocket"
-            android:layout_width="175dp"
-            android:layout_height="275dp"
-            app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_section_header"
-            app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_cargo_top_attempt"/>
+            android:layout_width="130dp"
+            android:layout_height="300dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/rocket"/>
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/base_scout_rocket_hatch_header"
                     android:src="@drawable/hatch"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="50dp"
-                    app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_section_header"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_top_attempt_square"
-                        layout="@layout/attempt_square"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_hatch_top_attempt"/>
+                    android:layout_weight="1"
+                    android:contentDescription="@string/hatch"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_top_attempt_square"
+                    layout="@layout/attempt_square"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
 
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_top_attempt"
-                        layout="@layout/stepper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_hatch_header"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_hatch_top_attempt_square"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-                </LinearLayout>
-                <LinearLayout
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_top_attempt"
+                    layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_top_success_square"
-                        layout="@layout/success_square"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_hatch_top_success"/>
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_top_success_square"
+                    layout="@layout/success_square"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
 
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_top_success"
-                        layout="@layout/stepper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_hatch_top_attempt"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_hatch_top_success_square"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </LinearLayout>
-                <LinearLayout
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_top_success"
+                    layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_middle_attempt_square"
-                        layout="@layout/attempt_square"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_hatch_middle_attempt"/>
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_middle_attempt_square"
+                    layout="@layout/attempt_square"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
 
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_middle_attempt"
-                        layout="@layout/stepper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_hatch_top_success"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_hatch_middle_attempt_square"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-                </LinearLayout>
-                <LinearLayout
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_middle_attempt"
+                    layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_middle_success_square"
-                        layout="@layout/success_square"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_hatch_middle_success"/>
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_middle_success_square"
+                    layout="@layout/success_square"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
 
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_middle_success"
-                        layout="@layout/stepper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_hatch_middle_attempt"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_hatch_middle_success_square"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-                </LinearLayout>
-                <LinearLayout
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_middle_success"
+                    layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_low_attempt_square"
-                        layout="@layout/attempt_square"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_hatch_low_attempt"/>
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_low_attempt_square"
+                    layout="@layout/attempt_square"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
 
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_low_attempt"
-                        layout="@layout/stepper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_hatch_middle_success"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_hatch_low_attempt_square"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-                </LinearLayout>
-                <LinearLayout
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_low_attempt"
+                    layout="@layout/stepper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_low_success_square"
-                        layout="@layout/success_square"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_graphic"
-                        app:layout_constraintTop_toTopOf="@+id/base_scout_rocket_hatch_low_success"/>
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_low_success_square"
+                    layout="@layout/success_square"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
 
-                    <include
-                        android:id="@+id/base_scout_rocket_hatch_low_success"
-                        layout="@layout/stepper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_hatch_low_attempt"
-                        app:layout_constraintStart_toEndOf="@+id/base_scout_rocket_hatch_low_success_square"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-                </LinearLayout>
+                <include
+                    android:id="@+id/base_scout_rocket_hatch_low_success"
+                    layout="@layout/stepper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
