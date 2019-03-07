@@ -123,7 +123,7 @@ public class PitScoutRecord {
         return sb.toString();
     }
 
-    private String str(String key) {
+    public String str(String key) {
         Object value = data.get(key);
         if (value == null) {
             return "";

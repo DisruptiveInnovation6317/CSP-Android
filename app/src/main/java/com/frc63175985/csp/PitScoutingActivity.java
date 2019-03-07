@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.frc63175985.csp.auth.PitScoutRecord;
@@ -79,16 +81,42 @@ public class PitScoutingActivity extends Activity {
                 Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                 if (pictureIntent.resolveActivity(getPackageManager()) != null) {
-                    File imageFile = FileManager.shared.getNewImageFile();
+                    File imageFile = FileManager.shared.getNewImageFile("FRONT-");
                     if (imageFile == null) {
                         return;
                     }
 
-                    Log.d("TEST123", "FILENAME: " + imageFile.getAbsolutePath());
-                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.example.android.fileprovider", imageFile);
+                    ScoutAuthState.shared.pitScoutRecord.set(PitScoutRecord.ROBOT_FRONT_FILENAME, imageFile.getName());
+                    Debug.log("Set " + PitScoutRecord.ROBOT_FRONT_FILENAME + " to " + imageFile.getName());
+
+                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.frc63175985.fileprovider", imageFile);
                     pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
                     startActivityForResult(pictureIntent, REQUEST_FRONT_ROBOT_IMAGE);
+                } else {
+                    Toast.makeText(PitScoutingActivity.this, "Could not start camera", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        findViewById(R.id.pit_image_side_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                if (pictureIntent.resolveActivity(getPackageManager()) != null) {
+                    File imageFile = FileManager.shared.getNewImageFile("SIDE-");
+                    if (imageFile == null) {
+                        return;
+                    }
+
+                    ScoutAuthState.shared.pitScoutRecord.set(PitScoutRecord.ROBOT_SIDE_FILENAME, imageFile.getName());
+                    Debug.log("Set " + PitScoutRecord.ROBOT_SIDE_FILENAME + " to " + imageFile.getName());
+
+                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.frc63175985.fileprovider", imageFile);
+                    pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+                    startActivityForResult(pictureIntent, REQUEST_SIDE_ROBOT_IMAGE);
                 } else {
                     Toast.makeText(PitScoutingActivity.this, "Could not start camera", Toast.LENGTH_LONG).show();
                 }
@@ -128,8 +156,21 @@ public class PitScoutingActivity extends Activity {
         }
 
         if (requestCode == REQUEST_FRONT_ROBOT_IMAGE || requestCode == REQUEST_SIDE_ROBOT_IMAGE) {
-            // TODO
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+            // Read image
+            String key = requestCode == REQUEST_FRONT_ROBOT_IMAGE ?
+                    PitScoutRecord.ROBOT_FRONT_FILENAME : PitScoutRecord.ROBOT_SIDE_FILENAME;
+            String filename = ScoutAuthState.shared.pitScoutRecord.str(key);
+            if (filename.isEmpty()) {
+                Debug.log("Filename is empty");
+                return;
+            }
+
+            Bitmap image = FileManager.shared.readImage(filename);
+            if (requestCode == REQUEST_FRONT_ROBOT_IMAGE) {
+                ((ImageView)findViewById(R.id.pit_image_front_imageView)).setImageBitmap(image);
+            } else {
+                ((ImageView)findViewById(R.id.pit_image_side_imageView)).setImageBitmap(image);
+            }
         }
     }
 }
