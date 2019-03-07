@@ -82,7 +82,7 @@ public class FileManager {
         try {
             newPitFile.createNewFile();
             FileWriter writer = new FileWriter(newPitFile);
-            writer.write(ScoutAuthState.shared.currentMatch.export());
+            writer.write(ScoutAuthState.shared.pitScoutRecord.export());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

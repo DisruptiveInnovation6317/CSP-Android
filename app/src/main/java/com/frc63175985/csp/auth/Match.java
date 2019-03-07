@@ -44,8 +44,8 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  * schema and being able to export in CSV format.
  */
 public class Match {
-    public static final String[] SPEED_OPTIONS = {"Speed", "Slow (>7 sec)", "Med (3-7 sec)", "Fast (<3 sec)"};
-    public static final String[] LEVELS_OPTIONS = {"Level", "1", "2", "3"};
+    public static final String[] SPEED_OPTIONS = {"--------", "Slow (>7 sec)", "Med (3-7 sec)", "Fast (<3 sec)"};
+    public static final String[] LEVELS_OPTIONS = {"--------", "1", "2", "3"};
 
     /* Keys */
     public static final String AUTO_PREFIX = "auto_";

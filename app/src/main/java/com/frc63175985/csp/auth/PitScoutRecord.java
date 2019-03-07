@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class PitScoutRecord {
-    public static final String[] HEIGHT_OPTIONS = {"Height", "Low", "Mid", "High"};
-    public static final String[] SPEED_OPTIONS = {"Grab Speed", "N/A", "Slow", "Moderate", "Fast"};
+    public static final String[] SPEED_OPTIONS = Match.SPEED_OPTIONS;
+    public static final String[] HEIGHT_OPTIONS = {"--------", "Low", "Mid", "High"};
 
     public static final String TEAM_NUMBER = "idTeam";
 

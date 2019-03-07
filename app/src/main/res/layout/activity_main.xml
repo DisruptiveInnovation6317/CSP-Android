@@ -12,16 +12,11 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/projectb_imageView"
+            android:id="@+id/csp_imageView"
             android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:src="@drawable/projectb_logo" />
-
-        <ImageView
-            android:id="@+id/di_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:src="@drawable/di_logo" />
+            android:layout_height="200dp"
+            android:src="@drawable/csp_logo"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <!-- Layout if not logged in -->

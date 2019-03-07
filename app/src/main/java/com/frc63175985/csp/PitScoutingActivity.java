@@ -32,6 +32,8 @@ public class PitScoutingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scouting);
 
+        PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_team_number_editText), PitScoutRecord.TEAM_NUMBER);
+
         // HATCHES
         PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_can_manipulate_hatch), PitScoutRecord.CAN_MANIPULATE_HATCH);
         PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_hatch_floor_intake), PitScoutRecord.HATCH_FROM_FLOOR);
@@ -53,8 +55,11 @@ public class PitScoutingActivity extends Activity {
         // SANDSTORM
         PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_active), PitScoutRecord.SANDSTORM_ACTIVE);
 
-        String[] controlOptions = {"Control Option", "N/A", "Autonomous", "Manual", "Hybrid"};
+        String[] controlOptions = {"--------", "N/A", "Autonomous", "Manual", "Hybrid"};
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandstorm_control_spinner), PitScoutRecord.AUTO_TYPE, controlOptions);
+
+        String[] startLevelOptions = {"--------", "1", "2", "3"};
+        PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandstorm_start_level_spinner), PitScoutRecord.START_LEVEL, startLevelOptions);
 
         PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_deliver_hatch_checkBox), PitScoutRecord.CAN_DELIVER_HATCH);
         PitScoutRecord.GUI.bindStepper(findViewById(R.id.pit_max_hatches_stepper), PitScoutRecord.NUM_HATCHES_DELIVERED);
@@ -67,7 +72,7 @@ public class PitScoutingActivity extends Activity {
         // CLIMB
         PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_climb_active_checkBox), PitScoutRecord.CAN_CLIMB);
 
-        String[] climbTypeOptions = {"Climb Type", "Self Only", "Self Plus Others", "Others Only", "Assisted"};
+        String[] climbTypeOptions = {"--------", "Self Only", "Self Plus Others", "Others Only", "Assisted"};
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_climb_type_spinner), PitScoutRecord.CLIMB_TYPE, climbTypeOptions);
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_grab_speed_spinner), PitScoutRecord.CLIMB_GRAB_SPEED, PitScoutRecord.SPEED_OPTIONS);
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_climb_speed_spinner), PitScoutRecord.CLIMB_SPEED, PitScoutRecord.SPEED_OPTIONS);

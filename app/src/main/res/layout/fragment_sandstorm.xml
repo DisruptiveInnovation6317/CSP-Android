@@ -54,23 +54,29 @@
             android:textAlignment="center"
             android:textColor="@android:color/white" />
 
-        <CheckBox
-            android:id="@+id/sandstorm_drop_start_object_checkBox"
-            android:text="Drop Start Object"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/highlight">
+            <CheckBox
+                android:id="@+id/sandstorm_drop_start_object_checkBox"
+                android:text="Drop Start Object"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/sandstorm_contact_robot_checkBox"
-            android:text="Contact Robot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/sandstorm_contact_robot_checkBox"
+                android:text="Contact Robot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/sandstorm_field_collision_checkBox"
-            android:text="Field Collision"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/sandstorm_field_collision_checkBox"
+                android:text="Field Collision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <include
             layout="@layout/fragment_base_scout" />

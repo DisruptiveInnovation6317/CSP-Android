@@ -60,7 +60,8 @@
             android:id="@+id/teleop_played_defense_checkBox"
             android:text="Played Defense?"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:background="@color/highlight"/>
 
         <TextView
             android:id="@+id/teleop_intake_section_header"

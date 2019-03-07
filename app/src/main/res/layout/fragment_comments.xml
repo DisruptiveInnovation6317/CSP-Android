@@ -14,11 +14,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Spinner
-        android:id="@+id/comments_drive_rating_spinner"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:background="@color/highlight"
+        android:orientation="horizontal">
+        <TextView
+            android:text="Drive Rating: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/comments_drive_rating_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+
 
     <CheckBox
         android:id="@+id/comments_worked_with_alliance_checkBox"
@@ -80,19 +92,25 @@
         android:inputType="textCapSentences|textMultiLine"
         android:maxLength="2000"/>
 
-    <CheckBox
-        android:id="@+id/comments_highlight_checkBox"
-        android:text="Highlight"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/highlight">
+        <CheckBox
+            android:id="@+id/comments_highlight_checkBox"
+            android:text="Highlight this team"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <CheckBox
-        android:id="@+id/comments_warning_checkBox"
-        android:text="Warning"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/comments_warning_checkBox"
+            android:text="Issue a warning"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/comments_submit_section_header"
