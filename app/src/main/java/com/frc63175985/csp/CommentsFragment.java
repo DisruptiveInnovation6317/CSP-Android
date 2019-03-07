@@ -19,7 +19,7 @@ public class CommentsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comments, container, false);
 
-        String[] driveRatings = {"--------", "Terrible", "Average", "Good", "Amazing"};
+        String[] driveRatings = {"--------", "Needs", "Average", "Good", "Amazing"};
         Match.GUI.bindSpinner(getContext(), view, R.id.comments_drive_rating_spinner,
                 Match.DRIVE_RATING, driveRatings);
 

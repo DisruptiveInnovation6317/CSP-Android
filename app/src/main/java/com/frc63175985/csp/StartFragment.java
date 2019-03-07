@@ -61,23 +61,23 @@ public class StartFragment extends Fragment {
     private void autofill(View view) {
         // Alliance
         int alliance = ScoutAuthState.shared.currentMatch.num(Match.ALLIANCE);
-        if (alliance == 0) {
+        if (alliance == 1) {
             ((RadioGroup) view.findViewById(R.id.start_alliance_radioGroup))
                     .check(R.id.start_alliance_red_radio);
-        } else if (alliance == 1) {
+        } else if (alliance == 2) {
             ((RadioGroup) view.findViewById(R.id.start_alliance_radioGroup))
                     .check(R.id.start_alliance_blue_radio);
         }
 
         // Drive Station
         int driveStation = ScoutAuthState.shared.currentMatch.num(Match.DRIVE_STATION);
-        if (driveStation == 0) {
+        if (driveStation == 1) {
             ((RadioGroup)view.findViewById(R.id.start_drive_station_radioGroup))
                     .check(R.id.start_drive_station_1_radio);
-        } else if (driveStation == 1) {
+        } else if (driveStation == 2) {
             ((RadioGroup)view.findViewById(R.id.start_drive_station_radioGroup))
                     .check(R.id.start_drive_station_2_radio);
-        } else if (driveStation == 2) {
+        } else if (driveStation == 3) {
             ((RadioGroup)view.findViewById(R.id.start_drive_station_radioGroup))
                     .check(R.id.start_drive_station_3_radio);
         }

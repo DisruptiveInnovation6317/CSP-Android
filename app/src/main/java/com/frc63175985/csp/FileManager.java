@@ -20,12 +20,14 @@ public class FileManager {
     private File rootFolder;
     private File pitFolder;
     private File matchFolder;
+    private File aggregateFolder;
     private SimpleDateFormat FILENAME_FORMAT = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
 
     private FileManager() {
         rootFolder = new File(Environment.getExternalStorageDirectory(), "CSP");
         pitFolder = new File(rootFolder, "PIT");
         matchFolder = new File(rootFolder, "MATCH");
+        aggregateFolder = new File(rootFolder, "AGGREGATION");
 
         if (!pitFolder.exists()) {
             pitFolder.mkdirs();
@@ -33,6 +35,10 @@ public class FileManager {
 
         if (!matchFolder.exists()) {
             matchFolder.mkdirs();
+        }
+
+        if (!aggregateFolder.exists()) {
+            aggregateFolder.mkdirs();
         }
     }
 
@@ -56,6 +62,26 @@ public class FileManager {
         }
 
         return imageFile;
+    }
+
+    /**
+     * Save the aggregation data to the disk.
+     * @return the absolute path the file was saved to
+     */
+    public String saveAggregation(String data) {
+        File newAggregateFile = new File(aggregateFolder, FILENAME_FORMAT.format(new Date()) + ".csv");
+        try {
+            newAggregateFile.createNewFile();
+            FileWriter writer = new FileWriter(newAggregateFile);
+            writer.write(ScoutAuthState.shared.currentMatch.export());
+            writer.close();
+
+            return newAggregateFile.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**

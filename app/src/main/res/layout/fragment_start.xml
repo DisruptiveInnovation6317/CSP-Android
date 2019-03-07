@@ -15,14 +15,14 @@
             android:text="Match #"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36sp"/>
+            android:textSize="26sp"/>
 
         <EditText
             android:id="@+id/start_match_num_editText"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
-            android:textSize="36sp" />
+            android:textSize="26sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -34,14 +34,14 @@
             android:text="Team #"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36sp"/>
+            android:textSize="26sp"/>
 
         <EditText
             android:id="@+id/start_team_num_editText"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
-            android:textSize="36sp" />
+            android:textSize="26sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -53,7 +53,7 @@
             android:text="Alliance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36sp"/>
+            android:textSize="26sp"/>
 
         <RadioGroup
             android:id="@+id/start_alliance_radioGroup"
@@ -65,13 +65,13 @@
                 android:text="Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36sp"/>
+                android:textSize="26sp"/>
             <RadioButton
                 android:id="@+id/start_alliance_blue_radio"
                 android:text="Blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36sp"/>
+                android:textSize="26sp"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -84,7 +84,7 @@
             android:text="Drive Station"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36sp"/>
+            android:textSize="26sp"/>
 
         <RadioGroup
             android:id="@+id/start_drive_station_radioGroup"
@@ -97,14 +97,14 @@
                 android:layout_marginStart="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36sp"/>
+                android:textSize="26sp"/>
             <RadioButton
                 android:id="@+id/start_drive_station_2_radio"
                 android:text="2"
                 android:layout_marginStart="5sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36sp"/>
+                android:textSize="26sp"/>
 
             <RadioButton
                 android:id="@+id/start_drive_station_3_radio"
@@ -112,7 +112,7 @@
                 android:layout_marginStart="5sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36sp"/>
+                android:textSize="26sp"/>
         </RadioGroup>
     </LinearLayout>
 

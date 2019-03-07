@@ -205,7 +205,7 @@ public class PitScoutRecord {
             });
 
             // Preload data
-            boolean checked = ScoutAuthState.shared.currentMatch.bool(key).equals("TRUE");
+            boolean checked = ScoutAuthState.shared.pitScoutRecord.bool(key).equals("TRUE");
             checkBox.setChecked(checked);
 
             // if I'm not checked, disable my children

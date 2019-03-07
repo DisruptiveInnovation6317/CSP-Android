@@ -9,20 +9,11 @@
     android:layout_height="wrap_content"
     android:paddingBottom="50dp">
 
-    <ImageView
-        android:id="@+id/pit_logo_imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/csp_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
-
     <TextView
         android:id="@+id/pit_team_section_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pit_logo_imageView"
+        app:layout_constraintTop_toTopOf="parent"
         android:text="TEAM"
         android:textAlignment="center"
         android:background="@android:color/black"

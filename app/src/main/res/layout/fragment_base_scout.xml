@@ -118,7 +118,7 @@
             android:id="@+id/base_scout_cargoship_graphic"
             android:layout_width="150dp"
             android:layout_height="200dp"
-            android:src="@drawable/red_cargo_new"
+            android:src="@drawable/red_cargoship"
             android:paddingStart="0dp"
             android:paddingEnd="5dp"
             app:layout_constraintStart_toEndOf="@+id/base_scout_cargoship_cargo_top_attempts"
@@ -377,7 +377,7 @@
         </LinearLayout>
         <ImageView
             android:id="@+id/base_scout_rocket_graphic"
-            android:src="@drawable/red_rocket_new"
+            android:src="@drawable/red_rocket"
             android:layout_width="175dp"
             android:layout_height="275dp"
             app:layout_constraintTop_toBottomOf="@+id/base_scout_rocket_section_header"

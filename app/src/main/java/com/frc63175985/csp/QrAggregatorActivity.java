@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,7 +33,7 @@ import java.util.Locale;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class QrAggregatorActivity extends Activity implements ZXingScannerView.ResultHandler {
+public class QrAggregatorActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private FrameLayout frameLayout;
     private ZXingScannerView mScannerView;
     private ListView scannedListView;
@@ -210,16 +211,15 @@ public class QrAggregatorActivity extends Activity implements ZXingScannerView.R
                 return;
             }
 
-            // Save to file
-            File file = getAbsPath();
+            String path = FileManager.shared.saveAggregation(allEntriesContent);
             String title, message;
-            String saveValue = save(file, allEntriesContent);
-            if (saveValue == null) {
-                title = "Saved File";
-                message = "The file was just saved at the path:\n" + file.getAbsolutePath();
+
+            if (path == null) {
+                title = "Error";
+                message = "There was an error saving the file";
             } else {
-                title = "An Error Occurred";
-                message = "There was an error while writing to the path:\n" + file.getAbsolutePath() + "\nError:\n" + saveValue;
+                title = "File saved";
+                message = "Successfully exported to path:\n" + path;
             }
 
             new AlertDialog.Builder(this)
@@ -228,37 +228,5 @@ public class QrAggregatorActivity extends Activity implements ZXingScannerView.R
                     .setNegativeButton(android.R.string.ok, null)
                     .show();
         }
-    }
-
-    @Nullable private String save(@NonNull File file, @NonNull String contents) {
-        try {
-            FileWriter writer = new FileWriter(file);
-            writer.write(contents);
-            writer.close();
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-    }
-
-    @NonNull private File getAbsPath() {
-        SimpleDateFormat format = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
-        String filename = format.format(new Date()) + ".csv";
-        String rootPath = Environment.getExternalStorageDirectory() + "/CSP/";
-        File rootFile = new File(rootPath);
-        if (!rootFile.exists()) {
-            rootFile.mkdir();
-        }
-
-        String absFilePath = rootPath + filename;
-        File file = new File(absFilePath);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return file;
     }
 }

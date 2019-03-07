@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import com.frc63175985.csp.auth.ScoutAuthState;
 
 import java.io.File;
 
-public class PitScoutingActivity extends Activity {
+public class PitScoutingActivity extends AppCompatActivity {
     public static final int REQUEST_FRONT_ROBOT_IMAGE = 1;
     public static final int REQUEST_SIDE_ROBOT_IMAGE = 2;
 
