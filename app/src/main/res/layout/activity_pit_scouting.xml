@@ -303,7 +303,7 @@
         android:layout_height="wrap_content" />
 
     <Spinner
-        android:id="@+id/pit_sandsstorm_max_height_cargo_spinner"
+        android:id="@+id/pit_sandsstorm_cargo_max_height_spinner"
         app:layout_constraintTop_toBottomOf="@+id/pit_max_cargo_stepper"
         app:layout_constraintStart_toStartOf="@+id/pit_max_cargo_stepper"
         android:layout_width="wrap_content"
@@ -313,7 +313,7 @@
         android:id="@+id/pit_climb_section_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pit_sandsstorm_max_height_cargo_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/pit_sandsstorm_cargo_max_height_spinner"
         android:text="CLIMB"
         android:textAlignment="center"
         android:background="@android:color/black"
@@ -364,7 +364,7 @@
         android:id="@+id/pit_climb_climb_speed_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pit_climb_grab_speed_spinner"
-        android:text="Grab Speed: "
+        android:text="Climb Speed: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -2,6 +2,7 @@ package com.frc63175985.csp.auth;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -14,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.frc63175985.csp.Debug;
 import com.frc63175985.csp.R;
 import com.frc63175985.csp.stepper.Stepper;
 import com.frc63175985.csp.stepper.StepperValueChangedListener;
@@ -22,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+
+import javax.annotation.Nullable;
 
 public class PitScoutRecord {
     public static final String[] SPEED_OPTIONS = Match.SPEED_OPTIONS;
@@ -143,6 +147,7 @@ public class PitScoutRecord {
     }
 
     public void set(String key, Object value) {
+        if (Debug.LOG_DATABASE_SET) Debug.log("PitScoutDB: Setting key " + key + " to value " + value);
         data.put(key, value);
     }
 
@@ -153,7 +158,7 @@ public class PitScoutRecord {
      * @param key The key to be searched for
      * @return The value, if it exists, otherwise {@code "FALSE"}
      */
-    private String bool(String key) {
+    private String bool(@NonNull String key) {
         Object bool = data.get(key);
         if (bool == null) return "FALSE";
         else return (boolean)bool ? "TRUE" : "FALSE";
@@ -172,7 +177,7 @@ public class PitScoutRecord {
          * @param key The key that should be updated in the current {@link Match} object
          * @see Match
          */
-        public static void bindCheckbox(View view, final String key) {
+        public static void bindCheckbox(@NonNull View view, @NonNull final String key, @Nullable final View[] children) {
             CheckBox checkBox = (CheckBox)view;
 
             // Add listener
@@ -180,15 +185,38 @@ public class PitScoutRecord {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     ScoutAuthState.shared.pitScoutRecord.set(key, isChecked);
+
+                    if (children != null) {
+                        for (View view : children) {
+                            view.setEnabled(isChecked);
+
+                            if (isChecked) {
+                                continue;
+                            }
+
+                            if (view instanceof CheckBox) {
+                                ((CheckBox) view).setChecked(false);
+                            } else if (view instanceof Spinner) {
+                                ((Spinner) view).setSelection(0);
+                            }
+                        }
+                    }
                 }
             });
 
             // Preload data
             boolean checked = ScoutAuthState.shared.currentMatch.bool(key).equals("TRUE");
             checkBox.setChecked(checked);
+
+            // if I'm not checked, disable my children
+            if (!checked && children != null) {
+                for (View child : children) {
+                    child.setEnabled(false);
+                }
+            }
         }
 
-        public static void bindEditText(View view, final String key) {
+        public static void bindEditText(@NonNull View view, @NonNull final String key) {
             EditText editText = (EditText)view;
 
             // Add listener

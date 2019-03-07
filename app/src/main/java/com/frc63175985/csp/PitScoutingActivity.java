@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,25 +34,37 @@ public class PitScoutingActivity extends Activity {
         PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_team_number_editText), PitScoutRecord.TEAM_NUMBER);
 
         // HATCHES
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_can_manipulate_hatch), PitScoutRecord.CAN_MANIPULATE_HATCH);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_hatch_floor_intake), PitScoutRecord.HATCH_FROM_FLOOR);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_hatch_exchange_intake), PitScoutRecord.HATCH_FROM_EXCHANGE);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_hatch_low_level), PitScoutRecord.HATCH_LOW);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_hatch_mid_level), PitScoutRecord.HATCH_MID);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_hatch_high_level), PitScoutRecord.HATCH_HIGH);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_can_manipulate_hatch), PitScoutRecord.CAN_MANIPULATE_HATCH, new View[]{
+                findViewById(R.id.pit_hatch_floor_intake), findViewById(R.id.pit_hatch_exchange_intake),
+                findViewById(R.id.pit_deliver_hatch_low_level), findViewById(R.id.pit_deliver_hatch_mid_level),
+                findViewById(R.id.pit_deliver_hatch_high_level)
+        });
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_hatch_floor_intake), PitScoutRecord.HATCH_FROM_FLOOR, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_hatch_exchange_intake), PitScoutRecord.HATCH_FROM_EXCHANGE, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_hatch_low_level), PitScoutRecord.HATCH_LOW, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_hatch_mid_level), PitScoutRecord.HATCH_MID, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_hatch_high_level), PitScoutRecord.HATCH_HIGH, null);
         PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_hatch_intake_notes_editText), PitScoutRecord.HATCH_INTAKE_NOTES);
 
         // CARGO
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_can_manipulate_cargo), PitScoutRecord.CAN_MANIPULATE_CARGO);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_cargo_floor_intake), PitScoutRecord.CARGO_FROM_FLOOR);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_cargo_exchange_intake), PitScoutRecord.CARGO_FROM_EXCHANGE);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_cargo_low_level), PitScoutRecord.CARGO_LOW);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_cargo_mid_level), PitScoutRecord.CARGO_MID);
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_cargo_high_level), PitScoutRecord.CARGO_HIGH);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_can_manipulate_cargo), PitScoutRecord.CAN_MANIPULATE_CARGO, new View[]{
+                findViewById(R.id.pit_cargo_floor_intake), findViewById(R.id.pit_cargo_exchange_intake),
+                findViewById(R.id.pit_deliver_cargo_low_level), findViewById(R.id.pit_deliver_cargo_mid_level),
+                findViewById(R.id.pit_deliver_cargo_high_level)
+        });
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_cargo_floor_intake), PitScoutRecord.CARGO_FROM_FLOOR, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_cargo_exchange_intake), PitScoutRecord.CARGO_FROM_EXCHANGE, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_cargo_low_level), PitScoutRecord.CARGO_LOW, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_cargo_mid_level), PitScoutRecord.CARGO_MID, null);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_deliver_cargo_high_level), PitScoutRecord.CARGO_HIGH, null);
         PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_cargo_intake_notes_editText), PitScoutRecord.CARGO_INTAKE_NOTES);
 
         // SANDSTORM
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_active), PitScoutRecord.SANDSTORM_ACTIVE);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_active), PitScoutRecord.SANDSTORM_ACTIVE, new View[]{
+                findViewById(R.id.pit_sandstorm_control_spinner), findViewById(R.id.pit_sandstorm_start_level_spinner),
+                findViewById(R.id.pit_sandstorm_deliver_hatch_checkBox), findViewById(R.id.pit_sandstorm_deliver_cargo_checkBox),
+                findViewById(R.id.pit_sandstorm_hatch_max_height_spinner), findViewById(R.id.pit_sandsstorm_cargo_max_height_spinner)
+        });
 
         String[] controlOptions = {"--------", "N/A", "Autonomous", "Manual", "Hybrid"};
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandstorm_control_spinner), PitScoutRecord.AUTO_TYPE, controlOptions);
@@ -61,16 +72,19 @@ public class PitScoutingActivity extends Activity {
         String[] startLevelOptions = {"--------", "1", "2", "3"};
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandstorm_start_level_spinner), PitScoutRecord.START_LEVEL, startLevelOptions);
 
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_deliver_hatch_checkBox), PitScoutRecord.CAN_DELIVER_HATCH);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_deliver_hatch_checkBox), PitScoutRecord.CAN_DELIVER_HATCH, null);
         PitScoutRecord.GUI.bindStepper(findViewById(R.id.pit_max_hatches_stepper), PitScoutRecord.NUM_HATCHES_DELIVERED);
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandstorm_hatch_max_height_spinner), PitScoutRecord.MAX_HATCH_HEIGHT, PitScoutRecord.HEIGHT_OPTIONS);
 
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_deliver_cargo_checkBox), PitScoutRecord.CAN_DELIVER_CARGO);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_sandstorm_deliver_cargo_checkBox), PitScoutRecord.CAN_DELIVER_CARGO, null);
         PitScoutRecord.GUI.bindStepper(findViewById(R.id.pit_max_cargo_stepper), PitScoutRecord.NUM_CARGO_DELIVERED);
-        PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandsstorm_max_height_cargo_spinner), PitScoutRecord.MAX_CARGO_HEIGHT, PitScoutRecord.HEIGHT_OPTIONS);
+        PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_sandsstorm_cargo_max_height_spinner), PitScoutRecord.MAX_CARGO_HEIGHT, PitScoutRecord.HEIGHT_OPTIONS);
 
         // CLIMB
-        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_climb_active_checkBox), PitScoutRecord.CAN_CLIMB);
+        PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_climb_active_checkBox), PitScoutRecord.CAN_CLIMB, new View[]{
+                findViewById(R.id.pit_climb_climb_type_spinner), findViewById(R.id.pit_climb_grab_speed_spinner),
+                findViewById(R.id.pit_climb_climb_speed_spinner), findViewById(R.id.pit_climb_max_height_spinner)
+        });
 
         String[] climbTypeOptions = {"--------", "Self Only", "Self Plus Others", "Others Only", "Assisted"};
         PitScoutRecord.GUI.bindSpinner(this, findViewById(R.id.pit_climb_climb_type_spinner), PitScoutRecord.CLIMB_TYPE, climbTypeOptions);

@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.frc63175985.csp.Debug;
 import com.frc63175985.csp.MainActivity;
 import com.frc63175985.csp.R;
 import com.frc63175985.csp.enums.BaseScoutType;
@@ -134,6 +135,7 @@ public class Match {
     }
 
     public void set(String key, Object value) {
+        if (Debug.LOG_DATABASE_SET) Debug.log("MatchDb: Setting key " + key + " to value " + value);
         data.put(key, value);
     }
 
