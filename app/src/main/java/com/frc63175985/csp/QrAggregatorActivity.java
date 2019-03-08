@@ -3,7 +3,9 @@ package com.frc63175985.csp;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +17,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -147,7 +151,12 @@ public class QrAggregatorActivity extends AppCompatActivity implements ZXingScan
                         "FALSE,FALSE,-1,-1,FALSE,0,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE" +
                         ",-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,FALSE,FALSE,FALSE,FALSE," +
                         "-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE,-1,FALSE," +
-                        "-1,FALSE,-1,FALSE,,FALSE,FALSE,0,FALSE,FALSE,FALSE,FALSE,FALSE,");
+                        "-1,FALSE,-1,FALSE,,FALSE,FALSE,0,FALSE,FALSE,FALSE,FALSE,FALSE");
+                listViewValues.add("DEFAULT,Cedar+Falls,,,1,1,Richards,+Brandon,TRUE,TRUE," +
+                        "TRUE,TRUE,1,1,TRUE,0,1,TRUE,1,TRUE,1,TRUE,1,TRUE,1,TRUE" +
+                        ",1,TRUE,1,TRUE,1,TRUE,1,TRUE,1,TRUE,TRUE,TRUE,TRUE,TRUE," +
+                        "1,TRUE,1,TRUE,1,TRUE,1,TRUE,1,TRUE,1,TRUE,1,TRUE,1,TRUE," +
+                        "1,TRUE,1,TRUE,,TRUE,TRUE,0,TRUE,TRUE,TRUE,TRUE,TRUE");
                 listViewValues.notifyDataSetChanged();
                 showScanned();
                 Toast.makeText(this, "Added new match data!", Toast.LENGTH_SHORT).show();
@@ -203,22 +212,31 @@ public class QrAggregatorActivity extends AppCompatActivity implements ZXingScan
                 return;
             }
 
-            String path = FileManager.shared.saveAggregation(allEntriesContent);
-            String title, message;
+            final File aggregationFile = FileManager.shared.saveAggregation(allEntriesContent);
 
-            if (path == null) {
-                title = "Error";
-                message = "There was an error saving the file";
+            if (aggregationFile == null) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage("There was an error saving the file")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .show();
             } else {
-                title = "File saved";
-                message = "Successfully exported to path:\n" + path;
+                new AlertDialog.Builder(this)
+                        .setTitle("File saved")
+                        .setMessage("Successfully exported to path:\n" + aggregationFile.getAbsolutePath() + "\nWould you like to share this file?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                                shareIntent.setType("text/plain");
+                                Uri uri = Uri.fromFile(aggregationFile);
+                                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                                startActivity(Intent.createChooser(shareIntent, "Share file using"));
+                            }
+                        })
+                        .show();
             }
-
-            new AlertDialog.Builder(this)
-                    .setTitle(title)
-                    .setMessage(message)
-                    .setNegativeButton(android.R.string.ok, null)
-                    .show();
         }
     }
 }

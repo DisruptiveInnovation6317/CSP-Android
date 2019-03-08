@@ -1,5 +1,7 @@
 package com.frc63175985.csp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -22,6 +24,8 @@ public class FileManager {
     private File matchFolder;
     private File aggregateFolder;
     private SimpleDateFormat FILENAME_FORMAT = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
+
+    public static final int CHOOSE_AGGREGATOR_FILE_REQUEST_CODE = 1;
 
     private FileManager() {
         rootFolder = new File(Environment.getExternalStorageDirectory(), "CSP");
@@ -53,8 +57,8 @@ public class FileManager {
         return bitmap;
     }
 
-    public File getNewImageFile(@NonNull String prefix) {
-        File imageFile = new File(pitFolder, prefix + generateRandomFilename("jpg"));
+    public File getNewImageFile(@NonNull String filename) {
+        File imageFile = new File(pitFolder, filename + ".jpg");
         try {
             imageFile.createNewFile();
         } catch (IOException e) {
@@ -66,17 +70,17 @@ public class FileManager {
 
     /**
      * Save the aggregation data to the disk.
-     * @return the absolute path the file was saved to
+     * @return the file was saved to
      */
-    public String saveAggregation(String data) {
+    public File saveAggregation(String data) {
         File newAggregateFile = new File(aggregateFolder, FILENAME_FORMAT.format(new Date()) + ".csv");
         try {
             newAggregateFile.createNewFile();
             FileWriter writer = new FileWriter(newAggregateFile);
-            writer.write(ScoutAuthState.shared.currentMatch.export());
+            writer.write(data);
             writer.close();
 
-            return newAggregateFile.getAbsolutePath();
+            return newAggregateFile;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -112,18 +116,5 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private String generateRandomFilename(String ext) {
-        int length = 8;
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
-        Random random = new Random();
-        StringBuilder filename = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int index = (int)(random.nextFloat() * characters.length());
-            filename.append(characters.charAt(index));
-        }
-
-        return filename.toString() + "." + ext;
     }
 }

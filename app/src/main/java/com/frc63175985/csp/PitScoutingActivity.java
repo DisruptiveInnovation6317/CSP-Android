@@ -97,10 +97,16 @@ public class PitScoutingActivity extends AppCompatActivity {
         findViewById(R.id.pit_image_front_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String filename = ScoutAuthState.shared.pitScoutRecord.str(PitScoutRecord.TEAM_NUMBER);
+                if (filename.isEmpty()) {
+                    Toast.makeText(PitScoutingActivity.this, "Supply Team Number First", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                 if (pictureIntent.resolveActivity(getPackageManager()) != null) {
-                    File imageFile = FileManager.shared.getNewImageFile("FRONT-");
+                    File imageFile = FileManager.shared.getNewImageFile("FRONT-" + filename);
                     if (imageFile == null) {
                         return;
                     }
@@ -121,10 +127,15 @@ public class PitScoutingActivity extends AppCompatActivity {
         findViewById(R.id.pit_image_side_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String filename = ScoutAuthState.shared.pitScoutRecord.str(PitScoutRecord.TEAM_NUMBER);
+                if (filename.isEmpty()) {
+                    Toast.makeText(PitScoutingActivity.this, "Supply Team Number First", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                 if (pictureIntent.resolveActivity(getPackageManager()) != null) {
-                    File imageFile = FileManager.shared.getNewImageFile("SIDE-");
+                    File imageFile = FileManager.shared.getNewImageFile("SIDE-" + filename);
                     if (imageFile == null) {
                         return;
                     }
