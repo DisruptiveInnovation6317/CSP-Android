@@ -186,6 +186,24 @@ public class PitScoutingActivity extends AppCompatActivity {
                                 startActivity(Intent.createChooser(shareIntent, "Share file using"));
                             }
                         })
+                        .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                // Ask if they want to reset everything
+                                new AlertDialog.Builder(PitScoutingActivity.this)
+                                        .setTitle("Clear")
+                                        .setMessage("Would you like to clear the screen?")
+                                        .setNegativeButton(android.R.string.no, null)
+                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ScoutAuthState.shared.pitScoutRecord.clear();
+                                                finish();
+                                            }
+                                        })
+                                        .show();
+                            }
+                        })
                         .show();
             }
         });

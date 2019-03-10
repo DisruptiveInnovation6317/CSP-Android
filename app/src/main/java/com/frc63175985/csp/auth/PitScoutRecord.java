@@ -127,6 +127,10 @@ public class PitScoutRecord {
         return sb.toString();
     }
 
+    public void clear() {
+        data = new HashMap<>();
+    }
+
     public String str(String key) {
         Object value = data.get(key);
         if (value == null) {
