@@ -386,6 +386,10 @@ public class Match {
         return sb.toString();
     }
 
+    public void clear() {
+        data.clear();
+    }
+
     private String str(String key) {
         Object value = data.get(key);
         if (value == null) {

@@ -128,7 +128,7 @@ public class PitScoutRecord {
     }
 
     public void clear() {
-        data = new HashMap<>();
+        data.clear();
     }
 
     public String str(String key) {

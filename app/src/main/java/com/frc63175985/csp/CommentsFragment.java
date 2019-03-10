@@ -1,6 +1,7 @@
 package com.frc63175985.csp;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -45,6 +46,24 @@ public class CommentsFragment extends Fragment {
 
                 AlertDialog dialog = QrHelper.qrDialogFromString(getContext(), "Match", contents);
                 if (dialog != null) {
+                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            // Ask if they want to reset everything
+                            new AlertDialog.Builder(CommentsFragment.this.getContext())
+                                    .setTitle("Clear")
+                                    .setMessage("Would you like to clear the screen?")
+                                    .setNegativeButton(android.R.string.no, null)
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            ScoutAuthState.shared.currentMatch.clear();
+                                            CommentsFragment.this.getActivity().finish();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    });
                     dialog.show();
                     FileManager.shared.saveMatch();
                 }
