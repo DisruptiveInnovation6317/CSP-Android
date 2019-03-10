@@ -105,16 +105,25 @@ public class FileManager {
 
     /**
      * Save the current Pit Scouting entry to the disk
+     * @returns the {@link File} object this entry saved to
      */
-    public void savePit() {
+    public File savePit() {
         File newPitFile = new File(pitFolder, FILENAME_FORMAT.format(new Date()) + ".csv");
         try {
             newPitFile.createNewFile();
             FileWriter writer = new FileWriter(newPitFile);
             writer.write(ScoutAuthState.shared.pitScoutRecord.export());
             writer.close();
+
+            return newPitFile;
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return null;
+    }
+
+    public File getRobotPicture(String filename) {
+        return new File(pitFolder, filename);
     }
 }

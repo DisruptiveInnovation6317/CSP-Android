@@ -28,7 +28,7 @@
         <activity android:name=".PitScoutingActivity"/>
         
         <provider
-            android:authorities="com.frc63175985.fileprovider"
+            android:authorities="com.frc63175985.csp.fileprovider"
             android:name="android.support.v4.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

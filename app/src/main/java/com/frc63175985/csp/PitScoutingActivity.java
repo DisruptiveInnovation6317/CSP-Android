@@ -2,6 +2,7 @@ package com.frc63175985.csp;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -114,7 +115,7 @@ public class PitScoutingActivity extends AppCompatActivity {
                     ScoutAuthState.shared.pitScoutRecord.set(PitScoutRecord.ROBOT_FRONT_FILENAME, imageFile.getName());
                     Debug.log("Set " + PitScoutRecord.ROBOT_FRONT_FILENAME + " to " + imageFile.getName());
 
-                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.frc63175985.fileprovider", imageFile);
+                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.frc63175985.csp.fileprovider", imageFile);
                     pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
                     startActivityForResult(pictureIntent, REQUEST_FRONT_ROBOT_IMAGE);
@@ -143,7 +144,7 @@ public class PitScoutingActivity extends AppCompatActivity {
                     ScoutAuthState.shared.pitScoutRecord.set(PitScoutRecord.ROBOT_SIDE_FILENAME, imageFile.getName());
                     Debug.log("Set " + PitScoutRecord.ROBOT_SIDE_FILENAME + " to " + imageFile.getName());
 
-                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.frc63175985.fileprovider", imageFile);
+                    Uri imageUri = FileProvider.getUriForFile(PitScoutingActivity.this, "com.frc63175985.csp.fileprovider", imageFile);
                     pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
                     startActivityForResult(pictureIntent, REQUEST_SIDE_ROBOT_IMAGE);
@@ -165,11 +166,27 @@ public class PitScoutingActivity extends AppCompatActivity {
                     return;
                 }
 
-                AlertDialog alert = QrHelper.qrDialogFromString(PitScoutingActivity.this, "Pit Scouting", contents);
-                if (alert != null) {
-                    FileManager.shared.savePit();
-                    alert.show();
-                }
+                final File pitScoutingFile = FileManager.shared.savePit();
+
+                new AlertDialog.Builder(PitScoutingActivity.this)
+                        .setTitle("Pit Scouting Exported!")
+                        .setMessage("Exported to path: " + pitScoutingFile.getAbsolutePath() + "\nDo you want to share this Pit Scouting file?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                                Uri uri = FileProvider.getUriForFile(
+                                        PitScoutingActivity.this,
+                                        PitScoutingActivity.this.getApplicationContext()
+                                                .getPackageName() + ".fileprovider", pitScoutingFile);
+                                shareIntent.setDataAndType(uri, "text/plain");
+                                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                                startActivity(Intent.createChooser(shareIntent, "Share file using"));
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -189,7 +206,7 @@ public class PitScoutingActivity extends AppCompatActivity {
             // Read image
             String key = requestCode == REQUEST_FRONT_ROBOT_IMAGE ?
                     PitScoutRecord.ROBOT_FRONT_FILENAME : PitScoutRecord.ROBOT_SIDE_FILENAME;
-            String filename = ScoutAuthState.shared.pitScoutRecord.str(key);
+            final String filename = ScoutAuthState.shared.pitScoutRecord.str(key);
             if (filename.isEmpty()) {
                 Debug.log("Filename is empty");
                 return;
@@ -201,6 +218,26 @@ public class PitScoutingActivity extends AppCompatActivity {
             } else {
                 ((ImageView)findViewById(R.id.pit_image_side_imageView)).setImageBitmap(image);
             }
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Share Robot Photo")
+                    .setMessage("Do you want to share this robot photo?")
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            Uri uri = FileProvider.getUriForFile(
+                                    PitScoutingActivity.this,
+                                    PitScoutingActivity.this.getApplicationContext()
+                                            .getPackageName() + ".fileprovider", FileManager.shared.getRobotPicture(filename));
+                            shareIntent.setDataAndType(uri, "image/*");
+                            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                            startActivity(Intent.createChooser(shareIntent, "Share file using"));
+                        }
+                    })
+                    .show();
         }
     }
 }

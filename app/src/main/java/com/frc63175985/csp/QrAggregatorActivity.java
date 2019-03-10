@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -229,8 +230,12 @@ public class QrAggregatorActivity extends AppCompatActivity implements ZXingScan
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                                shareIntent.setType("text/plain");
-                                Uri uri = Uri.fromFile(aggregationFile);
+                                Uri uri = FileProvider.getUriForFile(
+                                        QrAggregatorActivity.this,
+                                        QrAggregatorActivity.this.getApplicationContext()
+                                                .getPackageName() + ".fileprovider", aggregationFile);
+                                shareIntent.setDataAndType(uri, "text/plain");
+                                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
                                 startActivity(Intent.createChooser(shareIntent, "Share file using"));
                             }
