@@ -166,6 +166,12 @@ public class PitScoutingActivity extends AppCompatActivity {
                     return;
                 }
 
+                String teamName = ScoutAuthState.shared.pitScoutRecord.str(PitScoutRecord.TEAM_NUMBER);
+                if (teamName.isEmpty()) {
+                    Toast.makeText(PitScoutingActivity.this, "Team Name cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 final File pitScoutingFile = FileManager.shared.savePit();
 
                 new AlertDialog.Builder(PitScoutingActivity.this)

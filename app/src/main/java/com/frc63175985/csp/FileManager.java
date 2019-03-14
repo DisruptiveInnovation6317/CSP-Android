@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
+import com.frc63175985.csp.auth.PitScoutRecord;
 import com.frc63175985.csp.auth.ScoutAuthState;
 
 import java.io.File;
@@ -24,8 +25,6 @@ public class FileManager {
     private File matchFolder;
     private File aggregateFolder;
     private SimpleDateFormat FILENAME_FORMAT = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
-
-    public static final int CHOOSE_AGGREGATOR_FILE_REQUEST_CODE = 1;
 
     private FileManager() {
         rootFolder = new File(Environment.getExternalStorageDirectory(), "CSP");
@@ -98,6 +97,8 @@ public class FileManager {
             FileWriter writer = new FileWriter(newMatchFile);
             writer.write(ScoutAuthState.shared.currentMatch.export());
             writer.close();
+
+            Debug.log("Wrote match file to path " + newMatchFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,12 +109,13 @@ public class FileManager {
      * @returns the {@link File} object this entry saved to
      */
     public File savePit() {
-        File newPitFile = new File(pitFolder, FILENAME_FORMAT.format(new Date()) + ".csv");
+        File newPitFile = new File(pitFolder, "PIT_TEAM_" + ScoutAuthState.shared.pitScoutRecord.str(PitScoutRecord.TEAM_NUMBER) + ".csv");
         try {
             newPitFile.createNewFile();
             FileWriter writer = new FileWriter(newPitFile);
             writer.write(ScoutAuthState.shared.pitScoutRecord.export());
             writer.close();
+            Debug.log("Wrote pit file to path " + newPitFile.getAbsolutePath());
 
             return newPitFile;
         } catch (IOException e) {
