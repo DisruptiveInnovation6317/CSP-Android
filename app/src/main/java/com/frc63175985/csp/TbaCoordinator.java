@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -119,15 +120,23 @@ class TbaAsyncRequest extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         try {
             JSONArray jsonResult = new JSONArray(result);
-            String[] postValue = new String[jsonResult.length()];
+            int[] values = new int[jsonResult.length()];
 
             for (int i = 0; i < jsonResult.length(); i++) {
                 JSONObject teamObject = jsonResult.getJSONObject(i);
                 int teamNumber = teamObject.getInt("team_number");
-                postValue[i] = String.valueOf(teamNumber);
+                values[i] = teamNumber;
             }
 
-            delegate.processFinished(postValue);
+            // Sort array
+            Arrays.sort(values);
+
+            String[] strings = new String[values.length];
+            for (int i = 0; i < values.length; i++) {
+                strings[i] = String.valueOf(values[i]);
+            }
+
+            delegate.processFinished(strings);
         } catch (JSONException e) {
             e.printStackTrace();
             delegate.processFinished(null);

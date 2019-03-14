@@ -17,6 +17,7 @@ import android.widget.Spinner;
 
 import com.frc63175985.csp.Debug;
 import com.frc63175985.csp.R;
+import com.frc63175985.csp.TbaCoordinator;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
 import com.frc63175985.csp.enums.LevelSelection;
@@ -485,6 +486,51 @@ public class Match {
                     return null;
                 }
             }});
+        }
+
+        /**
+         * Bind a specific type of spinner (one that specifies a team number)
+         * @param context
+         * @param view
+         */
+        public static void bindTeamNumberSpinner(Context context, View view) {
+            if (TbaCoordinator.shared.teams == null) {
+                throw new IllegalArgumentException("Cannot be called when Tba teams is null");
+            }
+
+            // Create an array with ------ at the beginning
+            String[] modifiedArray = new String[TbaCoordinator.shared.teams.length + 1];
+            modifiedArray[0] = "--------";
+            System.arraycopy(TbaCoordinator.shared.teams, 0, modifiedArray, 1, TbaCoordinator.shared.teams.length);
+
+            // Create listener
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    context, R.layout.spinner_drop_down_item, modifiedArray);
+            final Spinner spinner = (Spinner)view;
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ScoutAuthState.shared.currentMatch.set(Match.TEAM_NUMBER, spinner.getSelectedItem());
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            });
+
+            // Prefill
+            String teamNumber = ScoutAuthState.shared.currentMatch.str(Match.TEAM_NUMBER);
+            int positionInArray = -1;
+            for (int i = 0; i < TbaCoordinator.shared.teams.length; i++) {
+                if (TbaCoordinator.shared.teams[i].equals(teamNumber)) {
+                    positionInArray = i+1; // +1 because array[0] == the placeholder, "-----"
+                    break;
+                }
+            }
+
+            if (positionInArray != -1) {
+                spinner.setSelection(positionInArray);
+            }
         }
 
         public static void bindSpinner(Context context, View parentView, int id,

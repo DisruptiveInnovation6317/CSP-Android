@@ -24,7 +24,16 @@ public class StartFragment extends Fragment {
 
         // Match # listener
         Match.GUI.bindEditText(view, R.id.start_match_num_editText, Match.MATCH_NUMBER);
-        Match.GUI.bindEditText(view, R.id.start_team_num_editText, Match.TEAM_NUMBER);
+
+        if (TbaCoordinator.shared.teams == null) {
+            Match.GUI.bindEditText(view, R.id.start_team_num_editText, Match.TEAM_NUMBER);
+            view.findViewById(R.id.start_team_num_editText).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.start_team_num_spinner).setVisibility(View.GONE);
+        } else {
+            Match.GUI.bindTeamNumberSpinner(getContext(), view.findViewById(R.id.start_team_num_spinner));
+            view.findViewById(R.id.start_team_num_editText).setVisibility(View.GONE);
+            view.findViewById(R.id.start_team_num_spinner).setVisibility(View.VISIBLE);
+        }
 
         // Alliance listener
         ((RadioGroup)view.findViewById(R.id.start_alliance_radioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

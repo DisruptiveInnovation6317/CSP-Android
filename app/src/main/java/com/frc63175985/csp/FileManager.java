@@ -36,6 +36,28 @@ public class FileManager {
         aggregateFolder = new File(rootFolder, "AGGREGATION");
         eventsFolder = new File(rootFolder, "EVENTS");
 
+        if (Debug.CLEAR_FILES) {
+            for (File f : pitFolder.listFiles()) {
+                f.delete();
+            }
+            pitFolder.delete();
+
+            for (File f : matchFolder.listFiles()) {
+                f.delete();
+            }
+            matchFolder.delete();
+
+            for (File f : aggregateFolder.listFiles()) {
+                f.delete();
+            }
+            aggregateFolder.delete();
+
+            for (File f : eventsFolder.listFiles()) {
+                f.delete();
+            }
+            eventsFolder.delete();
+        }
+
         if (!pitFolder.exists()) {
             pitFolder.mkdirs();
         }
@@ -156,6 +178,7 @@ public class FileManager {
             writer.write(builder.toString());
             writer.close();
             Debug.log("Wrote event file to path " + newEventFile.getAbsolutePath());
+            Debug.log(builder.toString());
 
             return newEventFile;
         } catch (IOException e) {
@@ -170,9 +193,15 @@ public class FileManager {
         if (eventFile.exists()) {
             Debug.log("Event " + ScoutAuthState.shared.tournament + " is already saved! Loading...");
 
+            BufferedReader reader = null;
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(eventFile));
+                reader = new BufferedReader(new FileReader(eventFile));
                 String rawData = reader.readLine();
+
+                if (rawData == null || rawData.isEmpty()) {
+                    throw new FileNotFoundException("Stream is empty!");
+                }
+
                 String[] data = rawData.split(",");
                 reader.close();
 
@@ -181,6 +210,14 @@ public class FileManager {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
 

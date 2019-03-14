@@ -42,6 +42,11 @@
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
             android:textSize="26sp" />
+
+        <Spinner
+            android:id="@+id/start_team_num_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout

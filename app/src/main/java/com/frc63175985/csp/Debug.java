@@ -13,6 +13,7 @@ public class Debug {
     public static final boolean EMULATE_QR_SCAN = false;
     public static final boolean LOG_GENERATED_QR_CODE = false;
     public static final boolean LOG_DATABASE_SET = false;
+    public static final boolean CLEAR_FILES = false;
 
     public static void log(@Nullable Object o) {
         if (o == null) {
