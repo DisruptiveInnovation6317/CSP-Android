@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.frc63175985.csp.Debug;
-import com.frc63175985.csp.MainActivity;
 import com.frc63175985.csp.R;
 import com.frc63175985.csp.enums.BaseScoutType;
 import com.frc63175985.csp.enums.CargoShipSelection;
@@ -272,7 +271,7 @@ public class Match {
     public String export() {
         if (!ScoutAuthState.shared.isLoggedIn()) {
             // Something is very wrong...
-            MainActivity.logE("Trying to export match without a scout being logged in.");
+            Debug.log("Trying to export match without a scout being logged in.");
             return null;
         }
 

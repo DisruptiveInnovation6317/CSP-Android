@@ -3,8 +3,6 @@ package com.frc63175985.csp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,11 +57,6 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
-
-    @Override
     public void authStateChanged(boolean loggedIn) {
         refreshView();
     }
@@ -88,21 +81,5 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
             scoutNameEditText = findViewById(R.id.welcome_scout_login_editText);
             tournamentNameEditText = findViewById(R.id.welcome_tournament_login_editText);
         }
-    }
-
-    /**
-     * Log verbosely to Logcat using the tag CSP_V
-     * @param o the object to be logged
-     */
-    public static void logV(Object o) {
-        Log.d("CSP_V", o.toString());
-    }
-
-    /**
-     * Log an error to Logcat using the tag CSP_E
-     * @param o the object to be logged
-     */
-    public static void logE(Object o) {
-        Log.d("CSP_E", o.toString());
     }
 }
