@@ -390,7 +390,7 @@ public class Match {
         data.clear();
     }
 
-    private String str(String key) {
+    public String str(String key) {
         Object value = data.get(key);
         if (value == null) {
             return "";

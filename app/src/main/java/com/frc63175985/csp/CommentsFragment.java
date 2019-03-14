@@ -44,6 +44,14 @@ public class CommentsFragment extends Fragment {
                     return;
                 }
 
+                if (ScoutAuthState.shared.currentMatch.str(Match.TEAM_NUMBER).isEmpty()) {
+                    Toast.makeText(getContext(), "Team Number cannot be empty", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (ScoutAuthState.shared.currentMatch.str(Match.MATCH_NUMBER).isEmpty()) {
+                    Toast.makeText(getContext(), "Match Number cannot be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 AlertDialog dialog = QrHelper.qrDialogFromString(getContext(), "Match", contents);
                 if (dialog != null) {
                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {

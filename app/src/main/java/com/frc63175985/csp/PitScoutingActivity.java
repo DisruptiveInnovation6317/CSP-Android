@@ -32,7 +32,17 @@ public class PitScoutingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scouting);
 
-        PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_team_number_editText), PitScoutRecord.TEAM_NUMBER);
+        if (TbaCoordinator.shared.teams == null) {
+            PitScoutRecord.GUI.bindEditText(findViewById(R.id.pit_team_number_editText), PitScoutRecord.TEAM_NUMBER);
+            findViewById(R.id.pit_team_number_editText).setVisibility(View.VISIBLE);
+            findViewById(R.id.pit_team_number_textView).setVisibility(View.INVISIBLE);
+            findViewById(R.id.pit_team_number_spinner).setVisibility(View.INVISIBLE);
+        } else {
+            PitScoutRecord.GUI.bindTeamNumberSpinner(this, findViewById(R.id.pit_team_number_spinner));
+            findViewById(R.id.pit_team_number_editText).setVisibility(View.INVISIBLE);
+            findViewById(R.id.pit_team_number_textView).setVisibility(View.VISIBLE);
+            findViewById(R.id.pit_team_number_spinner).setVisibility(View.VISIBLE);
+        }
 
         // HATCHES
         PitScoutRecord.GUI.bindCheckbox(findViewById(R.id.pit_can_manipulate_hatch), PitScoutRecord.CAN_MANIPULATE_HATCH, new View[]{
@@ -167,7 +177,7 @@ public class PitScoutingActivity extends AppCompatActivity {
                 }
 
                 String teamName = ScoutAuthState.shared.pitScoutRecord.str(PitScoutRecord.TEAM_NUMBER);
-                if (teamName.isEmpty()) {
+                if (teamName.isEmpty() || teamName.equals("--------")) {
                     Toast.makeText(PitScoutingActivity.this, "Team Name cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }

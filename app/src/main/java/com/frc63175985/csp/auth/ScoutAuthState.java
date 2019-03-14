@@ -1,8 +1,5 @@
 package com.frc63175985.csp.auth;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import com.frc63175985.csp.Debug;
 
 import java.util.LinkedList;
@@ -21,23 +18,7 @@ public class ScoutAuthState {
         // Auto login if in debug mode
         if (Debug.AUTO_SIGNIN) {
             scout = "LAST_FIRST";
-            tournament = "CAAV";
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                try {
-                    Thread.sleep(1000);
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                        notifyAuthStateChanged(true);
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                }
-            }).start();
+            tournament = "2019iacf";
         }
     }
 

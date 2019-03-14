@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
         } else if (id == R.id.welcome_qr_aggregator_button) {
             Intent i = new Intent(MainActivity.this, QrAggregatorActivity.class);
             startActivity(i);
+        } else if (id == R.id.welcome_pull_from_tba) {
+            TbaCoordinator.shared.pullEventData();
         }
     }
 

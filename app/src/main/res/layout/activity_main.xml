@@ -130,6 +130,13 @@
             android:onClick="onClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/welcome_pull_from_tba"
+            android:text="Pull from TBA"
+            android:onClick="onClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

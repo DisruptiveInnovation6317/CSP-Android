@@ -1,22 +1,24 @@
 package com.frc63175985.csp;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.PitScoutRecord;
 import com.frc63175985.csp.auth.ScoutAuthState;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 public class FileManager {
     public static final FileManager shared = new FileManager();
@@ -24,6 +26,7 @@ public class FileManager {
     private File pitFolder;
     private File matchFolder;
     private File aggregateFolder;
+    private File eventsFolder;
     private SimpleDateFormat FILENAME_FORMAT = new SimpleDateFormat("y-M-d-k-h-m-s-S", Locale.US);
 
     private FileManager() {
@@ -31,6 +34,7 @@ public class FileManager {
         pitFolder = new File(rootFolder, "PIT");
         matchFolder = new File(rootFolder, "MATCH");
         aggregateFolder = new File(rootFolder, "AGGREGATION");
+        eventsFolder = new File(rootFolder, "EVENTS");
 
         if (!pitFolder.exists()) {
             pitFolder.mkdirs();
@@ -42,6 +46,10 @@ public class FileManager {
 
         if (!aggregateFolder.exists()) {
             aggregateFolder.mkdirs();
+        }
+
+        if (!eventsFolder.exists()) {
+            eventsFolder.mkdirs();
         }
     }
 
@@ -91,7 +99,10 @@ public class FileManager {
      * Save the current Match entry to the disk.
      */
     public void saveMatch() {
-        File newMatchFile = new File(matchFolder, FILENAME_FORMAT.format(new Date()) + ".csv");
+        String filename = String.format(Locale.US, "MATCH_%s_TEAM_%s.csv",
+                ScoutAuthState.shared.currentMatch.str(Match.MATCH_NUMBER),
+                ScoutAuthState.shared.currentMatch.str(Match.TEAM_NUMBER));
+        File newMatchFile = new File(matchFolder, filename);
         try {
             newMatchFile.createNewFile();
             FileWriter writer = new FileWriter(newMatchFile);
@@ -120,6 +131,57 @@ public class FileManager {
             return newPitFile;
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * Save an event to the disk
+     * @param teams the array of teams to be saved
+     * @return the file that was saved
+     */
+    public File saveEvent(String[] teams) {
+        // convert teams to csv file
+        StringBuilder builder = new StringBuilder();
+        for (String teamNumber : teams) {
+            builder.append(teamNumber).append(",");
+        }
+        builder.deleteCharAt(builder.length()-1); // delete last comma
+
+        File newEventFile = new File(eventsFolder, ScoutAuthState.shared.tournament + ".csv");
+        try {
+            newEventFile.createNewFile();
+            FileWriter writer = new FileWriter(newEventFile);
+            writer.write(builder.toString());
+            writer.close();
+            Debug.log("Wrote event file to path " + newEventFile.getAbsolutePath());
+
+            return newEventFile;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Nullable public String[] loadEvent() {
+        File eventFile = new File(eventsFolder, ScoutAuthState.shared.tournament + ".csv");
+        if (eventFile.exists()) {
+            Debug.log("Event " + ScoutAuthState.shared.tournament + " is already saved! Loading...");
+
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(eventFile));
+                String rawData = reader.readLine();
+                String[] data = rawData.split(",");
+                reader.close();
+
+                return data;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
