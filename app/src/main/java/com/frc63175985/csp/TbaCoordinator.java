@@ -37,14 +37,14 @@ public class TbaCoordinator implements TbaAsyncDelegate, ScoutAuthStateListener 
         }
     }
 
-    public void pullEventData() {
+    public void pullEventData(TbaAsyncDelegate delegate) {
         // Make sure we have an event code
         if (ScoutAuthState.shared.tournament == null ||
             ScoutAuthState.shared.tournament.isEmpty()) {
             return;
         }
 
-        new TbaAsyncRequest(this).execute(API_KEY);
+        new TbaAsyncRequest(this, delegate).execute(API_KEY);
     }
 
     @Override
@@ -70,10 +70,10 @@ public class TbaCoordinator implements TbaAsyncDelegate, ScoutAuthStateListener 
 }
 
 class TbaAsyncRequest extends AsyncTask<String, Void, String> {
-    private TbaAsyncDelegate delegate;
+    private TbaAsyncDelegate[] delegates;
 
-    public TbaAsyncRequest(TbaAsyncDelegate delegate) {
-        this.delegate = delegate;
+    public TbaAsyncRequest(TbaAsyncDelegate... delegates) {
+        this.delegates = delegates;
     }
 
     @Override
@@ -118,6 +118,8 @@ class TbaAsyncRequest extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        String[] strings = null;
+
         try {
             JSONArray jsonResult = new JSONArray(result);
             int[] values = new int[jsonResult.length()];
@@ -131,15 +133,16 @@ class TbaAsyncRequest extends AsyncTask<String, Void, String> {
             // Sort array
             Arrays.sort(values);
 
-            String[] strings = new String[values.length];
+            strings = new String[values.length];
             for (int i = 0; i < values.length; i++) {
                 strings[i] = String.valueOf(values[i]);
             }
-
-            delegate.processFinished(strings);
-        } catch (JSONException e) {
+        } catch (JSONException | NullPointerException e) {
             e.printStackTrace();
-            delegate.processFinished(null);
+        }
+
+        for (TbaAsyncDelegate delegate : delegates) {
+            delegate.processFinished(strings);
         }
     }
 }

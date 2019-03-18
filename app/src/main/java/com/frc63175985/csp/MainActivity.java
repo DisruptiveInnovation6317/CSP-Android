@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.frc63175985.csp.auth.ScoutAuthState;
 import com.frc63175985.csp.auth.ScoutAuthStateListener;
 
-public class MainActivity extends AppCompatActivity implements ScoutAuthStateListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements ScoutAuthStateListener, View.OnClickListener, TbaAsyncDelegate {
     private EditText scoutNameEditText, tournamentNameEditText;
 
     @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
             Intent i = new Intent(MainActivity.this, QrAggregatorActivity.class);
             startActivity(i);
         } else if (id == R.id.welcome_pull_from_tba) {
-            TbaCoordinator.shared.pullEventData();
+            TbaCoordinator.shared.pullEventData(this);
         }
     }
 
@@ -80,6 +80,13 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
 
             scoutNameEditText = findViewById(R.id.welcome_scout_login_editText);
             tournamentNameEditText = findViewById(R.id.welcome_tournament_login_editText);
+        }
+    }
+
+    @Override
+    public void processFinished(String[] teamNames) {
+        if (teamNames == null) {
+            Toast.makeText(this, "Error grabbing teams", Toast.LENGTH_SHORT).show();
         }
     }
 }
