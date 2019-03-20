@@ -31,6 +31,7 @@ public class FileManager {
 
     private FileManager() {
         rootFolder = new File(Environment.getExternalStorageDirectory(), "CSP");
+        Debug.log(rootFolder);
         pitFolder = new File(rootFolder, "PIT");
         matchFolder = new File(rootFolder, "MATCH");
         aggregateFolder = new File(rootFolder, "AGGREGATION");
@@ -120,7 +121,7 @@ public class FileManager {
     /**
      * Save the current Match entry to the disk.
      */
-    public void saveMatch() {
+    public File saveMatch() {
         String filename = String.format(Locale.US, "MATCH_%s_TEAM_%s.csv",
                 ScoutAuthState.shared.currentMatch.str(Match.MATCH_NUMBER),
                 ScoutAuthState.shared.currentMatch.str(Match.TEAM_NUMBER));
@@ -135,6 +136,8 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return newMatchFile;
     }
 
     /**

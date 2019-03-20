@@ -2,10 +2,13 @@ package com.frc63175985.csp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import com.frc63175985.csp.auth.Match;
 import com.frc63175985.csp.auth.ScoutAuthState;
+
+import java.io.File;
 
 public class CommentsFragment extends Fragment {
     @Nullable
@@ -52,28 +57,52 @@ public class CommentsFragment extends Fragment {
                     return;
                 }
 
+                final File matchFile = FileManager.shared.saveMatch();
                 AlertDialog dialog = QrHelper.qrDialogFromString(getContext(), "Match", contents);
                 if (dialog != null) {
                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            // Ask if they want to reset everything
-                            new AlertDialog.Builder(CommentsFragment.this.getContext())
-                                    .setTitle("Clear")
-                                    .setMessage("Would you like to clear the screen?")
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Match Scouting Exported!")
+                                    .setMessage("Exported to path: " + matchFile.getAbsolutePath() + "\nDo you want to share this Match Scouting file?")
                                     .setNegativeButton(android.R.string.no, null)
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            ScoutAuthState.shared.currentMatch.clear();
-                                            CommentsFragment.this.getActivity().finish();
+                                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                                            Uri uri = FileProvider.getUriForFile(
+                                                    getContext(),
+                                                    getContext().getApplicationContext()
+                                                            .getPackageName() + ".fileprovider", matchFile);
+                                            shareIntent.setDataAndType(uri, "text/plain");
+                                            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                                            startActivity(Intent.createChooser(shareIntent, "Share file using"));
+                                        }
+                                    })
+                                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialog) {
+                                            // Ask if they want to reset everything
+                                            new AlertDialog.Builder(getContext())
+                                                    .setTitle("Clear")
+                                                    .setMessage("Would you like to clear the screen?")
+                                                    .setNegativeButton(android.R.string.no, null)
+                                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            ScoutAuthState.shared.currentMatch.clear();
+                                                            getActivity().finish();
+                                                        }
+                                                    })
+                                                    .show();
                                         }
                                     })
                                     .show();
                         }
                     });
                     dialog.show();
-                    FileManager.shared.saveMatch();
                 }
             }
         });
