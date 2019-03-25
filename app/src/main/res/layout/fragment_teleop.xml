@@ -140,62 +140,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:text="Climb: "
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <Spinner
-                android:id="@+id/teleop_climb_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Secure Hold: "
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <Spinner
-                android:id="@+id/teleop_secure_hold_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Climb Speed: "
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <Spinner
-                android:id="@+id/teleop_climb_speed_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Climb Outcome: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Spinner
-                android:id="@+id/teleop_climb_outcome_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
                 android:text="Climb Height: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -203,28 +147,12 @@
                 android:id="@+id/teleop_climb_height_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Assists: "
+            <CheckBox
+                android:id="@+id/teleop_climb_was_assisted_checkBox"
+                android:text="Was assisted?"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <include
-                android:id="@+id/teleop_climb_assists_stepper"
-                layout="@layout/stepper"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
         </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/teleop_robot_fell_checkBox"
-            android:text="Robot Fell"
-            android:layout_marginBottom="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

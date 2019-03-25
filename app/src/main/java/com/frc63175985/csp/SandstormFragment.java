@@ -21,17 +21,9 @@ public class SandstormFragment extends BaseScoutFragment {
         initializeRocketAndCargoship(view);
 
         // Start
-        Match.GUI.bindCheckbox(view, R.id.sandstorm_sandstorm_active, Match.SANDSTORM_ACTIVE);
-        Match.GUI.bindCheckbox(view, R.id.sandstorm_leaves_hab_checkBox, Match.LEAVES_HAB);
-        Match.GUI.bindSpinner(getContext(), view, R.id.sandstorm_hab_level_spinner, Match.START_LEVEL, Match.LEVELS_OPTIONS);
-        Match.GUI.bindSpinner(getContext(), view, R.id.sandstorm_start_position_spinner, Match.START_POSITION, new String[]{"--------", "Left", "Middle", "Right"});
+        Match.GUI.bindSpinner(getContext(), view, R.id.sandstorm_hab_level_spinner, Match.START_LEVEL, new String[]{"--------", "1", "2"});
         Match.GUI.bindSpinner(getContext(), view, R.id.sandstorm_start_object_spinner, Match.START_OBJECT, new String[]{"--------", "N/A", "Hatch", "Cargo"});
         Match.GUI.bindCheckbox(view, R.id.sandstorm_crosses_midline_checkBox, Match.CROSS_OVER);
-
-        // Errors
-        Match.GUI.bindCheckbox(view, R.id.sandstorm_drop_start_object_checkBox, Match.LOSES_START_OBJECT);
-        Match.GUI.bindCheckbox(view, R.id.sandstorm_contact_robot_checkBox, Match.ROBOT_CONTACT);
-        Match.GUI.bindCheckbox(view, R.id.sandstorm_field_collision_checkBox, Match.FOUL);
 
         return view;
     }

@@ -68,12 +68,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <CheckBox
-        android:id="@+id/comments_ranking_2"
-        android:text="Completed HAB Climb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <TextView
         android:id="@+id/comments_comments_section_header"
         android:text="COMMENTS"

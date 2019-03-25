@@ -52,26 +52,20 @@ public class Match {
     public static final String AUTO_PREFIX = "auto_";
     public static final String TELEOP_PREFIX = "tele_";
 
-    public static final String MATCH_NUMBER = "numMatch";
+    public static final String MATCH_NUMBER = "match";
     public static final String TEAM_NUMBER = "idTeam";
     public static final String ALLIANCE = "idAlliance";
     public static final String DRIVE_STATION = "idDriveStation";
 
-    public static final String ROBOT_CRASHED = "flCrashed";
-    public static final String YELLOW_CARD = "flYellow";
-    public static final String RED_CARD = "flRed";
+    public static final String ROBOT_CRASHED = "crashed";
+    public static final String YELLOW_CARD = "yellow";
+    public static final String RED_CARD = "red";
 
     // Autonomous
-    public static final String SANDSTORM_ACTIVE = "auto_flState";
-    public static final String START_POSITION = "auto_idStartPosition";
     public static final String START_LEVEL = "auto_idStartLevel";
-    public static final String LEAVES_HAB = "auto_flBaseLine";
     public static final String START_OBJECT = "auto_idStartObject";
     // AUTONOMOUS CARGOSHIP
     // AUTONOMOUS ROCKET
-    public static final String LOSES_START_OBJECT = "auto_flLoseStartObject";
-    public static final String ROBOT_CONTACT = "auto_flRobotContact";
-    public static final String FOUL = "auto_flFoul";
     public static final String CROSS_OVER = "auto_flCrossOver";
 
     // Cargo Ship
@@ -106,13 +100,8 @@ public class Match {
     public static final String TAKE_CARGO_STATION = "flIntakeCargoStation";
 
     // End Game
-    public static final String CLIMB = "tele_idClimb";
-    public static final String CLIMB_OUTCOME = "tele_idClimbOutcome";
-    public static final String CLIMB_GRAB = "tele_idClimbGrab";
-    public static final String CLIMB_SPEED = "tele_idClimbSpeed";
-    public static final String NUMBER_CLIMB_ASSISTS = "tele_numClimbAssists";
+    public static final String CLIMB_ASSISTED = "tele_climbAssisted";
     public static final String CLIMB_LEVEL = "tele_idClimbLevel";
-    public static final String CLIMB_FALL = "tele_flClimbFall";
 
     // Comments
     public static final String COMMENTS = "comm_txNotes";
@@ -126,7 +115,6 @@ public class Match {
     public static final String EFFECTIVE_DEFENCE = "comm_flGoodDefence";
 
     public static final String RANKING_1 = "flRanking1";
-    public static final String RANKING_2 = "flRanking2";
 
     private HashMap<String, Object> data;
 
@@ -280,21 +268,19 @@ public class Match {
 
         // Meta
         sb.append("DEFAULT").append(","); // ID
-        sb.append(ScoutAuthState.shared.tournament).append(","); // idEvent
-        sb.append(str(MATCH_NUMBER)).append(","); // numMatch
+        sb.append(ScoutAuthState.shared.tournament).append(","); // event
+        sb.append(str(MATCH_NUMBER)).append(","); // match
         sb.append(str(TEAM_NUMBER)).append(","); // idTeam
         sb.append(num(ALLIANCE)).append(","); // idAlliance
         sb.append(num(DRIVE_STATION)).append(","); // idDriveStation
-        sb.append(ScoutAuthState.shared.scout).append(","); // txScoutName
-        sb.append(bool(ROBOT_CRASHED)).append(","); // flCrashed
-        sb.append(bool(YELLOW_CARD)).append(","); // flYellow
-        sb.append(bool(RED_CARD)).append(","); // flRed
+        sb.append(ScoutAuthState.shared.scout).append(","); // scoutname
+        sb.append(bool(ROBOT_CRASHED)).append(","); // crashed
+        sb.append(bool(YELLOW_CARD)).append(","); // yellow
+        sb.append(bool(RED_CARD)).append(","); // red
 
         // Autonomous
-        sb.append(bool(SANDSTORM_ACTIVE)).append(","); // auto_flState
-        sb.append(num(START_POSITION)).append(","); // auto_idStartPosition
+        sb.append(isAutonomousActive()).append(","); // auto_flState
         sb.append(num(START_LEVEL)).append(","); // auto_idStartLevel
-        sb.append(bool(LEAVES_HAB)).append(","); // auto_flBaseLine
         sb.append(num(START_OBJECT)).append(","); // auto_idStartObject
 
         // Autonomous - Cargo Ship
@@ -321,9 +307,6 @@ public class Match {
         sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
-        sb.append(bool(LOSES_START_OBJECT)).append(","); // auto_flLoseStartObject
-        sb.append(bool(ROBOT_CONTACT)).append(","); // auto_flRobotContact
-        sb.append(bool(FOUL)).append(","); // auto_flFoul
         sb.append(bool(CROSS_OVER)).append(","); // auto_flCrossOver
 
         // TeleOp - Cargo Ship
@@ -351,13 +334,8 @@ public class Match {
         sb.append(num(TELEOP_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
         // End Game
-        sb.append(num(CLIMB)).append(","); // tele_idClimb
-        sb.append(num(CLIMB_OUTCOME)).append(","); // tele_idClimbOutcome
-        sb.append(num(CLIMB_GRAB)).append(","); // tele_idClimbGrab
-        sb.append(num(CLIMB_SPEED)).append(","); // tele_idClimbSpeed
-        sb.append(num(NUMBER_CLIMB_ASSISTS)).append(","); // tele_numClimbAssists
         sb.append(num(CLIMB_LEVEL)).append(","); // tele_idClimbLevel
-        sb.append(bool(CLIMB_FALL)).append(","); // tele_flClimbFall
+        sb.append(num(CLIMB_ASSISTED)).append(","); // tele_climbAssisted
 
         sb.append(bool(DEFENSE)).append(","); // tele_flDefence
         sb.append(bool(TAKE_HATCH_GROUND)).append(","); // flIntakeHatchGround
@@ -381,9 +359,40 @@ public class Match {
         sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtModified
         sb.append(Build.MODEL == null || Build.MODEL.isEmpty() ? "Android-Device" : Build.MODEL).append(","); // txComputerName
         sb.append(bool(RANKING_1)).append(","); // flRanking1
-        sb.append(bool(RANKING_2)); // flRanking2
 
         return sb.toString();
+    }
+
+    private boolean isAutonomousActive() {
+        boolean isActive;
+
+        // Autonomous - Cargo Ship
+        isActive = num(AUTO_PREFIX + CARGO_FRONT_HATCH_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_FRONT_HATCH_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_SIDE_HATCH_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_SIDE_HATCH_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_FRONT_CARGO_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_FRONT_CARGO_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_SIDE_CARGO_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + CARGO_SIDE_CARGO_SUCCESS) > 0;
+
+        // Autonomous - Rocket
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_LOW_HATCH_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_LOW_HATCH_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_HIGH_HATCH_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_LOW_CARGO_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_LOW_CARGO_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT) > 0;
+        isActive = isActive || num(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS) > 0;
+
+        isActive = isActive || bool(CROSS_OVER).equals("TRUE"); // auto_flCrossOver
+
+        return isActive;
     }
 
     public void clear() {
