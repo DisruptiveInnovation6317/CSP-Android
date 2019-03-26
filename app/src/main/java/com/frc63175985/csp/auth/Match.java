@@ -358,7 +358,7 @@ public class Match {
         sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtCreation
         sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtModified
         sb.append(Build.MODEL == null || Build.MODEL.isEmpty() ? "Android-Device" : Build.MODEL).append(","); // txComputerName
-        sb.append(bool(RANKING_1)).append(","); // flRanking1
+        sb.append(bool(RANKING_1)); // flRanking1
 
         return sb.toString();
     }
