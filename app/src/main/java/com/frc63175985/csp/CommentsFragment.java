@@ -29,6 +29,10 @@ public class CommentsFragment extends Fragment {
         Match.GUI.bindSpinner(getContext(), view, R.id.comments_drive_rating_spinner,
                 Match.DRIVE_RATING, driveRatings);
 
+        String[] defenseRatings = {"--------", "Irrelevant", "Ok", "Some Impact", "Huge Impact", "Amazing"};
+        Match.GUI.bindSpinner(getContext(), view, R.id.comments_defense_rating_spinner,
+                Match.DEFENSE_RATING, defenseRatings);
+
         Match.GUI.bindEditText(view, R.id.comments_comments_editText, Match.COMMENTS);
         Match.GUI.bindCheckbox(view, R.id.comments_highlight_checkBox, Match.HIGHLIGHT);
         Match.GUI.bindCheckbox(view, R.id.comments_warning_checkBox, Match.WARNING);

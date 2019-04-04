@@ -108,6 +108,7 @@ public class Match {
     public static final String HIGHLIGHT = "comm_flHighlight";
     public static final String WARNING = "comm_flWarning";
     public static final String DRIVE_RATING = "comm_idDriveRating";
+    public static final String DEFENSE_RATING = "comm_idDefenseRating";
     public static final String WORK_WITH_ALLIANCE = "comm_flAlliance";
     public static final String RECOVER = "comm_flRecovery";
     public static final String WORKED_STRATEGY = "comm_flStrategy";
@@ -335,7 +336,7 @@ public class Match {
 
         // End Game
         sb.append(num(CLIMB_LEVEL)).append(","); // tele_idClimbLevel
-        sb.append(num(CLIMB_ASSISTED)).append(","); // tele_climbAssisted
+        sb.append(bool(CLIMB_ASSISTED)).append(","); // tele_climbAssisted
 
         sb.append(bool(DEFENSE)).append(","); // tele_flDefence
         sb.append(bool(TAKE_HATCH_GROUND)).append(","); // flIntakeHatchGround
@@ -348,6 +349,7 @@ public class Match {
         sb.append(bool(HIGHLIGHT)).append(","); // comm_flHighlight
         sb.append(bool(WARNING)).append(","); // comm_flWarning
         sb.append(num(DRIVE_RATING)).append(","); // comm_idDriveRating
+        sb.append(num(DEFENSE_RATING)).append(","); // com_idDefenseRating
         sb.append(bool(WORK_WITH_ALLIANCE)).append(","); // comm_flAlliance
         sb.append(bool(RECOVER)).append(","); // comm_flRecovery
         sb.append(bool(WORKED_STRATEGY)).append(","); // comm_flStrategy
@@ -355,15 +357,15 @@ public class Match {
         sb.append(bool(EFFECTIVE_DEFENCE)).append(","); // comm_flGoodDefence
 
         // Creation
-        sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtCreation
-        sb.append(new SimpleDateFormat("y/M/d h:m:s", Locale.US).format(new Date())).append(","); // dtModified
+        sb.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US).format(new Date())).append(","); // dtCreation
+        sb.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US).format(new Date())).append(","); // dtModified
         sb.append(Build.MODEL == null || Build.MODEL.isEmpty() ? "Android-Device" : Build.MODEL).append(","); // txComputerName
         sb.append(bool(RANKING_1)); // flRanking1
 
         return sb.toString();
     }
 
-    private boolean isAutonomousActive() {
+    private String isAutonomousActive() {
         boolean isActive;
 
         // Autonomous - Cargo Ship
@@ -392,7 +394,7 @@ public class Match {
 
         isActive = isActive || bool(CROSS_OVER).equals("TRUE"); // auto_flCrossOver
 
-        return isActive;
+        return isActive ? "TRUE" : "FALSE";
     }
 
     public void clear() {
