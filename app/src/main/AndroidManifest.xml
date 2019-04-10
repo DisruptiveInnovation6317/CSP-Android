@@ -27,6 +27,7 @@
         <activity android:name=".MatchScoutingActivity"/>
         <activity android:name=".QrAggregatorActivity"/>
         <activity android:name=".PitScoutingActivity"/>
+        <activity android:name=".SettingsActivity"/>
         
         <provider
             android:authorities="com.frc63175985.csp.fileprovider"

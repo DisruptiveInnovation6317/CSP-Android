@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
         setContentView(R.layout.activity_main);
 
         ScoutAuthState.shared.addStateListener(this);
+        ScoutAuthState.shared.currentMatch.loadPreferences(this);
 
         scoutNameEditText = findViewById(R.id.welcome_scout_login_editText);
         tournamentNameEditText = findViewById(R.id.welcome_tournament_login_editText);
@@ -32,27 +33,42 @@ public class MainActivity extends AppCompatActivity implements ScoutAuthStateLis
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.welcome_logout_button) {
-            ScoutAuthState.shared.logOut();
-        } else if (id == R.id.welcome_login_button) {
-            String scoutName = scoutNameEditText.getText().toString();
-            String tournamentName = tournamentNameEditText.getText().toString();
-            scoutNameEditText.clearFocus();
-            tournamentNameEditText.clearFocus();
-            if (!ScoutAuthState.shared.login(scoutName, tournamentName)) {
-                Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT).show();
+        switch (id) {
+            case R.id.welcome_logout_button:
+                ScoutAuthState.shared.logOut();
+                break;
+            case R.id.welcome_login_button:
+                String scoutName = scoutNameEditText.getText().toString();
+                String tournamentName = tournamentNameEditText.getText().toString();
+                scoutNameEditText.clearFocus();
+                tournamentNameEditText.clearFocus();
+                if (!ScoutAuthState.shared.login(scoutName, tournamentName)) {
+                    Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.welcome_pit_scouting_button: {
+                Intent i = new Intent(MainActivity.this, PitScoutingActivity.class);
+                startActivity(i);
+                break;
             }
-        } else if (id == R.id.welcome_pit_scouting_button) {
-            Intent i = new Intent(MainActivity.this, PitScoutingActivity.class);
-            startActivity(i);
-        } else if (id == R.id.welcome_match_scouting_button) {
-            Intent i = new Intent(MainActivity.this, MatchScoutingActivity.class);
-            startActivity(i);
-        } else if (id == R.id.welcome_qr_aggregator_button) {
-            Intent i = new Intent(MainActivity.this, QrAggregatorActivity.class);
-            startActivity(i);
-        } else if (id == R.id.welcome_pull_from_tba) {
-            TbaCoordinator.shared.pullEventData(this);
+            case R.id.welcome_match_scouting_button: {
+                Intent i = new Intent(MainActivity.this, MatchScoutingActivity.class);
+                startActivity(i);
+                break;
+            }
+            case R.id.welcome_qr_aggregator_button: {
+                Intent i = new Intent(MainActivity.this, QrAggregatorActivity.class);
+                startActivity(i);
+                break;
+            }
+            case R.id.welcome_pull_from_tba:
+                TbaCoordinator.shared.pullEventData(this);
+                break;
+            case R.id.launch_settings_button: {
+                Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(i);
+                break;
+            }
         }
     }
 

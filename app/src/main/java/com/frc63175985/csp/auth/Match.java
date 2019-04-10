@@ -1,7 +1,9 @@
 package com.frc63175985.csp.auth;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -46,6 +48,7 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  */
 public class Match {
     public static final String[] SPEED_OPTIONS = {"--------", "Slow (>7 sec)", "Med (3-7 sec)", "Fast (<3 sec)"};
+    public boolean onlineMode = false;
 
     /* Keys */
     public static final String AUTO_PREFIX = "auto_";
@@ -120,6 +123,10 @@ public class Match {
 
     public Match() {
         data = new HashMap<>();
+    }
+
+    public void loadPreferences(Activity activity) {
+        onlineMode = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean("ONLINE_MODE", false);
     }
 
     public void set(String key, Object value) {
