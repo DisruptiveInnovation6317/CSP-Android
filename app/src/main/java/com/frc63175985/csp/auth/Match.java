@@ -46,7 +46,6 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  */
 public class Match {
     public static final String[] SPEED_OPTIONS = {"--------", "Slow (>7 sec)", "Med (3-7 sec)", "Fast (<3 sec)"};
-    public static final String[] LEVELS_OPTIONS = {"--------", "1", "2", "3"};
 
     /* Keys */
     public static final String AUTO_PREFIX = "auto_";
@@ -193,7 +192,7 @@ public class Match {
             }
         }
 
-        data.put(key, value);
+        set(key, value);
     }
 
     public void updateCargoShipValue(BaseScoutType type, CargoShipSelection selection, ScoreObject object, Object value) {
@@ -249,7 +248,7 @@ public class Match {
             }
         }
 
-        data.put(key, value);
+        set(key, value);
     }
 
     /**

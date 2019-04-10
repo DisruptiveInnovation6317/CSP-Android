@@ -121,4 +121,10 @@
         </RadioGroup>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/drive_station_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Drive Station" />
+
 </LinearLayout>

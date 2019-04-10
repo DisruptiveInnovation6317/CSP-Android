@@ -1,12 +1,15 @@
 package com.frc63175985.csp;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -20,7 +23,7 @@ public class StartFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        final View view = inflater.inflate(R.layout.fragment_start, container, false);
 
         // Match # listener
         Match.GUI.bindEditText(view, R.id.start_match_num_editText, Match.MATCH_NUMBER);
@@ -44,6 +47,7 @@ public class StartFragment extends Fragment {
                 RadioButton radioButton = (RadioButton)group.getChildAt(radioIndex);
                 AllianceColor color = AllianceColor.valueOf(radioButton.getText().toString().toUpperCase());
                 ScoutAuthState.shared.currentMatch.set(Match.ALLIANCE, color == RED ? 1 : 2);
+                tryDriveStationImage(view);
             }
         });
 
@@ -56,12 +60,52 @@ public class StartFragment extends Fragment {
                 RadioButton radioButton = (RadioButton)group.getChildAt(radioIndex);
                 int driveStation = Integer.valueOf(radioButton.getText().toString());
                 ScoutAuthState.shared.currentMatch.set(Match.DRIVE_STATION, driveStation);
+                tryDriveStationImage(view);
             }
         });
 
         autofill(view);
 
         return view;
+    }
+
+    private void tryDriveStationImage(View view) {
+        if (ScoutAuthState.shared.currentMatch.num(Match.ALLIANCE) == 0 ||
+            ScoutAuthState.shared.currentMatch.num(Match.DRIVE_STATION) == 0) {
+            return;
+        }
+
+        // Set image
+        Drawable drawable = null;
+        if (ScoutAuthState.shared.currentMatch.num(Match.ALLIANCE) == 1) {
+            // Red
+            switch (ScoutAuthState.shared.currentMatch.num(Match.DRIVE_STATION)) {
+                case 1:
+                    drawable = ContextCompat.getDrawable(getActivity(), R.drawable.red_1);
+                    break;
+                case 2:
+                    drawable = ContextCompat.getDrawable(getActivity(), R.drawable.red_2);
+                    break;
+                case 3:
+                    drawable = ContextCompat.getDrawable(getActivity(), R.drawable.red_3);
+                    break;
+            }
+        } else {
+            // Blue
+            switch (ScoutAuthState.shared.currentMatch.num(Match.DRIVE_STATION)) {
+                case 1:
+                    drawable = ContextCompat.getDrawable(getActivity(), R.drawable.blue_1);
+                    break;
+                case 2:
+                    drawable = ContextCompat.getDrawable(getActivity(), R.drawable.blue_2);
+                    break;
+                case 3:
+                    drawable = ContextCompat.getDrawable(getActivity(), R.drawable.blue_3);
+                    break;
+            }
+        }
+
+        ((ImageView)view.findViewById(R.id.drive_station_imageView)).setImageDrawable(drawable);
     }
 
     /**
@@ -90,5 +134,7 @@ public class StartFragment extends Fragment {
             ((RadioGroup)view.findViewById(R.id.start_drive_station_radioGroup))
                     .check(R.id.start_drive_station_3_radio);
         }
+
+        tryDriveStationImage(view);
     }
 }
