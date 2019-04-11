@@ -555,8 +555,13 @@ public class Match {
             spinner.setSelection(savedIndex);
         }
 
-        public static void bindStepper(View parentView, int id, final String key) {
-            Stepper stepper = new Stepper(parentView.findViewById(id));
+        public static void bindStepper(View parentView, int id, final String key, int attemptId, final String attemptKey) {
+            Stepper attemptStepper = null;
+            if (attemptId != -1) {
+                attemptStepper = new Stepper(parentView.findViewById(attemptId), null);
+            }
+
+            Stepper stepper = new Stepper(parentView.findViewById(id), attemptStepper);
             StepperValueChangedListener listener = new StepperValueChangedListener() {
                 @Override
                 public boolean shouldChange() {
@@ -569,9 +574,25 @@ public class Match {
                 }
             };
             stepper.setOnValueChangedListener(listener);
+            if (attemptStepper != null) {
+                attemptStepper.setOnValueChangedListener(new StepperValueChangedListener() {
+                    @Override
+                    public boolean shouldChange() {
+                        return true;
+                    }
+
+                    @Override
+                    public void valueChanged(Stepper stepper, int newValue) {
+                        ScoutAuthState.shared.currentMatch.set(attemptKey, newValue);
+                    }
+                });
+            }
 
             // Preload
             stepper.setValue(ScoutAuthState.shared.currentMatch.num(key));
+            if (attemptStepper != null) {
+                attemptStepper.setValue(ScoutAuthState.shared.currentMatch.num(attemptKey));
+            }
         }
     }
 }

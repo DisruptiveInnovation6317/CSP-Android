@@ -1,5 +1,6 @@
 package com.frc63175985.csp.stepper;
 
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,12 +11,15 @@ public class Stepper {
     private StepperValueChangedListener listener;
     private int min = 0, max = Integer.MAX_VALUE;
 
-    public Stepper(View view) {
+    public Stepper(View view, @Nullable final Stepper attemptStepper) {
         stepperTextView = view.findViewById(R.id.stepper_number);
         view.findViewById(R.id.stepper_increment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 increment();
+                if (attemptStepper != null) {
+                    attemptStepper.increment();
+                }
             }
         });
 
@@ -23,6 +27,9 @@ public class Stepper {
             @Override
             public void onClick(View v) {
                 decrement();
+                if (attemptStepper != null) {
+                    attemptStepper.decrement();
+                }
             }
         });
     }
@@ -52,7 +59,7 @@ public class Stepper {
     /**
      * Add 1 to the counter
      */
-    private void increment() {
+    public void increment() {
         if (listener != null && !listener.shouldChange()) {
             return;
         }
@@ -71,7 +78,7 @@ public class Stepper {
     /**
      * Remove one from the counter
      */
-    private void decrement() {
+    public void decrement() {
         if (listener != null && !listener.shouldChange()) {
             return;
         }

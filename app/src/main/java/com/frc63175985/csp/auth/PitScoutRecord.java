@@ -326,7 +326,7 @@ public class PitScoutRecord {
         }
 
         public static void bindStepper(View view, final String key) {
-            Stepper stepper = new Stepper(view);
+            Stepper stepper = new Stepper(view, null);
             StepperValueChangedListener listener = new StepperValueChangedListener() {
                 @Override
                 public boolean shouldChange() {
