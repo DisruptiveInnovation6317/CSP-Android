@@ -23,6 +23,7 @@ public class SandstormFragment extends BaseScoutFragment {
         // Start
         Match.GUI.bindSpinner(getContext(), view, R.id.sandstorm_hab_level_spinner, Match.START_LEVEL, new String[]{"--------", "1", "2"});
         Match.GUI.bindSpinner(getContext(), view, R.id.sandstorm_start_object_spinner, Match.START_OBJECT, new String[]{"--------", "N/A", "Hatch", "Cargo"});
+        Match.GUI.bindCheckbox(view, R.id.sandstorm_crosses_hab_checkBox, Match.CROSSES_HAB);
         Match.GUI.bindCheckbox(view, R.id.sandstorm_crosses_midline_checkBox, Match.CROSS_OVER);
 
         return view;

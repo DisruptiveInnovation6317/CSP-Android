@@ -68,6 +68,7 @@ public class Match {
     public static final String START_OBJECT = "auto_idStartObject";
     // AUTONOMOUS CARGOSHIP
     // AUTONOMOUS ROCKET
+    public static final String CROSSES_HAB = "auto_crossesHab";
     public static final String CROSS_OVER = "auto_flCrossOver";
 
     // Cargo Ship
@@ -314,6 +315,7 @@ public class Match {
         sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT)).append(",");
         sb.append(num(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS)).append(",");
 
+        sb.append(bool(CROSSES_HAB)).append(","); // auto_crossesHab
         sb.append(bool(CROSS_OVER)).append(","); // auto_flCrossOver
 
         // TeleOp - Cargo Ship
@@ -398,6 +400,7 @@ public class Match {
         isActive = isActive || num(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT) > 0;
         isActive = isActive || num(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS) > 0;
 
+        isActive = isActive || bool(CROSSES_HAB).equals("TRUE"); // auto_crossesHab
         isActive = isActive || bool(CROSS_OVER).equals("TRUE"); // auto_flCrossOver
 
         return isActive ? "TRUE" : "FALSE";
