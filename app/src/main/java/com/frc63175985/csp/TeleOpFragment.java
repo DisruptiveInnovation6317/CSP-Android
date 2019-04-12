@@ -43,7 +43,7 @@ public class TeleOpFragment extends BaseScoutFragment {
         String[] outcomeOptions = {"--------", "Self Only", "Self Plus Others", "Others Only", "Assisted"};
         Match.GUI.bindSpinner(getContext(), view, R.id.teleop_climb_outcome_spinner, Match.CLIMB_OUTCOME, outcomeOptions);
         Match.GUI.bindSpinner(getContext(), view, R.id.teleop_climb_height_spinner, Match.CLIMB_LEVEL, PitScoutRecord.HEIGHT_OPTIONS);
-        Match.GUI.bindStepper(view, R.id.teleop_climb_assists_stepper, Match.NUMBER_CLIMB_ASSISTS);
+        Match.GUI.bindStepper(view, R.id.teleop_climb_assists_stepper, Match.NUMBER_CLIMB_ASSISTS, -1, null);
         Match.GUI.bindCheckbox(view, R.id.teleop_robot_fell_checkBox, Match.CLIMB_FALL);
 
         return view;
