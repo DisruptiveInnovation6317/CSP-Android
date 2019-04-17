@@ -1,130 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/comments_rating_section_header"
-        android:text="RATINGS"
-        android:textAlignment="center"
-        android:background="@android:color/black"
-        android:textColor="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/highlight"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
         <TextView
-            android:text="Drive Rating: "
-            android:layout_width="wrap_content"
+            android:id="@+id/comments_rating_section_header"
+            android:text="RATINGS"
+            android:textAlignment="center"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <Spinner
-            android:id="@+id/comments_drive_rating_spinner"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
-    </LinearLayout>
+            android:background="@color/highlight"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Drive Rating: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/comments_drive_rating_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
 
 
 
-    <CheckBox
-        android:id="@+id/comments_worked_with_alliance_checkBox"
-        android:text="Worked with Alliance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_recovered_checkBox"
-        android:text="Recovered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_strategy_checkBox"
-        android:text="Strategy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_solo_checkBox"
-        android:text="Worked Solo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_good_defence_checkBox"
-        android:text="Effective Defence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_ranking_1"
-        android:text="Completed Rocket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/comments_ranking_2"
-        android:text="Completed HAB Climb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/comments_comments_section_header"
-        android:text="COMMENTS"
-        android:textAlignment="center"
-        android:background="@android:color/black"
-        android:textColor="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/comments_comments_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/comments"
-        android:textSize="20sp"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxLength="2000"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/highlight">
         <CheckBox
-            android:id="@+id/comments_highlight_checkBox"
-            android:text="Highlight this team"
-            android:layout_marginTop="10dp"
+            android:id="@+id/comments_worked_with_alliance_checkBox"
+            android:text="Worked with Alliance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <CheckBox
-            android:id="@+id/comments_warning_checkBox"
-            android:text="Issue a warning"
-            android:layout_marginTop="10dp"
+            android:id="@+id/comments_recovered_checkBox"
+            android:text="Recovered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/comments_strategy_checkBox"
+            android:text="Strategy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/comments_solo_checkBox"
+            android:text="Worked Solo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/comments_good_defence_checkBox"
+            android:text="Effective Defence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/comments_ranking_1"
+            android:text="Completed Rocket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/comments_ranking_2"
+            android:text="Completed HAB Climb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/comments_comments_section_header"
+            android:text="COMMENTS"
+            android:textAlignment="center"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/comments_comments_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/comments"
+            android:textSize="20sp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/highlight">
+            <CheckBox
+                android:id="@+id/comments_highlight_checkBox"
+                android:text="Highlight this team"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/comments_warning_checkBox"
+                android:text="Issue a warning"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/comments_submit_section_header"
+            android:text="SUBMIT"
+            android:textAlignment="center"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/comments_finalize_button"
+            android:text="Finalize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Switch
+            android:id="@+id/comments_export_field_names"
+            android:text="Export Field Names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/comments_submit_section_header"
-        android:text="SUBMIT"
-        android:textAlignment="center"
-        android:background="@android:color/black"
-        android:textColor="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/comments_finalize_button"
-        android:text="Finalize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</ScrollView>

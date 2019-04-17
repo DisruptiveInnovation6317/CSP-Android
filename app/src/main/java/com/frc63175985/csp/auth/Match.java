@@ -46,6 +46,7 @@ import static com.frc63175985.csp.enums.ScoreObject.HATCH;
  */
 public class Match {
     public static final String[] SPEED_OPTIONS = {"--------", "Slow (>7 sec)", "Med (3-7 sec)", "Fast (<3 sec)"};
+    public boolean exportWithFields = false;
 
     /* Keys */
     public static final String AUTO_PREFIX = "auto_";
@@ -276,6 +277,114 @@ public class Match {
         }
 
         StringBuilder sb = new StringBuilder();
+
+        if (exportWithFields) {
+            sb.append("id").append(",");
+            sb.append("idEvent").append(",");
+            sb.append(MATCH_NUMBER).append(","); // numMatch
+            sb.append(TEAM_NUMBER).append(","); // idTeam
+            sb.append(ALLIANCE).append(","); // idAlliance
+            sb.append(DRIVE_STATION).append(","); // idDriveStation
+            sb.append("txScoutName").append(","); // txScoutName
+            sb.append(ROBOT_CRASHED).append(","); // flCrashed
+            sb.append(YELLOW_CARD).append(","); // flYellow
+            sb.append(RED_CARD).append(","); // flRed
+
+            // Autonomous
+            sb.append(SANDSTORM_ACTIVE).append(","); // auto_flState
+            sb.append(START_POSITION).append(","); // auto_idStartPosition
+            sb.append(START_LEVEL).append(","); // auto_idStartLevel
+            sb.append(LEAVES_HAB).append(","); // auto_flBaseLine
+            sb.append(START_OBJECT).append(","); // auto_idStartObject
+
+            // Autonomous - Cargo Ship
+            sb.append(AUTO_PREFIX + CARGO_FRONT_HATCH_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + CARGO_FRONT_HATCH_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + CARGO_SIDE_HATCH_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + CARGO_SIDE_HATCH_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + CARGO_FRONT_CARGO_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + CARGO_FRONT_CARGO_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + CARGO_SIDE_CARGO_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + CARGO_SIDE_CARGO_SUCCESS).append(",");
+
+            // Autonomous - Rocket
+            sb.append(AUTO_PREFIX + ROCKET_LOW_HATCH_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_LOW_HATCH_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_HIGH_HATCH_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_LOW_CARGO_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_LOW_CARGO_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT).append(",");
+            sb.append(AUTO_PREFIX + ROCKET_HIGH_CARGO_SUCCESS).append(",");
+
+            sb.append(LOSES_START_OBJECT).append(","); // auto_flLoseStartObject
+            sb.append(ROBOT_CONTACT).append(","); // auto_flRobotContact
+            sb.append(FOUL).append(","); // auto_flFoul
+            sb.append(CROSS_OVER).append(","); // auto_flCrossOver
+
+            // TeleOp - Cargo Ship
+            sb.append(TELEOP_PREFIX + CARGO_FRONT_HATCH_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_FRONT_HATCH_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_SIDE_HATCH_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_SIDE_HATCH_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_FRONT_CARGO_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_FRONT_CARGO_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_SIDE_CARGO_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + CARGO_SIDE_CARGO_SUCCESS).append(",");
+
+            // TeleOp - Rocket
+            sb.append(TELEOP_PREFIX + ROCKET_LOW_HATCH_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_LOW_HATCH_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_MIDDLE_HATCH_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_HIGH_HATCH_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_HIGH_HATCH_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_LOW_CARGO_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_LOW_CARGO_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_MIDDLE_CARGO_SUCCESS).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_HIGH_CARGO_ATTEMPT).append(",");
+            sb.append(TELEOP_PREFIX + ROCKET_HIGH_CARGO_SUCCESS).append(",");
+
+            // End Game
+            sb.append(CLIMB).append(","); // tele_idClimb
+            sb.append(CLIMB_OUTCOME).append(","); // tele_idClimbOutcome
+            sb.append(CLIMB_GRAB).append(","); // tele_idClimbGrab
+            sb.append(CLIMB_SPEED).append(","); // tele_idClimbSpeed
+            sb.append(NUMBER_CLIMB_ASSISTS).append(","); // tele_numClimbAssists
+            sb.append(CLIMB_LEVEL).append(","); // tele_idClimbLevel
+            sb.append(CLIMB_FALL).append(","); // tele_flClimbFall
+
+            sb.append(DEFENSE).append(","); // tele_flDefence
+            sb.append(TAKE_HATCH_GROUND).append(","); // flIntakeHatchGround
+            sb.append(TAKE_HATCH_STATION).append(","); // flIntakeHatchStation
+            sb.append(TAKE_CARGO_GROUND).append(","); // flIntakeCargoGround
+            sb.append(TAKE_CARGO_STATION).append(","); // flIntakeCargoStation
+
+            // Comments
+            sb.append(COMMENTS).append(","); // comm_txNotes
+            sb.append(HIGHLIGHT).append(","); // comm_flHighlight
+            sb.append(WARNING).append(","); // comm_flWarning
+            sb.append(DRIVE_RATING).append(","); // comm_idDriveRating
+            sb.append(WORK_WITH_ALLIANCE).append(","); // comm_flAlliance
+            sb.append(RECOVER).append(","); // comm_flRecovery
+            sb.append(WORKED_STRATEGY).append(","); // comm_flStrategy
+            sb.append(WORKED_SOLO).append(","); // comm_flOwnThing
+            sb.append(EFFECTIVE_DEFENCE).append(","); // comm_flGoodDefence
+
+            // Creation
+            sb.append("dtCreation").append(","); // dtCreation
+            sb.append("dtModified").append(","); // dtModified
+            sb.append("txComputerName").append(","); // txComputerName
+            sb.append(RANKING_1).append(","); // flRanking1
+            sb.append(RANKING_2); // flRanking2
+            sb.append("\n");
+        }
+
 
         // Meta
         sb.append("DEFAULT").append(","); // ID

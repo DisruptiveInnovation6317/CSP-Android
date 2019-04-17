@@ -33,7 +33,7 @@ public class QrHelper {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
         try {
-            int width = 600, height = 600;
+            int width = 800, height = 800;
             BitMatrix matrix = qrCodeWriter.encode(message, BarcodeFormat.QR_CODE, width, height);
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
             for (int x = 0; x < width; x++) {

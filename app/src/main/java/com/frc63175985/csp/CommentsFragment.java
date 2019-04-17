@@ -12,6 +12,8 @@ import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.frc63175985.csp.auth.Match;
@@ -39,6 +41,14 @@ public class CommentsFragment extends Fragment {
         Match.GUI.bindCheckbox(view, R.id.comments_good_defence_checkBox, Match.EFFECTIVE_DEFENCE);
         Match.GUI.bindCheckbox(view, R.id.comments_ranking_1, Match.RANKING_1);
         Match.GUI.bindCheckbox(view, R.id.comments_ranking_2, Match.RANKING_2);
+
+        ((Switch)view.findViewById(R.id.comments_export_field_names)).setChecked(ScoutAuthState.shared.currentMatch.exportWithFields);
+        ((Switch)view.findViewById(R.id.comments_export_field_names)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ScoutAuthState.shared.currentMatch.exportWithFields = isChecked;
+            }
+        });
 
         view.findViewById(R.id.comments_finalize_button).setOnClickListener(new View.OnClickListener() {
             @Override
